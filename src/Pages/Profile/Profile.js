@@ -283,19 +283,16 @@ export default function Profile() {
               <div className="row">
                 <div className="col-4">
                   <div className="text-center profile-boder">
-                      <img className="profile-img" src={img===null?'/images/users/avatar.png':img} alt="profile" />
-                    </div>
-                    <div>
+                    <img className="profile-img" src={img === null ? '/images/users/avatar.png' : img} alt="profile" />
+                  </div>
+                  <div>
                     <p className="text-center">
-                      <b>{user.firstName} {user.lastName}</b>
+                      <b>
+                        {user.firstName} {user.lastName}
+                      </b>
                     </p>
                   </div>
-                  {!isEditable ? (
-                    " "
-                  ) : (
-                    <input type="file" onChange={onImageChange} />
-                  )}
-                  
+                  {!isEditable ? ' ' : <input type="file" onChange={onImageChange} />}
                 </div>
 
                 <div className="col-8">
@@ -345,7 +342,7 @@ export default function Profile() {
                             <p>{phoneui}</p>
                           ) : (
                             <div className="d-flex  align-items-start w-100 customVerifyBox">
-                              <Form.Group controlId="formMobileNumber" className="inputHolder" style={{width:"265px"}}>
+                              <Form.Group controlId="formMobileNumber" className="inputHolder" style={{ width: '265px' }}>
                                 <Form.Control
                                   required
                                   pattern="^\(\d{3}\)\s\d{3}-\d{4}"
@@ -375,7 +372,7 @@ export default function Profile() {
                                     requestotp();
                                     buttonTracker(gaEvents.SEND_OTP);
                                   }}
-                                  style={{height:"60px"}}
+                                  style={{ height: '60px' }}
                                   data-testid="verifybtn"
                                 >
                                   <img src={process.env.REACT_APP_PUBLIC_URL + 'images/login/verify.svg'} alt="" /> Verify

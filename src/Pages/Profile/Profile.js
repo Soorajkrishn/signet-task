@@ -49,7 +49,7 @@ export default function Profile() {
     return formated;
   }
   const avatar = `${user.firstName.trim().charAt(0)} ${user.lastName.trim().charAt(0)}`;
-  console.log(avatar)
+  console.log(avatar);
   const setPhoneFormat = (value) => {
     const formattedPhoneNumber = formatPhoneNumber(value);
     setPhoneUi(formattedPhoneNumber);
@@ -239,7 +239,7 @@ export default function Profile() {
 
   const onImageChange = (e) => {
     const [file] = e.target.files;
-    setImg (URL.createObjectURL (file));
+    setImg(URL.createObjectURL(file));
   };
 
   return (
@@ -273,206 +273,231 @@ export default function Profile() {
         <div className="wrapperCard">
           {isLoading && <Loading />}
           <div className="wrapperCard--body">
-            <div >
+            <div>
               <div className="titleHeader">
                 <div className="info">
                   <h6>Profile</h6>
                 </div>
               </div>
 
-              <div className='row'>
-              <div className='col-4'>
-              {!isEditable?<div className='text-center profile-boder'>
-                  <img className='profile-img' src={img} alt='profile'/>
-                </div>:<input type="file" onChange={onImageChange} />}
-                <div>
-                  <p className='text-center'>{user.firstName} {user.lastName}</p>
-                </div>  
-              </div>
+              <div className="row">
+                <div className="col-4">
+                  {!isEditable ? (
+                    <div className="text-center profile-boder">
+                      <img className="profile-img" src={img} alt="profile" />
+                    </div>
+                  ) : (
+                    <input type="file" onChange={onImageChange} />
+                  )}
+                  <div>
+                    <p className="text-center">
+                      {user.firstName} {user.lastName}
+                    </p>
+                  </div>
+                </div>
 
-              <div className='col-8'>
-                <div className='row'>
-                  
-                  <div className='col-6'>
-                  <Form noValidate validated={validated} className="fromWrap">
-                    <div className="mb-3 input-group input-container  bit-1">
-                        <Form.Group controlId="formFirstName">
-                            <Form.Label><b>First Name</b> </Form.Label>
-                              {!isEditable?<p>{user.firstName}</p>:
+                <div className="col-8">
+                  <div className="row">
+                    <div className="col-6">
+                      <Form noValidate validated={validated} className="fromWrap">
+                        <div className="mb-3 input-group input-container  bit-1">
+                          <Form.Group controlId="formFirstName">
+                            <Form.Label>
+                              <b>First Name</b>{' '}
+                            </Form.Label>
+                            {!isEditable ? (
+                              <p>{user.firstName}</p>
+                            ) : (
                               <Form.Control
-                              required
-                              pattern="^[a-zA-Z0-9]+$"
-                              type="text"
-                              placeholder="First Name"
-                              autoComplete="off"
-                              value={user.firstName}
-                              onChange={(e) => {
-                                setUser((prevState) => ({ ...prevState, firstName: e.target.value }));
-                              }}
-                                          
-                            />}
-                          <Form.Control.Feedback type="invalid">Enter a valid First Name</Form.Control.Feedback>
-
-                        </Form.Group>
-                     </div>
-                     <div>
-                    <Form.Label><b>Organization Email</b></Form.Label>
-                    {!isEditable?<p>{user.emailId}</p>:
-                      <Form.Group controlId="formSecondaryEmail" className="inputHolder">
-                        <Form.Control placeholder="Organization Email" type="text" value={user.emailId} readOnly/>
-                      </Form.Group>
-                    }
-                    </div>
-                    <div>
-                  <Form.Label><b>Phone Number</b></Form.Label>
-                  {!isEditable?<p>{phoneui}</p>:
-                  <div className="d-flex  align-items-start w-100 customVerifyBox">
-                    <Form.Group controlId="formMobileNumber" className="inputHolder">
-                      <Form.Control
-                        required
-                        pattern="^\(\d{3}\)\s\d{3}-\d{4}"
-                        type="text"
-                        placeholder="Phone Number"
-                        autoComplete="off"
-                        value={phoneui}
-                        onChange={phoneChange}
-                        // readOnly={!isEditable}
-                      />
-                      {isEditable && validPhone === true ? (
-                        <Form.Control.Feedback type="invalid" data-testid="phonerr">
-                          Enter a valid Phone Number
-                        </Form.Control.Feedback>
-                      ) : null}
-                      {isEditable && phoneVer === true ? (
-                        <Form.Control.Feedback type="invalid" className="errorColor">
-                          Verify Phone Number
-                        </Form.Control.Feedback>
-                      ) : null}
-                    </Form.Group>
-                    {!toogle && isEditable && (
-                      <Button
-                        className="verifyBtn"
-                        variant="primary"
-                        onClick={() => {
-                          requestotp();
-                          buttonTracker(gaEvents.SEND_OTP);
-                        }}
-                        data-testid="verifybtn"
-                      >
-                        <img src={process.env.REACT_APP_PUBLIC_URL + 'images/login/verify.svg'} alt="" /> Verify
-                      </Button>
-                    )}
-
-                    {toogle && isEditable && (
-                      <Form.Group controlId="formOtp" className="inputHolder otpGap">
-                        <Form.Control
-                          required
-                          type="text"
-                          placeholder="OTP Number"
-                          autoComplete="off"
-                          value={otp}
-                          onChange={verifyotp}
-                          isInvalid={validOtp || wrongOtp}
-                        />
-                        <div className="d-flex flex-row-reverse align-items-center widthFull">
-                          <Button
-                            className="resendText d-flex justify-content-end"
-                            onClick={() => {
-                              requestotp();
-                              buttonTracker(gaEvents.RESEND_OTP);
-                            }}
-                          >
-                            Resend OTP
-                          </Button>
-                          {validOtp === true ? <p className="otpError">Enter a valid OTP</p> : null}
+                                required
+                                pattern="^[a-zA-Z0-9]+$"
+                                type="text"
+                                placeholder="First Name"
+                                autoComplete="off"
+                                value={user.firstName}
+                                onChange={(e) => {
+                                  setUser((prevState) => ({ ...prevState, firstName: e.target.value }));
+                                }}
+                              />
+                            )}
+                            <Form.Control.Feedback type="invalid">Enter a valid First Name</Form.Control.Feedback>
+                          </Form.Group>
                         </div>
-                      </Form.Group>
-                    )}
-                  </div>}
-                </div>
-                </Form>
-                  </div>
+                        <div>
+                          <Form.Label>
+                            <b>Organization Email</b>
+                          </Form.Label>
+                          {!isEditable ? (
+                            <p>{user.emailId}</p>
+                          ) : (
+                            <Form.Group controlId="formSecondaryEmail" className="inputHolder">
+                              <Form.Control placeholder="Organization Email" type="text" value={user.emailId} readOnly />
+                            </Form.Group>
+                          )}
+                        </div>
+                        <div>
+                          <Form.Label>
+                            <b>Phone Number</b>
+                          </Form.Label>
+                          {!isEditable ? (
+                            <p>{phoneui}</p>
+                          ) : (
+                            <div className="d-flex  align-items-start w-100 customVerifyBox">
+                              <Form.Group controlId="formMobileNumber" className="inputHolder">
+                                <Form.Control
+                                  required
+                                  pattern="^\(\d{3}\)\s\d{3}-\d{4}"
+                                  type="text"
+                                  placeholder="Phone Number"
+                                  autoComplete="off"
+                                  value={phoneui}
+                                  onChange={phoneChange}
+                                  // readOnly={!isEditable}
+                                />
+                                {isEditable && validPhone === true ? (
+                                  <Form.Control.Feedback type="invalid" data-testid="phonerr">
+                                    Enter a valid Phone Number
+                                  </Form.Control.Feedback>
+                                ) : null}
+                                {isEditable && phoneVer === true ? (
+                                  <Form.Control.Feedback type="invalid" className="errorColor">
+                                    Verify Phone Number
+                                  </Form.Control.Feedback>
+                                ) : null}
+                              </Form.Group>
+                              {!toogle && isEditable && (
+                                <Button
+                                  className="verifyBtn"
+                                  variant="primary"
+                                  onClick={() => {
+                                    requestotp();
+                                    buttonTracker(gaEvents.SEND_OTP);
+                                  }}
+                                  data-testid="verifybtn"
+                                >
+                                  <img src={process.env.REACT_APP_PUBLIC_URL + 'images/login/verify.svg'} alt="" /> Verify
+                                </Button>
+                              )}
 
-                  <div className='col-6'>
-                  <Form noValidate validated={validated} className="fromWrap">
-                    <div>
-                      <Form.Label><b>Last Name</b> </Form.Label>
-                      {!isEditable?<p>{user.lastName}</p>:
-                      <Form.Group controlId="formLastName" className="inputHolder">
-                        <Form.Control
-                          required
-                          pattern="^[a-zA-Z0-9]+$"
-                          type="text"
-                          placeholder="Last Name"
-                          autoComplete="off"
-                          value={user.lastName}
-                          onChange={(e) => {
-                            setUser((prevState) => ({ ...prevState, lastName: e.target.value }));
-                          }}
-                          // readOnly={!isEditable}
-                        />
-                        <Form.Control.Feedback type="invalid">Enter a valid Last Name</Form.Control.Feedback>
-                      </Form.Group>}
+                              {toogle && isEditable && (
+                                <Form.Group controlId="formOtp" className="inputHolder otpGap">
+                                  <Form.Control
+                                    required
+                                    type="text"
+                                    placeholder="OTP Number"
+                                    autoComplete="off"
+                                    value={otp}
+                                    onChange={verifyotp}
+                                    isInvalid={validOtp || wrongOtp}
+                                  />
+                                  <div className="d-flex flex-row-reverse align-items-center widthFull">
+                                    <Button
+                                      className="resendText d-flex justify-content-end"
+                                      onClick={() => {
+                                        requestotp();
+                                        buttonTracker(gaEvents.RESEND_OTP);
+                                      }}
+                                    >
+                                      Resend OTP
+                                    </Button>
+                                    {validOtp === true ? <p className="otpError">Enter a valid OTP</p> : null}
+                                  </div>
+                                </Form.Group>
+                              )}
+                            </div>
+                          )}
+                        </div>
+                      </Form>
                     </div>
-                    <div>
-                      <Form.Label><b>Organization Name</b></Form.Label>
-                      {!isEditable?<p>{user.orgName}</p>:
-                        <Form.Group controlId="formOrganization" className="inputHolder">
-                          <Form.Control placeholder="Organization Name" type="text" value={user.orgName} readOnly/>
-                        </Form.Group>
-                      }
+
+                    <div className="col-6">
+                      <Form noValidate validated={validated} className="fromWrap">
+                        <div>
+                          <Form.Label>
+                            <b>Last Name</b>{' '}
+                          </Form.Label>
+                          {!isEditable ? (
+                            <p>{user.lastName}</p>
+                          ) : (
+                            <Form.Group controlId="formLastName" className="inputHolder">
+                              <Form.Control
+                                required
+                                pattern="^[a-zA-Z0-9]+$"
+                                type="text"
+                                placeholder="Last Name"
+                                autoComplete="off"
+                                value={user.lastName}
+                                onChange={(e) => {
+                                  setUser((prevState) => ({ ...prevState, lastName: e.target.value }));
+                                }}
+                                // readOnly={!isEditable}
+                              />
+                              <Form.Control.Feedback type="invalid">Enter a valid Last Name</Form.Control.Feedback>
+                            </Form.Group>
+                          )}
+                        </div>
+                        <div>
+                          <Form.Label>
+                            <b>Organization Name</b>
+                          </Form.Label>
+                          {!isEditable ? (
+                            <p>{user.orgName}</p>
+                          ) : (
+                            <Form.Group controlId="formOrganization" className="inputHolder">
+                              <Form.Control placeholder="Organization Name" type="text" value={user.orgName} readOnly />
+                            </Form.Group>
+                          )}
+                        </div>
+                      </Form>
                     </div>
-                  </Form>
                   </div>
-                
+                  <div id="mobile-number-button" />
                 </div>
-                <div id="mobile-number-button" />
               </div>
-              </div>
-              <div className='text-center'>
-              {!isEditable ? (
-                <Button
-                  onClick={() => {
-                    setIsEditable(true);
-                    ReactGA.send({ hitType: 'pageview', page: `/editprofile/${localStorage.getItem('id')}` });
-                    buttonTracker(gaEvents.ENABLE_EDIT_USER);
-                  }}
-                  className="buttonPrimary mb-5 mt-4"
-                >
-                  {' '}
-                  Edit
-                </Button>
-              ) : (
-                <div className="profile-buttons">
-                  <div className="profile-cancel">
-                    <Button
-                      onClick={() => {
-                        if (roleId === userRoleId.signetAdmin) {
-                          buttonTracker(gaEvents.NAVIGATE_USERS_LIST);
-                          navigate('/users');
-                        } else {
-                          buttonTracker(gaEvents.NAVIGATE_TICKETS_LIST);
-                          navigate('/tickets');
-                        }
-                      }}
-                      className="buttonPrimary mb-5 mt-4"
-                    >
-                      {' '}
-                      Cancel
-                    </Button>
-                  </div>
+              <div className="text-center">
+                {!isEditable ? (
                   <Button
                     onClick={() => {
-                      buttonTracker(gaEvents.UPDATE_PROFILE_DETAILS);
-                      handleSubmit();
+                      setIsEditable(true);
+                      ReactGA.send({ hitType: 'pageview', page: `/editprofile/${localStorage.getItem('id')}` });
+                      buttonTracker(gaEvents.ENABLE_EDIT_USER);
                     }}
                     className="buttonPrimary mb-5 mt-4"
                   >
                     {' '}
-                    Save
+                    Edit
                   </Button>
-                </div>
-              )}
+                ) : (
+                  <div className="profile-buttons">
+                    <div className="profile-cancel">
+                      <Button
+                        onClick={() => {
+                          if (roleId === userRoleId.signetAdmin) {
+                            buttonTracker(gaEvents.NAVIGATE_USERS_LIST);
+                            navigate('/users');
+                          } else {
+                            buttonTracker(gaEvents.NAVIGATE_TICKETS_LIST);
+                            navigate('/tickets');
+                          }
+                        }}
+                        className="buttonPrimary mb-5 mt-4"
+                      >
+                        {' '}
+                        Cancel
+                      </Button>
+                    </div>
+                    <Button
+                      onClick={() => {
+                        buttonTracker(gaEvents.UPDATE_PROFILE_DETAILS);
+                        handleSubmit();
+                      }}
+                      className="buttonPrimary mb-5 mt-4"
+                    >
+                      {' '}
+                      Save
+                    </Button>
+                  </div>
+                )}
               </div>
             </div>
           </div>

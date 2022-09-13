@@ -4,12 +4,12 @@
 .profile-buttons {
   display: flex;
 }
-.profile-img{
+.profile-img {
   border-radius: 300px;
   width: 100%;
   height: 100%;
 }
-.profile-boder{
+.profile-boder {
   width: 80%;
   height: 80%;
 }

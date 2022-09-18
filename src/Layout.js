@@ -32,7 +32,6 @@ function Layout(props) {
     ReactGA.send({ hitType: 'pageview', page: location.pathname });
   }, [location.pathname]);
 
-  console.log(component);
   switch (component) {
     case components.LOGIN:
       return <Login />;

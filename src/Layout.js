@@ -25,7 +25,6 @@ import { components } from './Constants/TextConstants';
 import { useLocation } from 'react-router-dom';
 import ReactGA from 'react-ga4';
 
-
 function Layout(props) {
   const { component } = props;
   const location = useLocation();
@@ -33,7 +32,7 @@ function Layout(props) {
     ReactGA.send({ hitType: 'pageview', page: location.pathname });
   }, [location.pathname]);
 
-  console.log(component)
+  console.log(component);
   switch (component) {
     case components.LOGIN:
       return <Login />;
@@ -80,7 +79,6 @@ function Layout(props) {
     case components.TEST_TICKET:
       return LayoutWithHeader(<Tickettask />);
 
-      
     default:
       return <div>Component not found</div>;
   }

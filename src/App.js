@@ -64,6 +64,7 @@ function App() {
             <Route exact path="/announcement" element={<Layout component={components.ANNOUNCEMENT} />} />
             <Route exact path="/notification" element={<Layout component={components.NOTIFICATION} />} />
             <Route exact path="/profile" element={<Layout component={components.PROFILE} />} />
+           
           </Route>
           <Route path="*" element={<Navigate replace to={redirectTo} />} />
           <Route exact path="/" element={token ? <Navigate to={redirectTo} /> : <Layout component={components.LOGIN} />} />
@@ -93,6 +94,7 @@ function App() {
           <Route exact path="/user/resetpassword" element={<Layout component={components.RESET} />} />
           <Route exact path="/otpverify" element={<Layout component={components.OTP_VERIFY} />} />
           <Route exact path="/twofactor" element={<Layout component={components.TWO_FACTOR} />} />
+          <Route exact path="/testtickets" element={<Layout component={components.TEST_TICKET} />} />
         </Routes>
       </Security>
     </Router>

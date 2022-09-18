@@ -20,9 +20,11 @@ import TwoFactorSignIn from './Pages/Authentication/TwoFactorSignIn';
 import Notification from './Pages/Notification/Notification';
 import HealthCharts from './Pages/HealthCharts/HealthCharts';
 import Profile from './Pages/Profile/Profile';
+import Tickettask from './Pages/Tickets/Test/TicketTask';
 import { components } from './Constants/TextConstants';
 import { useLocation } from 'react-router-dom';
 import ReactGA from 'react-ga4';
+
 
 function Layout(props) {
   const { component } = props;
@@ -31,6 +33,7 @@ function Layout(props) {
     ReactGA.send({ hitType: 'pageview', page: location.pathname });
   }, [location.pathname]);
 
+  console.log(component)
   switch (component) {
     case components.LOGIN:
       return <Login />;
@@ -74,7 +77,10 @@ function Layout(props) {
       return LayoutWithHeader(<Notification />);
     case components.PROFILE:
       return LayoutWithHeader(<Profile />);
+    case components.TEST_TICKET:
+      return LayoutWithHeader(<Tickettask />);
 
+      
     default:
       return <div>Component not found</div>;
   }

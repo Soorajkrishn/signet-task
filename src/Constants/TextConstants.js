@@ -37,6 +37,7 @@ export const components = {
   TWO_FACTOR: 'TWO_FACTOR',
   NOTIFICATION: 'NOTIFICATION',
   PROFILE: 'PROFILE',
+  TEST_TICKET:'TEST_TICKET'
 };
 
 export const gaEvents = {

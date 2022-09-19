@@ -195,7 +195,7 @@ function Tickettask() {
                       <i className="fa-solid fa-angle-left" />
                     </Button>
                     <Button>{pageNo}</Button>
-                    {pageNo===lastpageNO?'':<Button onClick={lastPage}>{lastpageNO}</Button>}
+                    {pageNo === lastpageNO ? '' : <Button onClick={lastPage}>{lastpageNO}</Button>}
                     <Button onClick={pageIncrement}>
                       <i className="fa-solid fa-angle-right" />
                     </Button>
@@ -247,7 +247,11 @@ function Tickettask() {
                     <Button
                       variant="link"
                       id={ticketdetails !== null ? ticketdetails[0].ticketNo : firstTicket !== null && firstTicket.ticketNo}
-                      onClick={() => handleClick(ticketdetails !== null ? ticketdetails[0].ticketNo : firstTicket !== null && firstTicket.ticketNo)}
+                      onClick={() =>
+                        handleClick(
+                          ticketdetails !== null ? ticketdetails[0].ticketNo : firstTicket !== null && firstTicket.ticketNo,
+                        )
+                      }
                     >
                       <img
                         src="/images/users/edit.svg"

@@ -48,8 +48,6 @@ export default function Profile() {
     const formated = x.replace(/\D+/g, '').replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
     return formated;
   }
-  const avatar = `${user.firstName.trim().charAt(0)} ${user.lastName.trim().charAt(0)}`;
-  console.log(avatar);
   const setPhoneFormat = (value) => {
     const formattedPhoneNumber = formatPhoneNumber(value);
     setPhoneUi(formattedPhoneNumber);
@@ -237,11 +235,38 @@ export default function Profile() {
     setValidated(true);
   };
 
+  const editButton=()=>{
+    setIsEditable(true);
+    ReactGA.send({ hitType: 'pageview', page: `/editprofile/${localStorage.getItem('id')}` });
+    buttonTracker(gaEvents.ENABLE_EDIT_USER);
+  }
+
+  const cancelButton=()=>{
+    if (roleId === userRoleId.signetAdmin) {
+      buttonTracker(gaEvents.NAVIGATE_USERS_LIST);
+      navigate('/users');
+    } else {
+      buttonTracker(gaEvents.NAVIGATE_TICKETS_LIST);
+      navigate('/tickets');
+    }
+  }
+
+  const submitButton=()=>{
+    buttonTracker(gaEvents.UPDATE_PROFILE_DETAILS);
+    handleSubmit();
+  }
+
   const onImageChange = (e) => {
     const [file] = e.target.files;
     setImg(URL.createObjectURL(file));
   };
 
+  const{firstName}=user
+  const{lastName}=user
+  const{emailId}=user
+  const{orgName}=user
+
+  
   return (
     <Container fluid className="signUpWrapper">
       {showAlert && (
@@ -282,7 +307,7 @@ export default function Profile() {
 
               <div className="row">
                 <div className="col-4">
-                  <div className="text-center profile-boder">
+                  <div className="text-center profile-container">
                     <img className="profile-img" src={img === null ? '/images/users/avatar.png' : img} alt="profile" />
                   </div>
                   <div>
@@ -305,7 +330,7 @@ export default function Profile() {
                               <b>First Name</b>{' '}
                             </Form.Label>
                             {!isEditable ? (
-                              <p>{user.firstName}</p>
+                              <p>{firstName}</p>
                             ) : (
                               <Form.Control
                                 required
@@ -313,7 +338,7 @@ export default function Profile() {
                                 type="text"
                                 placeholder="First Name"
                                 autoComplete="off"
-                                value={user.firstName}
+                                value={firstName}
                                 onChange={(e) => {
                                   setUser((prevState) => ({ ...prevState, firstName: e.target.value }));
                                 }}
@@ -327,10 +352,10 @@ export default function Profile() {
                             <b>Organization Email</b>
                           </Form.Label>
                           {!isEditable ? (
-                            <p>{user.emailId}</p>
+                            <p>{emailId}</p>
                           ) : (
                             <Form.Group controlId="formSecondaryEmail" className="inputHolder">
-                              <Form.Control placeholder="Organization Email" type="text" value={user.emailId} readOnly />
+                              <Form.Control placeholder="Organization Email" type="text" value={emailId} readOnly />
                             </Form.Group>
                           )}
                         </div>
@@ -417,7 +442,7 @@ export default function Profile() {
                             <b>Last Name</b>{' '}
                           </Form.Label>
                           {!isEditable ? (
-                            <p>{user.lastName}</p>
+                            <p>{lastName}</p>
                           ) : (
                             <Form.Group controlId="formLastName" className="inputHolder">
                               <Form.Control
@@ -426,7 +451,7 @@ export default function Profile() {
                                 type="text"
                                 placeholder="Last Name"
                                 autoComplete="off"
-                                value={user.lastName}
+                                value={lastName}
                                 onChange={(e) => {
                                   setUser((prevState) => ({ ...prevState, lastName: e.target.value }));
                                 }}
@@ -441,7 +466,7 @@ export default function Profile() {
                             <b>Organization Name</b>
                           </Form.Label>
                           {!isEditable ? (
-                            <p>{user.orgName}</p>
+                            <p>{orgName}</p>
                           ) : (
                             <Form.Group controlId="formOrganization" className="inputHolder">
                               <Form.Control placeholder="Organization Name" type="text" value={user.orgName} readOnly />
@@ -457,11 +482,7 @@ export default function Profile() {
               <div className="text-center">
                 {!isEditable ? (
                   <Button
-                    onClick={() => {
-                      setIsEditable(true);
-                      ReactGA.send({ hitType: 'pageview', page: `/editprofile/${localStorage.getItem('id')}` });
-                      buttonTracker(gaEvents.ENABLE_EDIT_USER);
-                    }}
+                    onClick={editButton }
                     className="buttonPrimary mb-5 mt-4"
                   >
                     {' '}
@@ -471,15 +492,7 @@ export default function Profile() {
                   <div className="profile-buttons">
                     <div className="profile-cancel">
                       <Button
-                        onClick={() => {
-                          if (roleId === userRoleId.signetAdmin) {
-                            buttonTracker(gaEvents.NAVIGATE_USERS_LIST);
-                            navigate('/users');
-                          } else {
-                            buttonTracker(gaEvents.NAVIGATE_TICKETS_LIST);
-                            navigate('/tickets');
-                          }
-                        }}
+                        onClick={cancelButton}
                         className="buttonPrimary mb-5 mt-4"
                       >
                         {' '}
@@ -487,10 +500,7 @@ export default function Profile() {
                       </Button>
                     </div>
                     <Button
-                      onClick={() => {
-                        buttonTracker(gaEvents.UPDATE_PROFILE_DETAILS);
-                        handleSubmit();
-                      }}
+                      onClick={submitButton}
                       className="buttonPrimary mb-5 mt-4"
                     >
                       {' '}

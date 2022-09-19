@@ -136,6 +136,8 @@ function Tickettask() {
   return (
     <div className="wrapperBase">
       {isLoading && <Loading />}
+      {isLoading?
+      <div>Loading...</div>:
       <div className="titleHeader d-flex align-items-center justify-content-between">
         <div className="info">
           <h6>Tickets</h6>
@@ -151,9 +153,8 @@ function Tickettask() {
             <img src={process.env.REACT_APP_PUBLIC_URL + 'images/users/plus.svg'} alt="" /> Create Ticket
           </Button>
         </div>
-        <div className="row">
-          <div className="col-4 ticket ">
-            <div className="ticket-content">
+        <div className="row container">
+          <div className="col-4 ticket_container ">
               <div className="input-group mb-3 searchbox">
                 <input type="search" className="search" placeholder="Search" onChange={(e) => filterData(e.target.value)} />
                 <div className="input-group-append">
@@ -166,7 +167,7 @@ function Tickettask() {
                 <tbody>
                   {dataslice.map((val) => (
                     <tr key={val.ticketNo} onClick={() => ticketFilter(val.ticketNo)} className="ticket-list">
-                      <td style={{ width: '1%' }}>
+                      <td className='ticket'>
                         <span className="truncate text">{val.description}</span>
                         <span className="text">
                           <i className="fa-sharp fa-solid fa-bookmark" /> {val.ticketNo}
@@ -176,7 +177,7 @@ function Tickettask() {
                   ))}
                 </tbody>
               </table>
-              <div className="text-center pagination">
+              <div className="pagination">
                 {lastpageNO <= 1 ? (
                   <Button>1</Button>
                 ) : (
@@ -192,7 +193,6 @@ function Tickettask() {
                   </>
                 )}
               </div>
-            </div>
           </div>
           <div className="col-5 description">
             <div className="content">
@@ -255,7 +255,7 @@ function Tickettask() {
             <Alert.Heading>{alertMessage}</Alert.Heading>
           </Alert>
         )}
-      </div>
+      </div>}
     </div>
   );
 }

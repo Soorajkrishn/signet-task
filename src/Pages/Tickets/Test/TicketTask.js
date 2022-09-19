@@ -90,6 +90,9 @@ function Tickettask() {
         return 'Very low';
     }
   };
+
+  // const ticketId=ticketdetails !== null ? ticketdetails[0].ticketNo : firstTicket !== null && firstTicket.ticketNo
+
   const ticketFilter = (ticketNumber) => {
     const ticketData = users.filter((each) => each.ticketNo === ticketNumber);
     setTicketdetails(ticketData);
@@ -128,6 +131,11 @@ function Tickettask() {
     setStart(7 * (lastpageNO - 1));
     setEnd(listSize);
     setPageno(lastpageNO);
+  };
+
+  const handleClick = (ticketId) => {
+    buttonTracker(gaEvents.NAVIGATE_EDIT_TICKET);
+    navigate(`/ticket/edit/${ticketId}`);
   };
 
   const tabledata = searchticket !== null ? searchticket : users;
@@ -187,7 +195,7 @@ function Tickettask() {
                       <i className="fa-solid fa-angle-left" />
                     </Button>
                     <Button>{pageNo}</Button>
-                    <Button onClick={lastPage}>{lastpageNO}</Button>
+                    {pageNo===lastpageNO?'':<Button onClick={lastPage}>{lastpageNO}</Button>}
                     <Button onClick={pageIncrement}>
                       <i className="fa-solid fa-angle-right" />
                     </Button>
@@ -239,6 +247,7 @@ function Tickettask() {
                     <Button
                       variant="link"
                       id={ticketdetails !== null ? ticketdetails[0].ticketNo : firstTicket !== null && firstTicket.ticketNo}
+                      onClick={() => handleClick(ticketdetails !== null ? ticketdetails[0].ticketNo : firstTicket !== null && firstTicket.ticketNo)}
                     >
                       <img
                         src="/images/users/edit.svg"

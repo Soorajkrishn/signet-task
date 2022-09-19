@@ -235,13 +235,13 @@ export default function Profile() {
     setValidated(true);
   };
 
-  const editButton=()=>{
+  const editButton = () => {
     setIsEditable(true);
     ReactGA.send({ hitType: 'pageview', page: `/editprofile/${localStorage.getItem('id')}` });
     buttonTracker(gaEvents.ENABLE_EDIT_USER);
-  }
+  };
 
-  const cancelButton=()=>{
+  const cancelButton = () => {
     if (roleId === userRoleId.signetAdmin) {
       buttonTracker(gaEvents.NAVIGATE_USERS_LIST);
       navigate('/users');
@@ -249,24 +249,23 @@ export default function Profile() {
       buttonTracker(gaEvents.NAVIGATE_TICKETS_LIST);
       navigate('/tickets');
     }
-  }
+  };
 
-  const submitButton=()=>{
+  const submitButton = () => {
     buttonTracker(gaEvents.UPDATE_PROFILE_DETAILS);
     handleSubmit();
-  }
+  };
 
   const onImageChange = (e) => {
     const [file] = e.target.files;
     setImg(URL.createObjectURL(file));
   };
 
-  const{firstName}=user
-  const{lastName}=user
-  const{emailId}=user
-  const{orgName}=user
+  const { firstName } = user;
+  const { lastName } = user;
+  const { emailId } = user;
+  const { orgName } = user;
 
-  
   return (
     <Container fluid className="signUpWrapper">
       {showAlert && (
@@ -481,28 +480,19 @@ export default function Profile() {
               </div>
               <div className="text-center">
                 {!isEditable ? (
-                  <Button
-                    onClick={editButton }
-                    className="buttonPrimary mb-5 mt-4"
-                  >
+                  <Button onClick={editButton} className="buttonPrimary mb-5 mt-4">
                     {' '}
                     Edit
                   </Button>
                 ) : (
                   <div className="profile-buttons">
                     <div className="profile-cancel">
-                      <Button
-                        onClick={cancelButton}
-                        className="buttonPrimary mb-5 mt-4"
-                      >
+                      <Button onClick={cancelButton} className="buttonPrimary mb-5 mt-4">
                         {' '}
                         Cancel
                       </Button>
                     </div>
-                    <Button
-                      onClick={submitButton}
-                      className="buttonPrimary mb-5 mt-4"
-                    >
+                    <Button onClick={submitButton} className="buttonPrimary mb-5 mt-4">
                       {' '}
                       Save
                     </Button>

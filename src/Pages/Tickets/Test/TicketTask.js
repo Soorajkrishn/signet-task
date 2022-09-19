@@ -136,25 +136,26 @@ function Tickettask() {
   return (
     <div className="wrapperBase">
       {isLoading && <Loading />}
-      {isLoading?
-      <div>Loading...</div>:
-      <div className="titleHeader d-flex align-items-center justify-content-between">
-        <div className="info">
-          <h6>Tickets</h6>
-        </div>
-        <div className="headerAction d-flex align-items-center">
-          <Button
-            className="buttonPrimary"
-            onClick={() => {
-              buttonTracker(gaEvents.NAVIGATE_ADD_TICKET);
-              navigate(`/ticket/add`);
-            }}
-          >
-            <img src={process.env.REACT_APP_PUBLIC_URL + 'images/users/plus.svg'} alt="" /> Create Ticket
-          </Button>
-        </div>
-        <div className="row container">
-          <div className="col-4 ticket_container ">
+      {isLoading ? (
+        <div>Loading...</div>
+      ) : (
+        <div className="titleHeader d-flex align-items-center justify-content-between">
+          <div className="info">
+            <h6>Tickets</h6>
+          </div>
+          <div className="headerAction d-flex align-items-center">
+            <Button
+              className="buttonPrimary"
+              onClick={() => {
+                buttonTracker(gaEvents.NAVIGATE_ADD_TICKET);
+                navigate(`/ticket/add`);
+              }}
+            >
+              <img src={process.env.REACT_APP_PUBLIC_URL + 'images/users/plus.svg'} alt="" /> Create Ticket
+            </Button>
+          </div>
+          <div className="row container">
+            <div className="col-4 ticket_container ">
               <div className="input-group mb-3 searchbox">
                 <input type="search" className="search" placeholder="Search" onChange={(e) => filterData(e.target.value)} />
                 <div className="input-group-append">
@@ -167,7 +168,7 @@ function Tickettask() {
                 <tbody>
                   {dataslice.map((val) => (
                     <tr key={val.ticketNo} onClick={() => ticketFilter(val.ticketNo)} className="ticket-list">
-                      <td className='ticket'>
+                      <td className="ticket">
                         <span className="truncate text">{val.description}</span>
                         <span className="text">
                           <i className="fa-sharp fa-solid fa-bookmark" /> {val.ticketNo}
@@ -193,69 +194,70 @@ function Tickettask() {
                   </>
                 )}
               </div>
-          </div>
-          <div className="col-5 description">
-            <div className="content">
-              <p>
-                <i className="fa-sharp fa-solid fa-bookmark" />{' '}
-                {ticketdetails !== null ? ticketdetails[0].ticketNo : firstTicket !== null && firstTicket.ticketNo}
-              </p>
-              <h4 className="heading">Description</h4>
-              <p>{ticketdetails !== null ? ticketdetails[0].description : firstTicket !== null && firstTicket.description}</p>
             </div>
-          </div>
-          <div className="col-3 ">
-            <div className="details">
-              <h4 className="heading">Status</h4>
-              <div className="values">
-                <p>{ticketdetails !== null ? ticketdetails[0].status : firstTicket !== null && firstTicket.status}</p>
+            <div className="col-5 description">
+              <div className="content">
+                <p>
+                  <i className="fa-sharp fa-solid fa-bookmark" />{' '}
+                  {ticketdetails !== null ? ticketdetails[0].ticketNo : firstTicket !== null && firstTicket.ticketNo}
+                </p>
+                <h4 className="heading">Description</h4>
+                <p>{ticketdetails !== null ? ticketdetails[0].description : firstTicket !== null && firstTicket.description}</p>
               </div>
+            </div>
+            <div className="col-3 ">
+              <div className="details">
+                <h4 className="heading">Status</h4>
+                <div className="values">
+                  <p>{ticketdetails !== null ? ticketdetails[0].status : firstTicket !== null && firstTicket.status}</p>
+                </div>
 
-              <h4 className="heading">Priority</h4>
-              <div className="values">
-                <p>{prioritylist(priority)}</p>
-              </div>
+                <h4 className="heading">Priority</h4>
+                <div className="values">
+                  <p>{prioritylist(priority)}</p>
+                </div>
 
-              <h4 className="heading">Created Date</h4>
-              <div className="values">
-                <p>{ticketdetails !== null ? ticketdetails[0].createdDate : firstTicket !== null && firstTicket.createdDate}</p>
-              </div>
+                <h4 className="heading">Created Date</h4>
+                <div className="values">
+                  <p>{ticketdetails !== null ? ticketdetails[0].createdDate : firstTicket !== null && firstTicket.createdDate}</p>
+                </div>
 
-              <h4 className="heading">Problem</h4>
-              <div className="values">
-                <p>{ticketdetails !== null ? ticketdetails[0].problem : firstTicket !== null && firstTicket.problem}</p>
-              </div>
+                <h4 className="heading">Problem</h4>
+                <div className="values">
+                  <p>{ticketdetails !== null ? ticketdetails[0].problem : firstTicket !== null && firstTicket.problem}</p>
+                </div>
 
-              <h4 className="heading">Phone Number</h4>
-              <div>
-                <p>{ticketdetails !== null ? ticketdetails[0].phoneNumber : firstTicket !== null && firstTicket.phoneNumber}</p>
-              </div>
+                <h4 className="heading">Phone Number</h4>
+                <div>
+                  <p>{ticketdetails !== null ? ticketdetails[0].phoneNumber : firstTicket !== null && firstTicket.phoneNumber}</p>
+                </div>
 
-              {(ticketdetails !== null ? ticketdetails[0].callerEmail : firstTicket !== null && firstTicket.callerEmail) ===
-                localStorage.getItem('email') && (
-                <>
-                  <h4>Edit</h4>
-                  <Button
-                    variant="link"
-                    id={ticketdetails !== null ? ticketdetails[0].ticketNo : firstTicket !== null && firstTicket.ticketNo}
-                  >
-                    <img
-                      src="/images/users/edit.svg"
+                {(ticketdetails !== null ? ticketdetails[0].callerEmail : firstTicket !== null && firstTicket.callerEmail) ===
+                  localStorage.getItem('email') && (
+                  <>
+                    <h4>Edit</h4>
+                    <Button
+                      variant="link"
                       id={ticketdetails !== null ? ticketdetails[0].ticketNo : firstTicket !== null && firstTicket.ticketNo}
-                      alt="Edit"
-                    />
-                  </Button>
-                </>
-              )}
+                    >
+                      <img
+                        src="/images/users/edit.svg"
+                        id={ticketdetails !== null ? ticketdetails[0].ticketNo : firstTicket !== null && firstTicket.ticketNo}
+                        alt="Edit"
+                      />
+                    </Button>
+                  </>
+                )}
+              </div>
             </div>
           </div>
+          {showAlert && (
+            <Alert variant={!error ? 'success' : 'danger'} className="alertWrapper" onClose={closeAlert} dismissible>
+              <Alert.Heading>{alertMessage}</Alert.Heading>
+            </Alert>
+          )}
         </div>
-        {showAlert && (
-          <Alert variant={!error ? 'success' : 'danger'} className="alertWrapper" onClose={closeAlert} dismissible>
-            <Alert.Heading>{alertMessage}</Alert.Heading>
-          </Alert>
-        )}
-      </div>}
+      )}
     </div>
   );
 }

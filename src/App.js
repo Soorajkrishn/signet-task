@@ -93,6 +93,7 @@ function App() {
           <Route exact path="/user/resetpassword" element={<Layout component={components.RESET} />} />
           <Route exact path="/otpverify" element={<Layout component={components.OTP_VERIFY} />} />
           <Route exact path="/twofactor" element={<Layout component={components.TWO_FACTOR} />} />
+          <Route exact path="/testtickets" element={<Layout component={components.TEST_TICKET} />} />
         </Routes>
       </Security>
     </Router>

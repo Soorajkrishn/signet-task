@@ -18,6 +18,7 @@
     "enzyme-adapter-react-16": "^1.15.6",
     "firebase": "^9.8.3",
     "freshchat-widget": "^1.0.6",
+    "interweave": "^13.0.0",
     "jest-environment-jsdom": "^28.1.0",
     "jwt-decode": "^3.1.2",
     "moment": "^2.29.4",

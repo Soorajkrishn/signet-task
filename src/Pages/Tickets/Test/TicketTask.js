@@ -8,6 +8,7 @@ import Loading from '../../Widgets/Loading';
 import './TicketTask.css';
 import { userRoleId } from '../../../Utilities/AppUtilities';
 import useAnalyticsEventTracker from '../../../Hooks/useAnalyticsEventTracker';
+import { Markup } from 'interweave';
 
 function Tickettask() {
   const navigate = useNavigate();
@@ -210,7 +211,7 @@ function Tickettask() {
                   {ticketdetails !== null ? ticketdetails[0].ticketNo : firstTicket !== null && firstTicket.ticketNo}
                 </p>
                 <h4 className="heading">Description</h4>
-                <p>{ticketdetails !== null ? ticketdetails[0].description : firstTicket !== null && firstTicket.description}</p>
+                <p><Markup content={ticketdetails !== null ? ticketdetails[0].description : firstTicket !== null && firstTicket.description}/></p>
               </div>
             </div>
             <div className="col-3 ">

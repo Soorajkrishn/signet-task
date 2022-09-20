@@ -200,7 +200,18 @@ export default function AddTicket() {
     setDate(dateandtime);
   };
 
-  // console.log('date :',updatedDescription)
+  const createEditTicket=()=>{
+    if (PostObject.description.trim().length > 0) {
+      saveTicket();
+    } else {
+      setPostObject((prev) => {
+        const Current = { ...prev };
+        Current.description = '';
+        return Current;
+      });
+      setValidated(true);
+    }
+  }
   return (
     <div className="wrapperBase">
       {showAlert && (
@@ -406,26 +417,13 @@ export default function AddTicket() {
                 }}
                 value="Cancel"
               />
-              {console.log(PostObject.description.trim().length)}
               <Button
                 className="buttonPrimary text-center"
-                onClick={() => {
-                  if (PostObject.description.trim().length > 0) {
-                    saveTicket();
-                  } else {
-                    setPostObject((prev) => {
-                      const Current = { ...prev };
-                      Current.description = '';
-                      return Current;
-                    });
-                    setValidated(true);
-                  }
-                }}
+                onClick={createEditTicket}
               >
                 {id ? 'Update' : 'Create'}
               </Button>
             </div>
-            {/* <Button onClick={newDescription}>UD</Button> */}
           </div>
         </>
       )}

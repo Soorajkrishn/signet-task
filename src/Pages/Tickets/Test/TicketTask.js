@@ -211,7 +211,13 @@ function Tickettask() {
                   {ticketdetails !== null ? ticketdetails[0].ticketNo : firstTicket !== null && firstTicket.ticketNo}
                 </p>
                 <h4 className="heading">Description</h4>
-                <p><Markup content={ticketdetails !== null ? ticketdetails[0].description : firstTicket !== null && firstTicket.description}/></p>
+                <p>
+                  <Markup
+                    content={
+                      ticketdetails !== null ? ticketdetails[0].description : firstTicket !== null && firstTicket.description
+                    }
+                  />
+                </p>
               </div>
             </div>
             <div className="col-3 ">

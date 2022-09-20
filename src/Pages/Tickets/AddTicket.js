@@ -10,7 +10,6 @@ import Select from 'react-select';
 import useAnalyticsEventTracker from '../../Hooks/useAnalyticsEventTracker';
 import moment from 'moment';
 
-
 export default function AddTicket() {
   const navigate = useNavigate();
   const [isLoading, setLoading] = useState(true);
@@ -43,12 +42,11 @@ export default function AddTicket() {
   const { buttonTracker } = useAnalyticsEventTracker();
   const [noApiError, setNoApiError] = useState(true);
   const [apiErrorMsg, setApiErrorMsg] = useState('');
-  const [additiondes,setAdditionaldes]=useState('');
-  const [date,setDate]=useState('');
-  
-  const format = "yyyy-MM-DD HH:mm";
-  const dateandtime = moment.utc(new Date()).subtract(4, 'hours').format(format);
+  const [additiondes, setAdditionaldes] = useState('');
+  const [date, setDate] = useState('');
 
+  const format = 'yyyy-MM-DD HH:mm';
+  const dateandtime = moment.utc(new Date()).subtract(4, 'hours').format(format);
 
   const customStyles = {
     control: (base) => ({
@@ -140,8 +138,8 @@ export default function AddTicket() {
     setSaveLoading(true);
     let ticketObject = { ...PostObject };
     if (id) {
-      const updatedDescription=PostObject.description+'\n\n'+date+'\n\n'+additiondes
-      ticketObject = { ...PostObject, ticketNo: id, description:updatedDescription };
+      const updatedDescription = PostObject.description + '\n\n' + date + '\n\n' + additiondes;
+      ticketObject = { ...PostObject, ticketNo: id, description: updatedDescription };
       delete ticketObject.assignedTo;
       delete ticketObject.solutionProvided;
       delete ticketObject.createdDate;
@@ -196,15 +194,11 @@ export default function AddTicket() {
       return Current;
     });
   };
-  
-  
 
-  
-  const newDescription=(e)=>{
-    setAdditionaldes(e.target.value)
-    setDate(dateandtime)
-    
-  }
+  const newDescription = (e) => {
+    setAdditionaldes(e.target.value);
+    setDate(dateandtime);
+  };
 
   // console.log('date :',updatedDescription)
   return (
@@ -233,9 +227,7 @@ export default function AddTicket() {
             <Form noValidate validated={validated}>
               <Form.Group className="mb-3 input-group">
                 <div className="input-container col">
-                  <Form.Label>
-                    Description {id?'':<span className="requiredTxt">*</span>}
-                  </Form.Label>
+                  <Form.Label>Description {id ? '' : <span className="requiredTxt">*</span>}</Form.Label>
                   <Form.Control
                     as="textarea"
                     className="width-95"
@@ -256,17 +248,16 @@ export default function AddTicket() {
                 </div>
               </Form.Group>
               {id && (
-                  <div className="input-container col">
-                    <Form.Label>Additional Details</Form.Label>
-                    <Form.Control
-                      placeholder="Additional Details"
-                      as="textarea"
-                      className="width-95"
-                      onChange={(e)=>newDescription(e)}
-                    />
-                  </div>
- 
-                )}
+                <div className="input-container col">
+                  <Form.Label>Additional Details</Form.Label>
+                  <Form.Control
+                    placeholder="Additional Details"
+                    as="textarea"
+                    className="width-95"
+                    onChange={(e) => newDescription(e)}
+                  />
+                </div>
+              )}
               <Form.Group className="mb-3 input-group">
                 <div className="input-container col-6">
                   <Form.Label>
@@ -428,8 +419,7 @@ export default function AddTicket() {
                       return Current;
                     });
                     setValidated(true);
-                  };
-                  
+                  }
                 }}
               >
                 {id ? 'Update' : 'Create'}

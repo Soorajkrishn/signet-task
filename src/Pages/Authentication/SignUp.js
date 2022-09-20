@@ -42,7 +42,7 @@ function SignUp() {
   const [phoneUi, setPhoneUi] = useState('');
   const [otp, setOtp] = useState('');
   const [wrongOtp, setWrongOtp] = useState(false);
-  const phoneNumber = '+1' + phone;
+  const phoneNumber = '+91' + phone;
   const { buttonTracker, linkTracker } = useAnalyticsEventTracker();
 
   useEffect(() => {
@@ -97,9 +97,9 @@ function SignUp() {
     );
   };
 
-  const requestotp = (e) => {
+  const requestotp = () => {
     if (phone.length === 10) {
-      e.preventDefault();
+      // e.preventDefault();
       setToogle(true);
       !appVerifier && generateRecaptcha();
       const appRecaptchaVerifier = window.recaptchaVerifier;

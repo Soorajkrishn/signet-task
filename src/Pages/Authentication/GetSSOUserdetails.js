@@ -204,7 +204,7 @@ function GetSSOUserdetails() {
       authentication,
     );
   };
-  const phoneNumber = '+1' + user.primaryPhone;
+  const phoneNumber = '+91' + user.primaryPhone;
   const requestOtp = (e) => {
     if (user.primaryPhone.length === 10) {
       e.preventDefault();

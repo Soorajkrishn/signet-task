@@ -200,7 +200,7 @@ export default function AddTicket() {
     setDate(dateandtime);
   };
 
-  const createEditTicket=()=>{
+  const createEditTicket = () => {
     if (PostObject.description.trim().length > 0) {
       saveTicket();
     } else {
@@ -211,7 +211,7 @@ export default function AddTicket() {
       });
       setValidated(true);
     }
-  }
+  };
   return (
     <div className="wrapperBase">
       {showAlert && (
@@ -417,10 +417,7 @@ export default function AddTicket() {
                 }}
                 value="Cancel"
               />
-              <Button
-                className="buttonPrimary text-center"
-                onClick={createEditTicket}
-              >
+              <Button className="buttonPrimary text-center" onClick={createEditTicket}>
                 {id ? 'Update' : 'Create'}
               </Button>
             </div>

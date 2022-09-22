@@ -62,12 +62,11 @@
   }
 }
 
-.controlWrapper{
+.controlWrapper {
   position: absolute;
   top: 0px;
   left: 0px;
 }
-
 
 /* Video */
 
@@ -76,14 +75,11 @@
   height: 100vh;
 }
 
-
 .time_progressbarContainer {
-
   background-color: gray;
   border-radius: 15px;
   width: 657.61px;
   height: 5px;
-  
 }
 
 .time_progressBar {
@@ -96,48 +92,47 @@
   color: white;
 }
 
-.bottomControl{
+.bottomControl {
   position: absolute;
   bottom: 0;
   margin-left: 22.19px;
-  
 }
-.videoSize{
+.videoSize {
   width: 80%;
 }
-.fullScreen_bottomControl{
+.fullScreen_bottomControl {
   position: absolute;
   bottom: 0;
   margin-left: 22.19px;
   width: 80%;
 }
 
-.control{
-margin-bottom: 13px;
+.control {
+  margin-bottom: 13px;
 }
-.backword{
+.backword {
   margin: 0px 18px 0px 12px;
 }
-.forward{
+.forward {
   margin: 0px 12px 0px 18px;
 }
-.fullScreen{
-  position: relative; 
-  right: 0; 
+.fullScreen {
+  position: relative;
+  right: 0;
   top: 0;
-  width: 100%; 
+  width: 100%;
 }
 
-.volumeBar{
+.volumeBar {
   margin-top: 10px;
   display: inline-block;
 }
-.volumeIcon{
-  margin:-6px 11px 0px 0px;
+.volumeIcon {
+  margin: -6px 11px 0px 0px;
 }
-.setting{
+.setting {
   position: relative;
-  margin:0px 10px 0px 30px;
+  margin: 0px 10px 0px 30px;
   display: inline-block;
 }
 
@@ -150,7 +145,7 @@ margin-bottom: 13px;
 .setting:hover .dropup-content {
   display: block;
 }
-.speedSetting{
+.speedSetting {
   display: block;
   color: white;
   text-decoration: none;

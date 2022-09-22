@@ -45,9 +45,8 @@ export default function Chats() {
     [],
   );
 
-
-  const vid = document.getElementById("demoVideo");
-  const videoLength = vid?.duration
+  const vid = document.getElementById('demoVideo');
+  const videoLength = vid?.duration;
 
   const handleClick = async () => {
     const [statusCode] = await fetchCall(APIUrlConstants.CONTACT_SALES + '/' + localStorage.getItem('id'), apiMethods.POST, {});
@@ -60,20 +59,17 @@ export default function Chats() {
   const minutes = parseInt(videoLength / 60, 10);
   const seconds = parseInt(videoLength % 60, 10);
 
-  const time = minutes + ':' + seconds
+  const time = minutes + ':' + seconds;
 
   const videoHandler = (control) => {
-    if (control === "play") {
+    if (control === 'play') {
       videoRef.current.play();
       setPlaying(true);
-
-    } else if (control === "pause") {
+    } else if (control === 'pause') {
       videoRef.current.pause();
       setPlaying(false);
-
     }
   };
-
 
   const fastForward = () => {
     videoRef.current.currentTime += 5;
@@ -89,16 +85,14 @@ export default function Chats() {
   }, 1000);
 
   const setVolume = (volumeValue) => {
-    videoRef.current.volume = (volumeValue / 100);
-  }
+    videoRef.current.volume = volumeValue / 100;
+  };
 
   useEffect(() => {
     if (currentTime === videoLength) {
       setPlaying(false);
     }
-  },
-    [currentTime]
-  )
+  }, [currentTime]);
   const setPlayBack = (speed) => {
     videoRef.current.playbackRate = speed;
   };
@@ -117,66 +111,106 @@ export default function Chats() {
           </div>
           <div className="wrapperCard--body">
             <div className={size ? 'fullScreen' : 'videoWrapper'}>
-              <video className='videoSize' onCanPlay={setPlayBack} ref={videoRef} id="demoVideo">
+              <video className="videoSize" onCanPlay={setPlayBack} ref={videoRef} id="demoVideo">
                 <source src="https://signet-group-public.s3.amazonaws.com/Animate+-+22182.mp4" />
               </video>
-              <div className='controlWrapper'>
+              <div className="controlWrapper">
                 <p style={{ color: 'white', fontSize: '36px' }}>Chat Demo</p>
               </div>
               <div className={size ? 'fullScreen_bottomControl' : 'bottomControl'}>
-
                 <div>
-                  <input style={{ width: size ? '95%' : "657.61px" }} type="range" min='0' max='100' step='1' value={progress === 'NaN:NaN' ? '0' : progress} />
+                  <input
+                    style={{ width: size ? '95%' : '657.61px' }}
+                    type="range"
+                    min="0"
+                    max="100"
+                    step="1"
+                    value={progress === 'NaN:NaN' ? '0' : progress}
+                  />
                 </div>
 
-                <div className='row control'>
-                  <div className='col-4'>
-                    <img className='volumeIcon' src="/images/video/volume-icon.svg" alt='volume' />
-                    <div className='volumeBar'>
-                      <input id="vol-control" type="range" min="0" max="100" step="1" onInput={(e) => setVolume(e.target.value)} onChange={(e) => setVolume(e.target.value)} />
+                <div className="row control">
+                  <div className="col-4">
+                    <img className="volumeIcon" src="/images/video/volume-icon.svg" alt="volume" />
+                    <div className="volumeBar">
+                      <input
+                        id="vol-control"
+                        type="range"
+                        min="0"
+                        max="100"
+                        step="1"
+                        onInput={(e) => setVolume(e.target.value)}
+                        onChange={(e) => setVolume(e.target.value)}
+                      />
                     </div>
                   </div>
-                  <div className='col-6'>
-                    <div className='row'>
-                      <div className='col-2'>
+                  <div className="col-6">
+                    <div className="row">
+                      <div className="col-2">
                         <p style={{ color: 'white' }}>
-                          {Math.floor(currentTime / 60) + ":" + ("0" + Math.floor(currentTime % 60)).slice(-2)}
+                          {Math.floor(currentTime / 60) + ':' + ('0' + Math.floor(currentTime % 60)).slice(-2)}
                         </p>
                       </div>
-                      <div className='col-7'>
+                      <div className="col-7">
                         <div className="controle">
                           <img onClick={revert} className="backword" alt="backward" src="/images/video/icons8-wrewind.png" />
                           {playing ? (
-                            <img onClick={() => videoHandler("pause")} className="controlsIcon--small" alt="pause" src="/images/video/icons8-wpause.png" />
+                            <img
+                              onClick={() => videoHandler('pause')}
+                              className="controlsIcon--small"
+                              alt="pause"
+                              src="/images/video/icons8-wpause.png"
+                            />
                           ) : (
-                            <img onClick={() => videoHandler("play")} className="controlsIcon--small" alt="play" src="/images/video/icons8-wplay.png" />
+                            <img
+                              onClick={() => videoHandler('play')}
+                              className="controlsIcon--small"
+                              alt="play"
+                              src="/images/video/icons8-wplay.png"
+                            />
                           )}
-                          <img onClick={fastForward} className="forward" alt="forward" src="/images/video/icons8-wfastforward.png" />
+                          <img
+                            onClick={fastForward}
+                            className="forward"
+                            alt="forward"
+                            src="/images/video/icons8-wfastforward.png"
+                          />
                         </div>
                       </div>
-                      <div className='col-2'>
+                      <div className="col-2">
                         <p style={{ color: 'white' }}>{time === 'NaN:NaN' ? '00:00' : time}</p>
                       </div>
                     </div>
                   </div>
-                  <div className='col-2'>
-                    <div >
-                      <div className='setting'>
-                        <img src="/images/video/settings.svg" alt='setting' />
+                  <div className="col-2">
+                    <div>
+                      <div className="setting">
+                        <img src="/images/video/settings.svg" alt="setting" />
                         <div className="dropup-content">
-                          <Button className='speedSetting' variant='link' onClick={() => setPlayBack(0.5)}>0.5</Button>
-                          <Button className='speedSetting' variant='link' onClick={() => setPlayBack(1)}>1</Button>
-                          <Button className='speedSetting' variant='link' onClick={() => setPlayBack(1.5)}>1.5</Button>
-                          <Button className='speedSetting' variant='link' onClick={() => setPlayBack(2)}>2</Button>
+                          <Button className="speedSetting" variant="link" onClick={() => setPlayBack(0.5)}>
+                            0.5
+                          </Button>
+                          <Button className="speedSetting" variant="link" onClick={() => setPlayBack(1)}>
+                            1
+                          </Button>
+                          <Button className="speedSetting" variant="link" onClick={() => setPlayBack(1.5)}>
+                            1.5
+                          </Button>
+                          <Button className="speedSetting" variant="link" onClick={() => setPlayBack(2)}>
+                            2
+                          </Button>
                         </div>
                       </div>
 
-                      <img onClick={() => size ? setSize(false) : setSize(true)} alt='fullscreen' src="/images/video/icons8-full-screen.png" />
+                      <img
+                        onClick={() => (size ? setSize(false) : setSize(true))}
+                        alt="fullscreen"
+                        src="/images/video/icons8-full-screen.png"
+                      />
                     </div>
                   </div>
                 </div>
               </div>
-
             </div>
 
             {!snackBar && (

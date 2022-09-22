@@ -1,5 +1,5 @@
 .videoWrapper {
-  width: 60%;
+  width: 702px;
   position: relative;
   border-radius: 10px;
 }
@@ -19,6 +19,7 @@
   color: var(--white);
 }
 .videoWrapper video {
+  width: 702px;
   border-radius: 10px;
 }
 .videoInfo {
@@ -59,4 +60,98 @@
   .videoHeader h5 {
     font-size: 16px;
   }
+}
+
+.controlWrapper{
+  position: absolute;
+  top: 0px;
+  left: 0px;
+}
+
+
+/* Video */
+
+.video {
+  width: 100vw;
+  height: 100vh;
+}
+
+
+.time_progressbarContainer {
+
+  background-color: gray;
+  border-radius: 15px;
+  width: 657.61px;
+  height: 5px;
+  
+}
+
+.time_progressBar {
+  border-radius: 15px;
+  background-color: rgba(106, 199, 249, 1);
+  height: 100%;
+}
+
+.controlsTime {
+  color: white;
+}
+
+.bottomControl{
+  position: absolute;
+  bottom: 0;
+  margin-left: 22.19px;
+  
+}
+.videoSize{
+  width: 80%;
+}
+.fullScreen_bottomControl{
+  position: absolute;
+  bottom: 0;
+  margin-left: 22.19px;
+  width: 80%;
+}
+
+.control{
+margin-bottom: 13px;
+}
+.backword{
+  margin: 0px 18px 0px 12px;
+}
+.forward{
+  margin: 0px 12px 0px 18px;
+}
+.fullScreen{
+  position: relative; 
+  right: 0; 
+  top: 0;
+  width: 100%; 
+}
+
+.volumeBar{
+  margin-top: 10px;
+  display: inline-block;
+}
+.volumeIcon{
+  margin:-6px 11px 0px 0px;
+}
+.setting{
+  position: relative;
+  margin:0px 10px 0px 30px;
+  display: inline-block;
+}
+
+.dropup-content {
+  display: none;
+  position: absolute;
+  background-color: black;
+  bottom: 0;
+}
+.setting:hover .dropup-content {
+  display: block;
+}
+.speedSetting{
+  display: block;
+  color: white;
+  text-decoration: none;
 }

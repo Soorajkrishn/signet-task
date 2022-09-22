@@ -82,7 +82,6 @@ export default function Chats() {
 
   useEffect(() => {
     intervelref.current = setInterval(() => {
-      console.log('hi');
       setCurrentTime(videoRef.current?.currentTime);
     }, 1000);
     return () => {

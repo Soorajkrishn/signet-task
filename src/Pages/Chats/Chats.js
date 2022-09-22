@@ -80,7 +80,7 @@ export default function Chats() {
     videoRef.current.currentTime -= 5;
   };
 
-  const timeint = () => {
+  const timeIntetvel = () => {
     intervelref.current = setInterval(() => {
       setCurrentTime(videoRef.current?.currentTime);
     }, 1000);
@@ -91,7 +91,7 @@ export default function Chats() {
 
   useEffect(() => {
     if (playing) {
-      timeint();
+      timeIntetvel();
     } else {
       clearInterval(intervelref.current);
     }

@@ -10,7 +10,6 @@ import Loading from '../Widgets/Loading';
 import { Button } from 'react-bootstrap';
 import useAnalyticsEventTracker from '../../Hooks/useAnalyticsEventTracker';
 
-
 export default function Chats() {
   const location = useLocation();
   const [snackBar, setSnackBar] = useState(false);
@@ -22,7 +21,7 @@ export default function Chats() {
   const roledId = localStorage.getItem('roleId');
   const { buttonTracker } = useAnalyticsEventTracker();
   const videoRef = useRef(null);
-  const intervelref = useRef(null) 
+  const intervelref = useRef(null);
 
   useEffect(() => {
     if (roledId === userRoleId.remoteSmartUser) {
@@ -81,17 +80,15 @@ export default function Chats() {
     videoRef.current.currentTime -= 5;
   };
 
-  useEffect(()=>{
-    intervelref.current=setInterval(() => {
-      console.log('hi')
-       setCurrentTime(videoRef.current?.currentTime);
-    },1000);
-    return(()=>{
-      clearInterval(intervelref.current)
-    })
-  },[])
-  
-
+  useEffect(() => {
+    intervelref.current = setInterval(() => {
+      console.log('hi');
+      setCurrentTime(videoRef.current?.currentTime);
+    }, 1000);
+    return () => {
+      clearInterval(intervelref.current);
+    };
+  }, []);
 
   const setVolume = (volumeValue) => {
     videoRef.current.volume = volumeValue / 100;
@@ -100,7 +97,7 @@ export default function Chats() {
   useEffect(() => {
     if (currentTime === videoLength) {
       setPlaying(false);
-      clearInterval(intervelref.current)
+      clearInterval(intervelref.current);
     }
     setProgress((videoRef.current.currentTime / videoLength) * 100);
   }, [currentTime]);
@@ -131,7 +128,7 @@ export default function Chats() {
               <div className={size ? 'fullScreenBottomControl' : 'bottomControl'}>
                 <div>
                   <input
-                    style={{ width:'99%' }}
+                    style={{ width: '99%' }}
                     type="range"
                     min="0"
                     max="100"
@@ -156,41 +153,32 @@ export default function Chats() {
                     </div>
                   </div>
                   <div className="col-5">
-                    
-                        <p style={{ color: 'white' ,display:'inline-block'}}>
-                          {Math.floor(currentTime / 60) + ':' + ('0' + Math.floor(currentTime % 60)).slice(-2)}
-                        </p>
-                      
-                  
-                        <div className="control">
-                          <img onClick={revert} className="backword" alt="backward" src="/images/video/icons8-wrewind.png" />
-                          {playing ? (
-                            <img
-                              onClick={() => videoHandler('pause')}
-                              className="controlsIcon--small"
-                              alt="pause"
-                              src="/images/video/icons8-wpause.png"
-                            />
-                          ) : (
-                            <img
-                              onClick={() => videoHandler('play')}
-                              className="controlsIcon--small"
-                              alt="play"
-                              src="/images/video/icons8-wplay.png"
-                            />
-                          )}
-                          <img
-                            onClick={fastForward}
-                            className="forward"
-                            alt="forward"
-                            src="/images/video/icons8-wfastforward.png"
-                          />
-                        </div>
-                     
-                     
-                        <p style={{ color: 'white' ,display:'inline-block'}}>{time === 'NaN:NaN' ? '00:00' : time}</p>
-                      
-                 </div>
+                    <p style={{ color: 'white', display: 'inline-block' }}>
+                      {Math.floor(currentTime / 60) + ':' + ('0' + Math.floor(currentTime % 60)).slice(-2)}
+                    </p>
+
+                    <div className="control">
+                      <img onClick={revert} className="backword" alt="backward" src="/images/video/icons8-wrewind.png" />
+                      {playing ? (
+                        <img
+                          onClick={() => videoHandler('pause')}
+                          className="controlsIcon--small"
+                          alt="pause"
+                          src="/images/video/icons8-wpause.png"
+                        />
+                      ) : (
+                        <img
+                          onClick={() => videoHandler('play')}
+                          className="controlsIcon--small"
+                          alt="play"
+                          src="/images/video/icons8-wplay.png"
+                        />
+                      )}
+                      <img onClick={fastForward} className="forward" alt="forward" src="/images/video/icons8-wfastforward.png" />
+                    </div>
+
+                    <p style={{ color: 'white', display: 'inline-block' }}>{time === 'NaN:NaN' ? '00:00' : time}</p>
+                  </div>
                   <div className="col-2 settingsWrapper">
                     <div>
                       <div className="setting">

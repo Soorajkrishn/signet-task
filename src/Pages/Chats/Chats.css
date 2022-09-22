@@ -76,7 +76,6 @@
   height: 100vh;
 }
 
-
 .controlsTime {
   color: white;
 }
@@ -96,10 +95,10 @@
   margin-left: 22.19px;
   width: 80%;
 }
-.volumeWrapper{
-  margin-left:3px ;
+.volumeWrapper {
+  margin-left: 3px;
 }
-.settingsWrapper{
+.settingsWrapper {
   margin-left: 55px;
 }
 

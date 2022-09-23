@@ -23,8 +23,8 @@ function Tickets() {
   const [alertMessage, setAlertMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const { buttonTracker, linkTracker } = useAnalyticsEventTracker();
-
-  const fetchAllUserDetails = async () => {
+  
+    const fetchAllUserDetails = async () => {
     setIsLoading(true);
     const { 0: statusCode, 1: data } = await makeRequest(
       APIUrlConstants.TICKETS_LIST + `?customerNo=${localStorage.getItem('orgNo')}`,
@@ -47,6 +47,7 @@ function Tickets() {
     navigate(`/ticket/edit/${ticketId}`);
   };
 
+  console.log(users)
   const actionBtn = (_row, cell, _rowIndex) => (
     <div className="actionBox d-flex align-items-center">
       {cell.callerEmail === localStorage.getItem('email') && (
@@ -72,36 +73,43 @@ function Tickets() {
     </div>
   );
 
-  const descriptionText = (_row, cell, _rowIndex) => <p className="truncate">{cell.description}</p>;
+  const descriptionText = (_row, cell, _rowIndex) => <p className="truncate" >{cell.description}</p>;
+
 
   const columns = [
     {
       dataField: 'ticketNo',
       text: 'Ticket#',
       formatter: ticketView,
+      editable:false
     },
     {
       dataField: 'description',
       text: 'Description',
       formatter: descriptionText,
+     
     },
     {
       dataField: 'priority',
       text: 'Priority',
+      editable:false
     },
     {
       dataField: 'status',
       text: 'Status',
+      editable:false
     },
     {
       dataField: 'assignedTo',
       text: 'Assignee',
+      editable:false
     },
     {
       dataField: 'Action',
       text: 'Edit',
       formatter: actionBtn,
       id: 'edit',
+      editable:false
     },
   ];
 
@@ -120,11 +128,27 @@ function Tickets() {
       <h6 className="text-center text-bold m-0 p-0">Loading ...</h6>
     );
 
+    const expandRow={
+      renderer: (row, rowIndex) => (
+        
+        <div>
+          <span className='rowExpand'><b>Created By : </b>{row.createdBy}</span>
+          <span className='rowExpand'><b>Created Date : </b>{row.createdDate}</span>
+          <span className='rowExpand'><b>Problem Code : </b>{row.problem}</span>
+          <span className='rowExpand'><b>Email : </b>{row.callerEmail}</span>
+        </div>
+      ),
+      
+      onlyOneExpanding: true,
+      showExpandColumn: true,
+      expandByColumnOnly: true,
+    }
+
   return (
     <div className="wrapperBase">
       <div className="tabelBase" data-test-id="usertable">
         {isLoading && <Loading />}
-        <ToolkitProvider keyField="ticketNo" data={users} columns={columns}>
+        <ToolkitProvider keyField="ticketNo" data={users} columns={columns} >
           {(props) => (
             <>
               <div className="titleHeader d-flex align-items-center justify-content-between">
@@ -148,6 +172,7 @@ function Tickets() {
                   {...props.baseProps}
                   pagination={users?.length > 10 ? paginationFactory({ sizePerPage: 10 }) : null}
                   noDataIndication={emptyDataMessage}
+                  expandRow={ expandRow }
                 />
               </div>
             </>

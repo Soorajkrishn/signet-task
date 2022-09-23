@@ -67,7 +67,7 @@ export default function OTPVerification() {
   const [otpNumber, setOtpNumber] = useState('');
   const [appVerifier, setAppVerifier] = useState(null);
 
-  const phoneNumber = '+1' + phone;
+  const phoneNumber = '+91' + phone;
 
   const generateRecaptcha = () => {
     window.recaptchaVerifier = new RecaptchaVerifier(

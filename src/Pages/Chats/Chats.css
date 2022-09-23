@@ -19,6 +19,7 @@
   color: var(--white);
 }
 .videoWrapper video {
+  width: 702px;
   border-radius: 10px;
 }
 .videoInfo {
@@ -59,4 +60,93 @@
   .videoHeader h5 {
     font-size: 16px;
   }
+}
+
+.controlWrapper {
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  padding: 15px;
+}
+
+/* Video */
+
+.video {
+  width: 100vw;
+  height: 100vh;
+}
+
+.controlsTime {
+  color: white;
+}
+
+.bottomControl {
+  position: absolute;
+  bottom: 0;
+  padding: 15px;
+  width: 100%;
+}
+.videoSize {
+  width: 80%;
+}
+.fullScreenBottomControl {
+  position: absolute;
+  bottom: 0;
+  margin-left: 22.19px;
+  width: 80%;
+}
+.volumeWrapper {
+  margin-left: 3px;
+}
+.settingsWrapper {
+  margin-left: 55px;
+}
+
+.control {
+  margin-bottom: 13px;
+  display: inline;
+}
+.backword {
+  margin: 0px 18px 0px 12px;
+  display: inline-block;
+}
+.forward {
+  margin: 0px 12px 0px 18px;
+  display: inline-block;
+}
+.fullScreen {
+  position: fixed;
+  right: 25px;
+  top: 25px;
+  left: 25px;
+  bottom: 25px;
+  width: 90vw;
+  height: 90vh;
+}
+.volumeBar {
+  margin-top: 10px;
+  display: inline-block;
+}
+.volumeIcon {
+  margin: -6px 11px 0px 0px;
+}
+.setting {
+  position: relative;
+  margin: 0px 10px 0px 30px;
+  display: inline-block;
+}
+
+.dropupContent {
+  display: none;
+  position: absolute;
+  background-color: black;
+  bottom: 0;
+}
+.setting:hover .dropupContent {
+  display: block;
+}
+.speedSetting {
+  display: block;
+  color: white;
+  text-decoration: none;
 }

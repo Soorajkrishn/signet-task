@@ -80,7 +80,6 @@ function Tickets() {
       dataField: 'ticketNo',
       text: 'Ticket#',
       formatter: ticketView,
-      editable: false,
     },
     {
       dataField: 'description',
@@ -90,24 +89,20 @@ function Tickets() {
     {
       dataField: 'priority',
       text: 'Priority',
-      editable: false,
     },
     {
       dataField: 'status',
       text: 'Status',
-      editable: false,
     },
     {
       dataField: 'assignedTo',
       text: 'Assignee',
-      editable: false,
     },
     {
       dataField: 'Action',
       text: 'Edit',
       formatter: actionBtn,
       id: 'edit',
-      editable: false,
     },
   ];
 

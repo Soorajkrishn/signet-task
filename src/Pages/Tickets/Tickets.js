@@ -129,19 +129,19 @@ function Tickets() {
   const expandRow = {
     renderer: (row, rowIndex) => (
       <div>
-        <span className="rowExpand">
+        <span className="hiddenRow">
           <b>Created By : </b>
           {row.createdBy}
         </span>
-        <span className="rowExpand">
+        <span className="hiddenRow">
           <b>Created Date : </b>
           {row.createdDate}
         </span>
-        <span className="rowExpand">
+        <span className="hiddenRow">
           <b>Problem Code : </b>
           {row.problem}
         </span>
-        <span className="rowExpand">
+        <span className="hiddenRow">
           <b>Email : </b>
           {row.callerEmail}
         </span>

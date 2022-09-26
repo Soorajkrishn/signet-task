@@ -11,6 +11,7 @@ import Loading from '../Widgets/Loading';
 import { authentication } from '../../Config/FirebaseConfig';
 import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth';
 import useAnalyticsEventTracker from '../../Hooks/useAnalyticsEventTracker';
+import { Country, State, City }  from 'country-state-city';
 
 function SignUp() {
   const [firstName, setFirstName] = useState('');
@@ -42,8 +43,14 @@ function SignUp() {
   const [phoneUi, setPhoneUi] = useState('');
   const [otp, setOtp] = useState('');
   const [wrongOtp, setWrongOtp] = useState(false);
-  const phoneNumber = '+91' + phone;
+  const [callCode,setCallcode]=useState(null)
+  const phoneNumber = '+'+callCode + phone;
   const { buttonTracker, linkTracker } = useAnalyticsEventTracker();
+  const [countryCode,setCountrycode]=useState(null)
+  const [stateCode,setStatecode]=useState(null)
+  const [cityCode,setCitycode]=useState(null)
+ 
+
 
   useEffect(() => {
     const timeId = setTimeout(() => {
@@ -217,6 +224,12 @@ function SignUp() {
     setValidated(true);
   };
 
+  const userContry=Country.getAllCountries()
+
+  const userState=State.getStatesOfCountry(countryCode)
+
+  const userCity=City.getCitiesOfState(countryCode,stateCode)
+
   return (
     <Container fluid className="signUpWrapper">
       {alertShow && (
@@ -350,11 +363,18 @@ function SignUp() {
                     </Col>
                   </Row>
                 ) : null}
+                
                 {toogle === false ? (
                   <Row>
+                    
                     <Col xs={12} md={12}>
                       <div className="d-flex  align-items-start w-100 customVerifyBox">
-                        <Form.Group controlId="formPhone" className="inputHolder w-100">
+                      <Form.Select style={{width:'25%', height:'60px'}} onChange={(e)=>setCallcode(e.target.value)}>
+                        <option>Code</option>
+                        {userContry.map((val)=><option value={val.phonecode} key={val.isoCode}>{val.isoCode}</option>)}
+                      </Form.Select>
+                        <Form.Group controlId="formPhone" style={{width:'75%'}} className="inputHolder">
+                          
                           <Form.Control
                             required
                             pattern="^\(\d{3}\)\s\d{3}-\d{4}"
@@ -442,14 +462,33 @@ function SignUp() {
                     </Form.Group>
                   </Col>
                 </Row>
+                <Row>
+                    <Col xs={12} md={12}>
+                      
+                          <Form.Select className='region' onChange={(e)=>setCountrycode(e.target.value)}>
+                            <option>Country</option>
+                            {userContry.map((val)=><option key={val.isoCode} value={val.isoCode}>{val.name}</option>)}
+                          </Form.Select>
+                          <Form.Select className='region stateOption' onChange={(e)=>setStatecode(e.target.value)}>
+                            <option>State</option>
+                            {userState.map((val)=><option key={val.isoCode} value={val.isoCode}>{val.name}</option>)}
+                          </Form.Select>
+                          <Form.Select className='region' onChange={(e)=>setCitycode(e.target.value)}>
+                            <option>City</option>
+                            {userCity.map((val)=><option key={val.name} value={val.name}>{val.name}</option>)}
+                          </Form.Select>
+                      
+                    </Col>
+                  </Row>
                 <Form.Group controlId="formBasicCheckbox" className="customCheck mb-2 mt-2">
                   <Form.Check.Input
                     data-validity={validity}
                     data-testid="termsCheckbox"
                     required
                     onChange={onAgreeTermsChanage}
+                    className='checkBox'
                   />
-                  <Form.Check.Label className="p-2">Agree to terms and conditions</Form.Check.Label>
+                  <Form.Check.Label style={{marginLeft:'20px'}} className="p-2">Agree to terms and conditions</Form.Check.Label>
                   <Form.Control.Feedback type="invalid">Please agree to terms and conditions</Form.Control.Feedback>
                 </Form.Group>
                 <div className="formFooter d-flex align-items-center justify-content-center flex-column mb-1">

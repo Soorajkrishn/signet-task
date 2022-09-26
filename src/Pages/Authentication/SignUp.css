@@ -261,16 +261,16 @@
   width: 100% !important;
 }
 
-.region{
+.region {
   width: 30%;
   margin-top: 10px;
   display: inline-block;
   height: 60px;
 }
-.stateOption{
+.stateOption {
   margin: 0px 25px 0px 25px;
 }
 
-.checkBox{
+.checkBox {
   margin-left: 0px;
 }

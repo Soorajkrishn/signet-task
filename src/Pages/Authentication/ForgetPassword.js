@@ -9,7 +9,6 @@ import { aboutSignet, apiMethods, gaEvents, httpStatusCode } from '../../Constan
 import useAnalyticsEventTracker from '../../Hooks/useAnalyticsEventTracker';
 import Loading from '../Widgets/Loading';
 
-
 function ForgetPassword() {
   const [stateData, setStateData] = useState({
     email: '',

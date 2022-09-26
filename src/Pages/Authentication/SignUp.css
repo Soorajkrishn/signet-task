@@ -274,3 +274,16 @@
 .checkBox {
   margin-left: 0px;
 }
+
+.acknowledgement {
+  margin-left: '20px';
+}
+
+.mobileCode {
+  width: '25%';
+  height: '60px';
+}
+
+.phone {
+  width: '75%';
+}

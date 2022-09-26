@@ -366,7 +366,7 @@ function SignUp() {
                   <Row>
                     <Col xs={12} md={12}>
                       <div className="d-flex  align-items-start w-100 customVerifyBox">
-                        <Form.Select style={{ width: '25%', height: '60px' }} onChange={(e) => setCallcode(e.target.value)}>
+                        <Form.Select className="mobileCode" onChange={(e) => setCallcode(e.target.value)}>
                           <option>Code</option>
                           {userContry.map((val) => (
                             <option value={val.phonecode} key={val.isoCode}>
@@ -374,7 +374,7 @@ function SignUp() {
                             </option>
                           ))}
                         </Form.Select>
-                        <Form.Group controlId="formPhone" style={{ width: '75%' }} className="inputHolder">
+                        <Form.Group controlId="formPhone" className="inputHolder phone">
                           <Form.Control
                             required
                             pattern="^\(\d{3}\)\s\d{3}-\d{4}"
@@ -498,9 +498,7 @@ function SignUp() {
                     onChange={onAgreeTermsChanage}
                     className="checkBox"
                   />
-                  <Form.Check.Label style={{ marginLeft: '20px' }} className="p-2">
-                    Agree to terms and conditions
-                  </Form.Check.Label>
+                  <Form.Check.Label className="p-2 acknowledgement">Agree to terms and conditions</Form.Check.Label>
                   <Form.Control.Feedback type="invalid">Please agree to terms and conditions</Form.Control.Feedback>
                 </Form.Group>
                 <div className="formFooter d-flex align-items-center justify-content-center flex-column mb-1">

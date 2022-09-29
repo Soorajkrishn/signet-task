@@ -17,9 +17,9 @@ function Statistics() {
   const [org, setOrg] = useState('');
   const { buttonTracker } = useAnalyticsEventTracker();
   const history = useNavigate();
-  const [activeUsers, setactiveUsers] = useState([]);
-  const [inActiveUsers, setinActiveUsers] = useState([]);
-  const [pendingUsers, setpendingUsers] = useState([]);
+  const [activeUsers, setActiveUsers] = useState([]);
+  const [inActiveUsers, setInactiveUsers] = useState([]);
+  const [pendingUsers, setPendingUsers] = useState([]);
 
   const fetchAllUserDetails = async () => {
     setIsLoading(true);
@@ -49,9 +49,9 @@ function Statistics() {
         return true;
       });
 
-      setactiveUsers(tempActiveUsers);
-      setinActiveUsers(tempInActiveUsers);
-      setpendingUsers(tempPendingUsers);
+      setActiveUsers(tempActiveUsers);
+      setInactiveUsers(tempInActiveUsers);
+      setPendingUsers(tempPendingUsers);
     }
   }, [users]);
 

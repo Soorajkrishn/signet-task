@@ -17,9 +17,9 @@ function Statistics() {
   const [org, setOrg] = useState('');
   const { buttonTracker } = useAnalyticsEventTracker();
   const history = useNavigate();
-  const [activeUsers,setactiveUsers] = useState([]);
-  const [inActiveUsers,setinActiveUsers] = useState([]);
-  const [pendingUsers,setpendingUsers] = useState([]);
+  const [activeUsers, setactiveUsers] = useState([]);
+  const [inActiveUsers, setinActiveUsers] = useState([]);
+  const [pendingUsers, setpendingUsers] = useState([]);
 
   const fetchAllUserDetails = async () => {
     setIsLoading(true);
@@ -32,8 +32,8 @@ function Statistics() {
   };
   const totalUsers = users.length;
 
-  useEffect(()=>{
-    if(users){
+  useEffect(() => {
+    if (users) {
       const tempActiveUsers = [];
       const tempInActiveUsers = [];
       const tempPendingUsers = [];
@@ -51,10 +51,10 @@ function Statistics() {
 
       setactiveUsers(tempActiveUsers);
       setinActiveUsers(tempInActiveUsers);
-      setpendingUsers(tempPendingUsers)
+      setpendingUsers(tempPendingUsers);
     }
-  },[users])
-    
+  }, [users]);
+
   const totalActiveUsers = activeUsers?.length;
 
   const totalInactiveUsers = inActiveUsers?.length;
@@ -93,7 +93,7 @@ function Statistics() {
   const labels = ['Active Users', 'Inactive Users', 'Pending Users'];
   const values = [totalActiveUsers, totalInactiveUsers, totalPendingUsers];
 
-  console.log(totalActiveUsers)
+  console.log(totalActiveUsers);
   const dataValues = {
     labels,
     datasets: [
@@ -139,7 +139,7 @@ function Statistics() {
                   <div className="cardHeader d-flex align-items-center justify-content-between">
                     <h6>User Status</h6>
                   </div>
-                  <div className='chartWrapper'>
+                  <div className="chartWrapper">
                     <Doughnut data={dataValues} options={options} />
                   </div>
                 </div>
@@ -187,7 +187,7 @@ function Statistics() {
                     </tr>
                   </thead>
                   <tbody>
-                  {filterUsers?.map((v) => (
+                    {filterUsers?.map((v) => (
                       <tr key={v.userId}>
                         <td>
                           <Button variant="link" onClick={() => handleClick(v.userId)}>
@@ -197,7 +197,7 @@ function Statistics() {
                         <td>{v.organization}</td>
                         <td>{v.orgEmail}</td>
                       </tr>
-                  ))}
+                    ))}
                   </tbody>
                 </Table>
               </Col>

@@ -35,7 +35,6 @@ function UsersList({ userId }) {
     setShow(true);
   };
 
-
   const fetchAllUserDetails = async () => {
     setIsLoading(true);
     const { 0: statusCode, 1: data } = await makeRequest(APIUrlConstants.FETCH_USER_DETAILS);

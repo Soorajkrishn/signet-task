@@ -64,6 +64,7 @@ function App() {
             <Route exact path="/announcement" element={<Layout component={components.ANNOUNCEMENT} />} />
             <Route exact path="/notification" element={<Layout component={components.NOTIFICATION} />} />
             <Route exact path="/profile" element={<Layout component={components.PROFILE} />} />
+            <Route exact path="/statistics" element={<Layout component={components.STATISTICS} />} />
           </Route>
           <Route path="*" element={<Navigate replace to={redirectTo} />} />
           <Route exact path="/" element={token ? <Navigate to={redirectTo} /> : <Layout component={components.LOGIN} />} />

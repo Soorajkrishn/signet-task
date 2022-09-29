@@ -83,6 +83,27 @@ export default function Sidebar() {
                 <img src={process.env.REACT_APP_PUBLIC_URL + 'images/sidebar/env-active.svg'} alt="" className="pe-2 activeImg" />
                 Announcements
               </Nav.Link>
+
+                <Nav.Link
+                className="pe-0 ps-2"
+                eventKey="health"
+                onClick={() => {
+                  linkTracker(gaEvents.ADMIN_STATISTICS);
+                  gotoNavigate('/statistics');
+                }}>
+                <img
+                  src={process.env.REACT_APP_PUBLIC_URL + 'images/sidebar/network-health.svg'}
+                  alt=""
+                  className="pe-2 defaultImg"
+                />
+                <img
+                  src={process.env.REACT_APP_PUBLIC_URL + 'images/sidebar/network-health-active.svg'}
+                  alt=""
+                  className="pe-2 activeImg"
+                />
+                  Statistics
+                </Nav.Link>
+           
             </>
           )}
           {role === userRoleId.remoteSmartUser && (
@@ -195,6 +216,7 @@ export default function Sidebar() {
                 />
                 Chat
               </Nav.Link>
+              
             </>
           )}
         </Nav>

@@ -47,7 +47,6 @@ function Tickets() {
     navigate(`/ticket/edit/${ticketId}`);
   };
 
-  console.log(users);
   const actionBtn = (_row, cell, _rowIndex) => (
     <div className="actionBox d-flex align-items-center">
       {cell.callerEmail === localStorage.getItem('email') && (

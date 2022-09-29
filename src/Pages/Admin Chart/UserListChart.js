@@ -17,9 +17,9 @@ function Statistics() {
   const [org, setOrg] = useState('');
   const { buttonTracker } = useAnalyticsEventTracker();
   const history = useNavigate();
-  const activeUsers = [];
-  const inActiveUsers = [];
-  const pendingUsers = [];
+  const [activeUsers,setactiveUsers] = useState([]);
+  const [inActiveUsers,setinActiveUsers] = useState([]);
+  const [pendingUsers,setpendingUsers] = useState([]);
 
   const fetchAllUserDetails = async () => {
     setIsLoading(true);
@@ -32,22 +32,34 @@ function Statistics() {
   };
   const totalUsers = users.length;
 
-  users.map((v) => {
-    if (v.status === 'Active') {
-      activeUsers.push(v);
-    } else if (v.status === 'Inactive') {
-      inActiveUsers.push(v);
-    } else if (v.status === 'Pending') {
-      pendingUsers.push(v);
+  useEffect(()=>{
+    if(users){
+      const tempActiveUsers = [];
+      const tempInActiveUsers = [];
+      const tempPendingUsers = [];
+
+      users.map((v) => {
+        if (v.status === 'Active') {
+          tempActiveUsers.push(v);
+        } else if (v.status === 'Inactive') {
+          tempInActiveUsers.push(v);
+        } else if (v.status === 'Pending') {
+          tempPendingUsers.push(v);
+        }
+        return true;
+      });
+
+      setactiveUsers(tempActiveUsers);
+      setinActiveUsers(tempInActiveUsers);
+      setpendingUsers(tempPendingUsers)
     }
-    return true;
-  });
+  },[users])
+    
+  const totalActiveUsers = activeUsers?.length;
 
-  const totalActiveUsers = activeUsers.length;
+  const totalInactiveUsers = inActiveUsers?.length;
 
-  const totalInactiveUsers = inActiveUsers.length;
-
-  const totalPendingUsers = pendingUsers.length;
+  const totalPendingUsers = pendingUsers?.length;
 
   const handleClick = (id) => {
     buttonTracker(gaEvents.NAVIGATE_EDIT_USER);
@@ -81,6 +93,7 @@ function Statistics() {
   const labels = ['Active Users', 'Inactive Users', 'Pending Users'];
   const values = [totalActiveUsers, totalInactiveUsers, totalPendingUsers];
 
+  console.log(totalActiveUsers)
   const dataValues = {
     labels,
     datasets: [
@@ -126,7 +139,7 @@ function Statistics() {
                   <div className="cardHeader d-flex align-items-center justify-content-between">
                     <h6>User Status</h6>
                   </div>
-                  <div className="imageWrapper">
+                  <div className='chartWrapper'>
                     <Doughnut data={dataValues} options={options} />
                   </div>
                 </div>
@@ -140,7 +153,7 @@ function Statistics() {
                     <img className="imagecontainer" alt="" src="/images/tasks/building.jpg" />
                   </div>
                   <h5>
-                    Number of Organization : <b>{registeredOrg.length}</b>
+                    Number of Organization : <b>{registeredOrg?.length}</b>
                   </h5>
                 </div>
               </Col>
@@ -156,7 +169,7 @@ function Statistics() {
                     </tr>
                   </thead>
                   <tbody>
-                    {registeredOrg.map((v) => (
+                    {registeredOrg?.map((v) => (
                       <tr key={v.organization} onClick={() => setOrg(v.organization)}>
                         <td>{v.organization !== null ? v.organization : 'Others'}</td>
                       </tr>
@@ -173,8 +186,8 @@ function Statistics() {
                       <th>User Email</th>
                     </tr>
                   </thead>
-                  {filterUsers.map((v) => (
-                    <tbody>
+                  <tbody>
+                  {filterUsers?.map((v) => (
                       <tr key={v.userId}>
                         <td>
                           <Button variant="link" onClick={() => handleClick(v.userId)}>
@@ -184,8 +197,8 @@ function Statistics() {
                         <td>{v.organization}</td>
                         <td>{v.orgEmail}</td>
                       </tr>
-                    </tbody>
                   ))}
+                  </tbody>
                 </Table>
               </Col>
             </Row>

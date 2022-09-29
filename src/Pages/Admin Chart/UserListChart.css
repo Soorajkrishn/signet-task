@@ -4,8 +4,8 @@
 }
 
 .imageWrapper {
-  width: 300px;
-  height: 300px;
+  width: 70%;
+  height: 70%;
   margin: 0px 30px;
 }
 
@@ -16,4 +16,10 @@
 
 .tableBackground {
   background-color: white;
+}
+
+.chartWrapper{
+    width: 85%;
+    height: 85%;
+    margin: 0px 30px;
 }

@@ -35,7 +35,6 @@ function UsersList({ userId }) {
     setShow(true);
   };
 
-  console.log(users);
 
   const fetchAllUserDetails = async () => {
     setIsLoading(true);

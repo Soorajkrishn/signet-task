@@ -47,6 +47,7 @@ function Tickets() {
     navigate(`/ticket/edit/${ticketId}`);
   };
 
+  console.log(users);
   const actionBtn = (_row, cell, _rowIndex) => (
     <div className="actionBox d-flex align-items-center">
       {cell.callerEmail === localStorage.getItem('email') && (
@@ -120,6 +121,33 @@ function Tickets() {
       <h6 className="text-center text-bold m-0 p-0">Loading ...</h6>
     );
 
+  const expandRow = {
+    renderer: (row, rowIndex) => (
+      <div>
+        <span className="hiddenRow">
+          <b>Created By : </b>
+          {row.createdBy}
+        </span>
+        <span className="hiddenRow">
+          <b>Created Date : </b>
+          {row.createdDate}
+        </span>
+        <span className="hiddenRow">
+          <b>Problem Code : </b>
+          {row.problem}
+        </span>
+        <span className="hiddenRow">
+          <b>Email : </b>
+          {row.callerEmail}
+        </span>
+      </div>
+    ),
+
+    onlyOneExpanding: true,
+    showExpandColumn: true,
+    expandByColumnOnly: true,
+  };
+
   return (
     <div className="wrapperBase">
       <div className="tabelBase" data-test-id="usertable">
@@ -148,6 +176,7 @@ function Tickets() {
                   {...props.baseProps}
                   pagination={users?.length > 10 ? paginationFactory({ sizePerPage: 10 }) : null}
                   noDataIndication={emptyDataMessage}
+                  expandRow={expandRow}
                 />
               </div>
             </>

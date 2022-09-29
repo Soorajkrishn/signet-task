@@ -37,6 +37,8 @@ export const components = {
   TWO_FACTOR: 'TWO_FACTOR',
   NOTIFICATION: 'NOTIFICATION',
   PROFILE: 'PROFILE',
+  TEST_TICKET: 'TEST_TICKET',
+  STATISTICS: 'STATISTICS',
 };
 
 export const gaEvents = {
@@ -83,6 +85,7 @@ export const gaEvents = {
   CREATE_NEW_TICKET: 'create_new_ticket',
   UPDATE_TICKET_DETAILS: 'update_ticket_details',
   CONTACT_SALES: 'contact_sales',
+  ADMIN_STATISTICS: 'admin_statistics',
 };
 
 export const aboutSignet =

@@ -169,9 +169,9 @@ function Statistics() {
                     </tr>
                   </thead>
                   <tbody>
-                    {registeredOrg?.map((v) => (
-                      <tr key={v.organization} onClick={() => setOrg(v.organization)}>
-                        <td>{v.organization !== null ? v.organization : 'Others'}</td>
+                    {registeredOrg?.map((item) => (
+                      <tr key={item?.organization} onClick={() => setOrg(item?.organization)}>
+                        <td>{item?.organization !== null ? item?.organization : 'Others'}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -187,15 +187,15 @@ function Statistics() {
                     </tr>
                   </thead>
                   <tbody>
-                    {filterUsers?.map((v) => (
-                      <tr key={v.userId}>
+                    {filterUsers?.map((item) => (
+                      <tr key={item?.userId}>
                         <td>
-                          <Button variant="link" onClick={() => handleClick(v.userId)}>
-                            {v.firstName}
+                          <Button variant="link" onClick={() => handleClick(item?.userId)}>
+                            {item?.firstName}
                           </Button>
                         </td>
-                        <td>{v.organization}</td>
-                        <td>{v.orgEmail}</td>
+                        <td>{item?.organization}</td>
+                        <td>{item?.orgEmail}</td>
                       </tr>
                     ))}
                   </tbody>

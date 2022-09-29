@@ -79,7 +79,7 @@ function Layout(props) {
     case components.TEST_TICKET:
       return LayoutWithHeader(<Tickettask />);
     case components.STATISTICS:
-      return LayoutWithHeader(<Statistics/>)
+      return LayoutWithHeader(<Statistics />);
 
     default:
       return <div>Component not found</div>;

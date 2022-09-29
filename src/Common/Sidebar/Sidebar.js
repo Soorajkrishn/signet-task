@@ -84,13 +84,14 @@ export default function Sidebar() {
                 Announcements
               </Nav.Link>
 
-                <Nav.Link
+              <Nav.Link
                 className="pe-0 ps-2"
                 eventKey="health"
                 onClick={() => {
                   linkTracker(gaEvents.ADMIN_STATISTICS);
                   gotoNavigate('/statistics');
-                }}>
+                }}
+              >
                 <img
                   src={process.env.REACT_APP_PUBLIC_URL + 'images/sidebar/network-health.svg'}
                   alt=""
@@ -101,9 +102,8 @@ export default function Sidebar() {
                   alt=""
                   className="pe-2 activeImg"
                 />
-                  Statistics
-                </Nav.Link>
-           
+                Statistics
+              </Nav.Link>
             </>
           )}
           {role === userRoleId.remoteSmartUser && (
@@ -216,7 +216,6 @@ export default function Sidebar() {
                 />
                 Chat
               </Nav.Link>
-              
             </>
           )}
         </Nav>

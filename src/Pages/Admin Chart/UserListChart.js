@@ -93,7 +93,6 @@ function Statistics() {
   const labels = ['Active Users', 'Inactive Users', 'Pending Users'];
   const values = [totalActiveUsers, totalInactiveUsers, totalPendingUsers];
 
-  console.log(totalActiveUsers);
   const dataValues = {
     labels,
     datasets: [

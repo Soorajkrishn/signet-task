@@ -81,7 +81,6 @@ function Layout(props) {
     case components.STATISTICS:
       return LayoutWithHeader(<Statistics />);
 
-
     default:
       return <div>Component not found</div>;
   }

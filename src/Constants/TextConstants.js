@@ -39,7 +39,6 @@ export const components = {
   PROFILE: 'PROFILE',
   TEST_TICKET: 'TEST_TICKET',
   STATISTICS: 'STATISTICS',
-  EXAMPLE: 'EXAMPLE',
 };
 
 export const gaEvents = {

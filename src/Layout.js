@@ -22,6 +22,7 @@ import HealthCharts from './Pages/HealthCharts/HealthCharts';
 import Profile from './Pages/Profile/Profile';
 import Tickettask from './Pages/Tickets/Test/TicketTask';
 import Statistics from './Pages/Admin Chart/UserListChart';
+import Example from './Pages/Tickets/CreateTicket/CreateTicket';
 import { components } from './Constants/TextConstants';
 import { useLocation } from 'react-router-dom';
 import ReactGA from 'react-ga4';
@@ -80,6 +81,8 @@ function Layout(props) {
       return LayoutWithHeader(<Tickettask />);
     case components.STATISTICS:
       return LayoutWithHeader(<Statistics />);
+    case components.EXAMPLE:
+      return LayoutWithHeader(<Example />);
 
     default:
       return <div>Component not found</div>;

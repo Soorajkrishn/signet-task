@@ -62,5 +62,11 @@ tbody tr:hover {
 }
 .values {
   border: 1px solid white;
-  background-color: rgba(13, 46, 97, 0.05);
+  background-color: rgba(19, 44, 83, 0.05);
+}
+.modelWrapper .modal-content{
+  height: 100%;
+}
+.description{
+  height: 240px;
 }

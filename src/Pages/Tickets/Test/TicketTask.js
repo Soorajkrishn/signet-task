@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Alert,Form } from 'react-bootstrap';
+import { Button, Alert, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import APIUrlConstants from '../../../Config/APIUrlConstants';
-import { fetchCall,makeRequest } from '../../../Services/APIService';
-import { apiMethods,gaEvents, httpStatusCode } from '../../../Constants/TextConstants';
+import { fetchCall, makeRequest } from '../../../Services/APIService';
+import { apiMethods, gaEvents, httpStatusCode } from '../../../Constants/TextConstants';
 import Loading from '../../Widgets/Loading';
 import './TicketTask.css';
 import { userRoleId } from '../../../Utilities/AppUtilities';
@@ -12,7 +12,6 @@ import { Markup } from 'interweave';
 import Modal from 'react-bootstrap/Modal';
 import Select from 'react-select';
 import moment from 'moment';
-
 
 function Tickettask() {
   const navigate = useNavigate();
@@ -37,7 +36,7 @@ function Tickettask() {
   const [modelLoading, setLoading] = useState(false);
   const [Priority, setPriority] = useState([]);
   const [problemCode, setProblemCode] = useState([]);
-  const [id,setId]=useState(null)
+  const [id, setId] = useState(null);
   const [additiondes, setAdditionaldes] = useState('');
   const [date, setDate] = useState('');
 
@@ -181,13 +180,11 @@ function Tickettask() {
     setDate(dateandtime);
   };
 
- 
-
   const tabledata = searchticket !== null ? searchticket : users;
   const dataslice = tabledata.slice(start, end);
 
   const fetchPromise = async () => {
-    setLoading(true)
+    setLoading(true);
     const optionArray = [];
     const fetchSitelist = await makeRequest(`${APIUrlConstants.LIST_SITES}?customerNo=${localStorage.getItem('orgNo')}`);
     const fetchPriority = await makeRequest(APIUrlConstants.LIST_PRIORITY);
@@ -254,8 +251,8 @@ function Tickettask() {
     setLoading(false);
   };
   const handleClick = (ticketId) => {
-    setId(ticketId)
-    setShow(true)
+    setId(ticketId);
+    setShow(true);
   };
   useEffect(() => {
     setPostObject((prev) => {
@@ -266,7 +263,7 @@ function Tickettask() {
       Current.phoneNumber = localStorage.getItem('mobile');
       return Current;
     });
-    fetchPromise()
+    fetchPromise();
   }, [id]);
 
   const handleChange = (value) => {
@@ -339,33 +336,33 @@ function Tickettask() {
     }
   };
 
-  const handleShow = () =>{
-    setId(null)
-    setShow(true)
-    fetchPromise()
-    };
-    
-    const handleClose = () => {
-      setShow(false);
-      setId(null)
-      setPostObject({
-        assignedTo: '',
-        customerId: '',
-        site: '',
-        createdBy: '',
-        createdDate: '',
-        phoneNumber: '',
-        status: 'ACTIVE',
-        requestType: 'NOC',
-        problem: 'System Trouble',
-        description: '',
-        callerEmail: '',
-        priority: '3',
-        solutionProvided: '',
-        ticketNo: '',
-      });
-    }
-  
+  const handleShow = () => {
+    setId(null);
+    setShow(true);
+    fetchPromise();
+  };
+
+  const handleClose = () => {
+    setShow(false);
+    setId(null);
+    setPostObject({
+      assignedTo: '',
+      customerId: '',
+      site: '',
+      createdBy: '',
+      createdDate: '',
+      phoneNumber: '',
+      status: 'ACTIVE',
+      requestType: 'NOC',
+      problem: 'System Trouble',
+      description: '',
+      callerEmail: '',
+      priority: '3',
+      solutionProvided: '',
+      ticketNo: '',
+    });
+  };
+
   return (
     <div className="wrapperBase">
       {isLoading && <Loading />}
@@ -373,285 +370,269 @@ function Tickettask() {
         <div>Loading...</div>
       ) : (
         <>
-         {modelLoading && <Loading/>}
-        <Modal show={show} onHide={handleClose} dialogClassName="modal-90w modelWrapper" size='xl'  fullscreen='xl-down'>
-          <Modal.Header>
-              {id?'Edit Ticket':'Create Ticket'}
-          </Modal.Header>
-          <Modal.Body>
-          <Form noValidate validated={validated}>
-              
-
-              <Form.Group className="mb-3 input-group">
-                <div className="input-container col-6">
-                  <Form.Label>
-                    Site Name {!id && <span className="requiredTxt">*</span>}
-                  </Form.Label>
-                  <div>
-                    <Select
-                      options={options}
-                      onChange={handleChange}
-                      placeholder="Search for Site Name"
-                      value={selectedValue}
-                      styles={{ customStyles }}
-                      data-testid="siteName"
-                    />
-                  </div>
-                </div>
-                <div className="input-container col-6">
-                  <Form.Label>Priority {!id && <span className="requiredTxt">*</span>}</Form.Label>
-                  <Form.Select
-                    className="width-90"
-                    data-testid="priority"
-                    onChange={(e) => {
-                      setPostObject((prev) => {
-                        const Current = { ...prev };
-                        Current.priority = e.target.value;
-                        return Current;
-                      });
-                    }}
-                    value={postObject.priority}
-                    disabled={id}
-                  >
-                    {Priority.map((i) => (
-                      <option key={i} value={i}>
-                        {i}
-                      </option>
-                    ))}
-                  </Form.Select>
-                </div>
-              </Form.Group>
-              <Form.Group className="mb-3 input-group">
-                <div className="input-container col-6">
-                  <Form.Label>Problem Code  {!id && <span className="requiredTxt">*</span>}</Form.Label>
-                  <Form.Select
-                    data-testid="priority"
-                    onChange={(e) => {
-                      setPostObject((prev) => {
-                        const Current = { ...prev };
-                        Current.problem = e.target.value;
-                        return Current;
-                      });
-                    }}
-                    value={postObject.priority}
-                    disabled={id}
-                  >
-                    {problemCode.map((i) => (
-                      <option key={i} value={i}>
-                        {i}
-                      </option>
-                    ))}
-                  </Form.Select>
-                </div>
-                {id && (
-                  <div className="input-container col-6">
-                    <Form.Label>Created Date</Form.Label>
-                    <Form.Control
-                      placeholder="Created Date"
-                      type="text"
-                      value={postObject.createdDate}
-                      disabled
-                    />
-                  </div>
-                )}
-              </Form.Group>
-              {id && (
+          {modelLoading && <Loading />}
+          <Modal show={show} onHide={handleClose} dialogClassName="modal-90w modelWrapper" size="xl" fullscreen="xl-down">
+            <Modal.Header>{id ? 'Edit Ticket' : 'Create Ticket'}</Modal.Header>
+            <Modal.Body>
+              <Form noValidate validated={validated}>
                 <Form.Group className="mb-3 input-group">
                   <div className="input-container col-6">
-                    <Form.Label>Created By</Form.Label>
-                    <Form.Control
-                      placeholder="Created By"
-                      type="text"
-                      className="width-90"
-                      value={postObject.createdBy}
-                      disabled
-                    />
+                    <Form.Label>Site Name {!id && <span className="requiredTxt">*</span>}</Form.Label>
+                    <div>
+                      <Select
+                        options={options}
+                        onChange={handleChange}
+                        placeholder="Search for Site Name"
+                        value={selectedValue}
+                        styles={{ customStyles }}
+                        data-testid="siteName"
+                      />
+                    </div>
                   </div>
                   <div className="input-container col-6">
-                    <Form.Label>Client Email</Form.Label>
-                    <Form.Control
-                      placeholder="Client Email"
-                      type="text"
+                    <Form.Label>Priority {!id && <span className="requiredTxt">*</span>}</Form.Label>
+                    <Form.Select
                       className="width-90"
-                      value={postObject.callerEmail}
-                      disabled
-                    />
+                      data-testid="priority"
+                      onChange={(e) => {
+                        setPostObject((prev) => {
+                          const Current = { ...prev };
+                          Current.priority = e.target.value;
+                          return Current;
+                        });
+                      }}
+                      value={postObject.priority}
+                      disabled={id}
+                    >
+                      {Priority.map((i) => (
+                        <option key={i} value={i}>
+                          {i}
+                        </option>
+                      ))}
+                    </Form.Select>
                   </div>
                 </Form.Group>
-              )}
-              
-              <Form.Group className="mb-3 input-group">
-                <div className="input-container col">
-                  <Form.Label>Description {!id && <span className="requiredTxt">*</span>}</Form.Label>
-                  <Form.Control
-                    as="textarea"
-                    className={id?'':"description"}
-                    placeholder="Enter description"
-                    required
-                    name="description"
-                    onChange={(e) => {
-                      setPostObject((prev) => {
-                        const Current = { ...prev };
-                        Current.description = e.target.value;
-                        return Current;
-                      });
-                    }}
-                 
-                    value={postObject.description}
-                    disabled={id}
-                  />
-                  <Form.Control.Feedback type="invalid">Description is required</Form.Control.Feedback>
-                </div>
-              </Form.Group>
-              {id && (
-                <div className="input-container col">
-                  <Form.Label>Additional Details</Form.Label>
-                  <Form.Control
-                    placeholder="Additional Details"
-                    as="textarea"
-                    onChange={(e) => newDescription(e)}
-                  />
-                </div>
-              )}
-            </Form>
-          </Modal.Body>
-        <Modal.Footer>
-          <Button variant="secondary" className='buttonDefault text-center minHeight45' onClick={handleClose}>
-            Cancel
-          </Button>
-          <Button variant="primary" className="buttonPrimary text-center" onClick={createEditTicket}>
-            {id?'Update':'Create'}
-          </Button>
-        </Modal.Footer>
-      </Modal>
-        <div className="titleHeader d-flex align-items-center justify-content-between">
-          <div className="info">
-            <h6>Tickets</h6>
-          </div>
-          <div className="headerAction d-flex align-items-center">
-            <Button
-              className="buttonPrimary"
-              onClick={handleShow}
-            >
-              <img src={process.env.REACT_APP_PUBLIC_URL + 'images/users/plus.svg'} alt="" /> Create Ticket
-            </Button>
-          </div>
-          <div className="row container">
-            <div className="col-4 ticket_container ">
-              <div className="input-group mb-3 searchbox">
-                <input type="search" className="search" placeholder="Search" onChange={(e) => filterData(e.target.value)} />
-                <div className="input-group-append">
-                  <Button>
-                    <i className="fa-sharp fa-solid fa-magnifying-glass" />
-                  </Button>
-                </div>
-              </div>
-              <table>
-                <tbody>
-                  {dataslice.map((val) => (
-                    <tr key={val.ticketNo} onClick={() => ticketFilter(val.ticketNo)} className="ticket-list">
-                      <td className="ticket">
-                        <span className="truncate text">{val.description}</span>
-                        <span className="text">
-                          <i className="fa-sharp fa-solid fa-bookmark" /> {val.ticketNo}
-                        </span>
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-              <div className="pagination">
-                {lastpageNO <= 1 ? (
-                  <Button>1</Button>
-                ) : (
-                  <>
-                    <Button onClick={pageDecrement}>
-                      <i className="fa-solid fa-angle-left" />
-                    </Button>
-                    <Button>{pageNo}</Button>
-                    {pageNo === lastpageNO ? '' : <Button onClick={lastPage}>{lastpageNO}</Button>}
-                    <Button onClick={pageIncrement}>
-                      <i className="fa-solid fa-angle-right" />
-                    </Button>
-                  </>
-                )}
-              </div>
-            </div>
-            <div className="col-5 description">
-              <div className="content">
-                <p>
-                  <i className="fa-sharp fa-solid fa-bookmark" />{' '}
-                  {ticketdetails !== null ? ticketdetails[0].ticketNo : firstTicket !== null && firstTicket.ticketNo}
-                </p>
-                <h4 className="heading">Description</h4>
-                <p>
-                  <Markup
-                    content={
-                      ticketdetails !== null ? ticketdetails[0].description : firstTicket !== null && firstTicket.description
-                    }
-                  />
-                </p>
-              </div>
-            </div>
-            <div className="col-3 ">
-              <div className="details">
-                <h4 className="heading">Status</h4>
-                <div className="values">
-                  <p>{ticketdetails !== null ? ticketdetails[0].status : firstTicket !== null && firstTicket.status}</p>
-                </div>
-
-                <h4 className="heading">Priority</h4>
-                <div className="values">
-                  <p>{prioritylist(priority)}</p>
-                </div>
-
-                <h4 className="heading">Created Date</h4>
-                <div className="values">
-                  <p>{ticketdetails !== null ? ticketdetails[0].createdDate : firstTicket !== null && firstTicket.createdDate}</p>
-                </div>
-
-                <h4 className="heading">Problem</h4>
-                <div className="values">
-                  <p>{ticketdetails !== null ? ticketdetails[0].problem : firstTicket !== null && firstTicket.problem}</p>
-                </div>
-
-                <h4 className="heading">Phone Number</h4>
-                <div>
-                  <p>{ticketdetails !== null ? ticketdetails[0].phoneNumber : firstTicket !== null && firstTicket.phoneNumber}</p>
-                </div>
-
-                {(ticketdetails !== null ? ticketdetails[0].callerEmail : firstTicket !== null && firstTicket.callerEmail) ===
-                  localStorage.getItem('email') && (
-                  <>
-                    <h4>Edit</h4>
-                    <Button
-                      variant="link"
-                      id={ticketdetails !== null ? ticketdetails[0].ticketNo : firstTicket !== null && firstTicket.ticketNo}
-                      onClick={() =>
-                        handleClick(
-                          ticketdetails !== null ? ticketdetails[0].ticketNo : firstTicket !== null && firstTicket.ticketNo,
-                        )
-                      }
+                <Form.Group className="mb-3 input-group">
+                  <div className="input-container col-6">
+                    <Form.Label>Problem Code {!id && <span className="requiredTxt">*</span>}</Form.Label>
+                    <Form.Select
+                      data-testid="priority"
+                      onChange={(e) => {
+                        setPostObject((prev) => {
+                          const Current = { ...prev };
+                          Current.problem = e.target.value;
+                          return Current;
+                        });
+                      }}
+                      value={postObject.priority}
+                      disabled={id}
                     >
-                      <img
-                        src="/images/users/edit.svg"
-                        id={ticketdetails !== null ? ticketdetails[0].ticketNo : firstTicket !== null && firstTicket.ticketNo}
-                        alt="Edit"
+                      {problemCode.map((i) => (
+                        <option key={i} value={i}>
+                          {i}
+                        </option>
+                      ))}
+                    </Form.Select>
+                  </div>
+                  {id && (
+                    <div className="input-container col-6">
+                      <Form.Label>Created Date</Form.Label>
+                      <Form.Control placeholder="Created Date" type="text" value={postObject.createdDate} disabled />
+                    </div>
+                  )}
+                </Form.Group>
+                {id && (
+                  <Form.Group className="mb-3 input-group">
+                    <div className="input-container col-6">
+                      <Form.Label>Created By</Form.Label>
+                      <Form.Control
+                        placeholder="Created By"
+                        type="text"
+                        className="width-90"
+                        value={postObject.createdBy}
+                        disabled
                       />
-                    </Button>
-                  </>
+                    </div>
+                    <div className="input-container col-6">
+                      <Form.Label>Client Email</Form.Label>
+                      <Form.Control
+                        placeholder="Client Email"
+                        type="text"
+                        className="width-90"
+                        value={postObject.callerEmail}
+                        disabled
+                      />
+                    </div>
+                  </Form.Group>
                 )}
+
+                <Form.Group className="mb-3 input-group">
+                  <div className="input-container col">
+                    <Form.Label>Description {!id && <span className="requiredTxt">*</span>}</Form.Label>
+                    <Form.Control
+                      as="textarea"
+                      className={id ? '' : 'description'}
+                      placeholder="Enter description"
+                      required
+                      name="description"
+                      onChange={(e) => {
+                        setPostObject((prev) => {
+                          const Current = { ...prev };
+                          Current.description = e.target.value;
+                          return Current;
+                        });
+                      }}
+                      value={postObject.description}
+                      disabled={id}
+                    />
+                    <Form.Control.Feedback type="invalid">Description is required</Form.Control.Feedback>
+                  </div>
+                </Form.Group>
+                {id && (
+                  <div className="input-container col">
+                    <Form.Label>Additional Details</Form.Label>
+                    <Form.Control placeholder="Additional Details" as="textarea" onChange={(e) => newDescription(e)} />
+                  </div>
+                )}
+              </Form>
+            </Modal.Body>
+            <Modal.Footer>
+              <Button variant="secondary" className="buttonDefault text-center minHeight45" onClick={handleClose}>
+                Cancel
+              </Button>
+              <Button variant="primary" className="buttonPrimary text-center" onClick={createEditTicket}>
+                {id ? 'Update' : 'Create'}
+              </Button>
+            </Modal.Footer>
+          </Modal>
+          <div className="titleHeader d-flex align-items-center justify-content-between">
+            <div className="info">
+              <h6>Tickets</h6>
+            </div>
+            <div className="headerAction d-flex align-items-center">
+              <Button className="buttonPrimary" onClick={handleShow}>
+                <img src={process.env.REACT_APP_PUBLIC_URL + 'images/users/plus.svg'} alt="" /> Create Ticket
+              </Button>
+            </div>
+            <div className="row container">
+              <div className="col-4 ticket_container ">
+                <div className="input-group mb-3 searchbox">
+                  <input type="search" className="search" placeholder="Search" onChange={(e) => filterData(e.target.value)} />
+                  <div className="input-group-append">
+                    <Button>
+                      <i className="fa-sharp fa-solid fa-magnifying-glass" />
+                    </Button>
+                  </div>
+                </div>
+                <table>
+                  <tbody>
+                    {dataslice.map((val) => (
+                      <tr key={val.ticketNo} onClick={() => ticketFilter(val.ticketNo)} className="ticket-list">
+                        <td className="ticket">
+                          <span className="truncate text">{val.description}</span>
+                          <span className="text">
+                            <i className="fa-sharp fa-solid fa-bookmark" /> {val.ticketNo}
+                          </span>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+                <div className="pagination">
+                  {lastpageNO <= 1 ? (
+                    <Button>1</Button>
+                  ) : (
+                    <>
+                      <Button onClick={pageDecrement}>
+                        <i className="fa-solid fa-angle-left" />
+                      </Button>
+                      <Button>{pageNo}</Button>
+                      {pageNo === lastpageNO ? '' : <Button onClick={lastPage}>{lastpageNO}</Button>}
+                      <Button onClick={pageIncrement}>
+                        <i className="fa-solid fa-angle-right" />
+                      </Button>
+                    </>
+                  )}
+                </div>
+              </div>
+              <div className="col-5 description">
+                <div className="content">
+                  <p>
+                    <i className="fa-sharp fa-solid fa-bookmark" />{' '}
+                    {ticketdetails !== null ? ticketdetails[0].ticketNo : firstTicket !== null && firstTicket.ticketNo}
+                  </p>
+                  <h4 className="heading">Description</h4>
+                  <p>
+                    <Markup
+                      content={
+                        ticketdetails !== null ? ticketdetails[0].description : firstTicket !== null && firstTicket.description
+                      }
+                    />
+                  </p>
+                </div>
+              </div>
+              <div className="col-3 ">
+                <div className="details">
+                  <h4 className="heading">Status</h4>
+                  <div className="values">
+                    <p>{ticketdetails !== null ? ticketdetails[0].status : firstTicket !== null && firstTicket.status}</p>
+                  </div>
+
+                  <h4 className="heading">Priority</h4>
+                  <div className="values">
+                    <p>{prioritylist(priority)}</p>
+                  </div>
+
+                  <h4 className="heading">Created Date</h4>
+                  <div className="values">
+                    <p>
+                      {ticketdetails !== null ? ticketdetails[0].createdDate : firstTicket !== null && firstTicket.createdDate}
+                    </p>
+                  </div>
+
+                  <h4 className="heading">Problem</h4>
+                  <div className="values">
+                    <p>{ticketdetails !== null ? ticketdetails[0].problem : firstTicket !== null && firstTicket.problem}</p>
+                  </div>
+
+                  <h4 className="heading">Phone Number</h4>
+                  <div>
+                    <p>
+                      {ticketdetails !== null ? ticketdetails[0].phoneNumber : firstTicket !== null && firstTicket.phoneNumber}
+                    </p>
+                  </div>
+
+                  {(ticketdetails !== null ? ticketdetails[0].callerEmail : firstTicket !== null && firstTicket.callerEmail) ===
+                    localStorage.getItem('email') && (
+                    <>
+                      <h4>Edit</h4>
+                      <Button
+                        variant="link"
+                        id={ticketdetails !== null ? ticketdetails[0].ticketNo : firstTicket !== null && firstTicket.ticketNo}
+                        onClick={() =>
+                          handleClick(
+                            ticketdetails !== null ? ticketdetails[0].ticketNo : firstTicket !== null && firstTicket.ticketNo,
+                          )
+                        }
+                      >
+                        <img
+                          src="/images/users/edit.svg"
+                          id={ticketdetails !== null ? ticketdetails[0].ticketNo : firstTicket !== null && firstTicket.ticketNo}
+                          alt="Edit"
+                        />
+                      </Button>
+                    </>
+                  )}
+                </div>
               </div>
             </div>
+            {showAlert && (
+              <Alert variant={!error ? 'success' : 'danger'} className="alertWrapper" onClose={closeAlert} dismissible>
+                <Alert.Heading>{alertMessage}</Alert.Heading>
+              </Alert>
+            )}
           </div>
-          {showAlert && (
-            <Alert variant={!error ? 'success' : 'danger'} className="alertWrapper" onClose={closeAlert} dismissible>
-              <Alert.Heading>{alertMessage}</Alert.Heading>
-            </Alert>
-          )}
-        </div>
         </>
-        
       )}
     </div>
   );

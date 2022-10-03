@@ -64,9 +64,9 @@ tbody tr:hover {
   border: 1px solid white;
   background-color: rgba(19, 44, 83, 0.05);
 }
-.modelWrapper .modal-content{
+.modelWrapper .modal-content {
   height: 100%;
 }
-.description{
+.description {
   height: 240px;
 }

@@ -8,7 +8,7 @@ import Alerts from '../Widgets/Alerts';
 import Loading from '../Widgets/Loading';
 import { authentication } from '../../Config/FirebaseConfig';
 import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { userRoleId, roleId } from '../../Utilities/AppUtilities';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateUser } from '../../Redux/Actions/Actions';
@@ -478,7 +478,10 @@ export default function Profile() {
                   <div id="mobile-number-button" />
                 </div>
               </div>
-              <div className="text-center">
+              <div>
+                <h6><Link to='/termsandconditions'>Privacy policy</Link> </h6>
+              </div>
+              <div>
                 {!isEditable ? (
                   <Button onClick={editButton} className="buttonPrimary mb-5 mt-4">
                     {' '}

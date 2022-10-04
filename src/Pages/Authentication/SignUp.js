@@ -365,8 +365,8 @@ function SignUp() {
                 {toogle === false ? (
                   <Row>
                     <Col xs={12} md={12}>
-                      <div className="d-flex  align-items-start w-100 customVerifyBox">
-                        <Form.Select className="mobileCode" onChange={(e) => setCallcode(e.target.value)}>
+                      <div className="d-flex w-100 align-items-start customVerifyBox">
+                        <Form.Select className="w-25 py-3" onChange={(e) => setCallcode(e.target.value)}>
                           <option>Code</option>
                           {userContry.map((val) => (
                             <option value={val.phonecode} key={val.isoCode}>
@@ -374,13 +374,14 @@ function SignUp() {
                             </option>
                           ))}
                         </Form.Select>
-                        <Form.Group controlId="formPhone" className="inputHolder phone">
+                        <Form.Group controlId="formPhone" className="inputHolder w-75">
                           <Form.Control
                             required
                             pattern="^\(\d{3}\)\s\d{3}-\d{4}"
                             type="text"
                             placeholder="Phone Number"
                             autoComplete="off"
+                            className='py-3'
                             value={phoneUi}
                             onChange={phoneChange}
                             isInvalid={validPhone}
@@ -490,7 +491,7 @@ function SignUp() {
                     </Form.Select>
                   </Col>
                 </Row>
-                <Form.Group controlId="formBasicCheckbox" className="customCheck mb-2 mt-2">
+                <Form.Group controlId="formBasicCheckbox" className="customCheck my-2">
                   <Form.Check.Input
                     data-validity={validity}
                     data-testid="termsCheckbox"
@@ -498,7 +499,7 @@ function SignUp() {
                     onChange={onAgreeTermsChanage}
                     className="checkBox"
                   />
-                  <Form.Check.Label className="p-2 acknowledgement">Agree to terms and conditions</Form.Check.Label>
+                  <Form.Check.Label className="p-2 ml-4">Agree to <Link to='/termsandconditions'>terms and conditions</Link> </Form.Check.Label>
                   <Form.Control.Feedback type="invalid">Please agree to terms and conditions</Form.Control.Feedback>
                 </Form.Group>
                 <div className="formFooter d-flex align-items-center justify-content-center flex-column mb-1">

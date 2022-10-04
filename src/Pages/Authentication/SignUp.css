@@ -282,8 +282,9 @@
 .mobileCode {
   width: '25%';
   height: '60px';
+  background-color: red;
 }
 
-.phone {
+ .phone {
   width: '75%';
 }

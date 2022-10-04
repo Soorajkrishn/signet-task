@@ -6,7 +6,7 @@ import Loading from '../Widgets/Loading';
 import './Login.css';
 import './SignUp.css';
 import { fetchCall } from '../../Services/APIService';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate,Link } from 'react-router-dom';
 import Alerts from '../Widgets/Alerts';
 import { useForm } from 'react-hook-form';
 import { authentication } from '../../Config/FirebaseConfig';
@@ -148,9 +148,10 @@ function GetSSOUserdetails() {
     [getUserDetails, navigate],
   );
 
-  useEffect(() => {
-    redirecttologin();
-  }, [redirecttologin]);
+  // useEffect(() => {
+  //   redirecttologin();
+  // }, [redirecttologin]);
+
 
   const updateUser = async () => {
     buttonTracker(gaEvents.UPDATE_SSO_USER_DETAILS);
@@ -393,7 +394,7 @@ function GetSSOUserdetails() {
                               <Form.Group controlId="formPhone" className="inputHolder w-100">
                                 <Form.Control
                                   required
-                                  className="user-detail-button"
+                                  className="user-detail-button py-3"
                                   pattern="^\(\d{3}\)\s\d{3}-\d{4}"
                                   type="text"
                                   placeholder="Phone Number"
@@ -410,7 +411,7 @@ function GetSSOUserdetails() {
                               </Form.Group>
                               <div className="verify-button-wrap">
                                 <Button
-                                  className="verifyBtn btn-block mt-0"
+                                  className="verifyBtn btn-block mt-0 "
                                   variant="primary"
                                   type="submit"
                                   onClick={() => {
@@ -426,7 +427,14 @@ function GetSSOUserdetails() {
                           </Col>
                         </Row>
                       ) : null}
-
+                      <Form.Group controlId="formBasicCheckbox" className="customCheck my-2">
+                      <Form.Check.Input
+                        data-testid="termsCheckbox"
+                        required
+                        className="checkBox"
+                      />
+                      <Form.Check.Label className="ml-4">Agree to <Link to='/termsandconditions'>terms and conditions</Link> </Form.Check.Label>
+                      </Form.Group>
                       <div className="d-flex justify-content-md-start justify-content-sm-center justify-content-center">
                         <input
                           className="buttonPrimary text-center mb-5 mt-4 me-2 update-button-wrap"

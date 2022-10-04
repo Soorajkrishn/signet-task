@@ -479,7 +479,9 @@ export default function Profile() {
                 </div>
               </div>
               <div>
-                <h6><Link to='/termsandconditions'>Privacy policy</Link> </h6>
+                <h6>
+                  <Link to="/termsandconditions">Privacy policy</Link>{' '}
+                </h6>
               </div>
               <div>
                 {!isEditable ? (

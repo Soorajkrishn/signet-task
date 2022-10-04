@@ -381,7 +381,7 @@ function SignUp() {
                             type="text"
                             placeholder="Phone Number"
                             autoComplete="off"
-                            className='py-3'
+                            className="py-3"
                             value={phoneUi}
                             onChange={phoneChange}
                             isInvalid={validPhone}
@@ -499,7 +499,9 @@ function SignUp() {
                     onChange={onAgreeTermsChanage}
                     className="checkBox"
                   />
-                  <Form.Check.Label className="p-2 ml-4">Agree to <Link to='/termsandconditions'>terms and conditions</Link> </Form.Check.Label>
+                  <Form.Check.Label className="p-2 ml-4">
+                    Agree to <Link to="/termsandconditions">terms and conditions</Link>{' '}
+                  </Form.Check.Label>
                   <Form.Control.Feedback type="invalid">Please agree to terms and conditions</Form.Control.Feedback>
                 </Form.Group>
                 <div className="formFooter d-flex align-items-center justify-content-center flex-column mb-1">

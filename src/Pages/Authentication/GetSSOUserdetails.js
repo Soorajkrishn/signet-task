@@ -6,7 +6,7 @@ import Loading from '../Widgets/Loading';
 import './Login.css';
 import './SignUp.css';
 import { fetchCall } from '../../Services/APIService';
-import { useNavigate,Link } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import Alerts from '../Widgets/Alerts';
 import { useForm } from 'react-hook-form';
 import { authentication } from '../../Config/FirebaseConfig';
@@ -151,7 +151,6 @@ function GetSSOUserdetails() {
   // useEffect(() => {
   //   redirecttologin();
   // }, [redirecttologin]);
-
 
   const updateUser = async () => {
     buttonTracker(gaEvents.UPDATE_SSO_USER_DETAILS);
@@ -428,12 +427,10 @@ function GetSSOUserdetails() {
                         </Row>
                       ) : null}
                       <Form.Group controlId="formBasicCheckbox" className="customCheck my-2">
-                      <Form.Check.Input
-                        data-testid="termsCheckbox"
-                        required
-                        className="checkBox"
-                      />
-                      <Form.Check.Label className="ml-4">Agree to <Link to='/termsandconditions'>terms and conditions</Link> </Form.Check.Label>
+                        <Form.Check.Input data-testid="termsCheckbox" required className="checkBox" />
+                        <Form.Check.Label className="ml-4">
+                          Agree to <Link to="/termsandconditions">terms and conditions</Link>{' '}
+                        </Form.Check.Label>
                       </Form.Group>
                       <div className="d-flex justify-content-md-start justify-content-sm-center justify-content-center">
                         <input

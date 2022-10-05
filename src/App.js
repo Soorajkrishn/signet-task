@@ -10,6 +10,8 @@ import { userRoleId, roleId } from './Utilities/AppUtilities';
 import Layout from './Layout';
 import { components } from './Constants/TextConstants';
 import ReactGA from 'react-ga4';
+import Navigation from './MobileUI/NavBar/Navbar';
+import TicketList from './MobileUI/Ticket/ticket';
 
 const oktaAuth = new OktaAuth({
   issuer: process.env.REACT_APP_OKTA_AUTH_URL,
@@ -96,6 +98,8 @@ function App() {
           <Route exact path="/otpverify" element={<Layout component={components.OTP_VERIFY} />} />
           <Route exact path="/twofactor" element={<Layout component={components.TWO_FACTOR} />} />
           <Route exact path="/testtickets" element={<Layout component={components.TEST_TICKET} />} />
+          <Route exact path="/nav" element={<Navigation/>} />
+          <Route exact path="/mobticket" element={<TicketList/>} />
         </Routes>
       </Security>
     </Router>

@@ -500,9 +500,10 @@ function SignUp() {
                     className="checkBox"
                   />
                   <Form.Check.Label className="p-2 ml-4">
-                    Agree to <Link to="/termsandconditions" 
-                    target='_blank'
-                    rel='noopener noreferrer'>terms and conditions</Link>
+                    Agree to{' '}
+                    <Link to="/termsandconditions" target="_blank" rel="noopener noreferrer">
+                      terms and conditions
+                    </Link>
                   </Form.Check.Label>
                   <Form.Control.Feedback type="invalid">Please agree to terms and conditions</Form.Control.Feedback>
                 </Form.Group>

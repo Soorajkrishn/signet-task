@@ -4,11 +4,12 @@ import './TermsandConditions.css';
 function TermsandConditions() {
   return (
     <div className="container contentWrapper">
-      <div className='text-center'>
-          <img alt='' src='/images/header/logo.svg'/>
+      <div className="text-center">
+        <img alt="" src="/images/header/logo.svg" />
       </div>
-      <br/>
-      <h3>Terms And Condition</h3><br/>
+      <br />
+      <h3>Terms And Condition</h3>
+      <br />
       <p>
         Any failure by SIGNET to deliver or install products or to otherwise perform caused by reason of any of the following
         events shall not constitute an event of default or breach of any Terms and Conditions of this Agreement or any other

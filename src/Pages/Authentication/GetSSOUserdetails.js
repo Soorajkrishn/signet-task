@@ -39,7 +39,7 @@ function GetSSOUserdetails() {
   const [showModal, setShowModal] = useState(false);
   const [wrongOtp, setWrongOtp] = useState(false);
   const { buttonTracker } = useAnalyticsEventTracker();
-  const [agree,setAgree]=useState(false)
+  const [agree, setAgree] = useState(false);
 
   const [user, setUser] = useState({
     email: '',
@@ -53,7 +53,7 @@ function GetSSOUserdetails() {
     primaryPhone: '',
     isMobileVerify: false,
   });
-  const [validated,setValidate]=useState(false)
+  const [validated, setValidate] = useState(false);
   const navigate = useNavigate();
 
   const handleClose = () => {
@@ -174,7 +174,7 @@ function GetSSOUserdetails() {
         }, 5000);
       }
     } else {
-      setValidate(true)
+      setValidate(true);
       setShowAlert(true);
       setAlertVarient('danger');
       setIsLoading(false);
@@ -210,7 +210,6 @@ function GetSSOUserdetails() {
   };
   const phoneNumber = '+91' + user.primaryPhone;
   const requestOtp = () => {
-    
     if (user.primaryPhone.length === 10 && agree) {
       setToogle(true);
       !appVerifier && generateRecaptcha();
@@ -406,7 +405,9 @@ function GetSSOUserdetails() {
                                   onChange={phoneChange}
                                   isInvalid={validPhone}
                                 />
-                                  {validPhone===true?<Form.Control.Feedback type="invalid">Enter a valid Phone Number</Form.Control.Feedback>:null}                                
+                                {validPhone === true ? (
+                                  <Form.Control.Feedback type="invalid">Enter a valid Phone Number</Form.Control.Feedback>
+                                ) : null}
                               </Form.Group>
                               <div className="verify-button-wrap">
                                 <Button
@@ -427,11 +428,17 @@ function GetSSOUserdetails() {
                         </Row>
                       ) : null}
                       <Form.Group controlId="formBasicCheckbox" className="customCheck my-2">
-                        <Form.Check.Input data-testid="termsCheckbox" onChange={(e)=>setAgree(e.target.checked)} required className="checkBox" />
+                        <Form.Check.Input
+                          data-testid="termsCheckbox"
+                          onChange={(e) => setAgree(e.target.checked)}
+                          required
+                          className="checkBox"
+                        />
                         <Form.Check.Label className="ml-4">
-                          Agree to <Link to="/termsandconditions"
-                          target='_blank'
-                          rel='noopener noreferrer'>terms and conditions</Link>
+                          Agree to{' '}
+                          <Link to="/termsandconditions" target="_blank" rel="noopener noreferrer">
+                            terms and conditions
+                          </Link>
                         </Form.Check.Label>
                         <Form.Control.Feedback type="invalid">Please agree to terms and conditions</Form.Control.Feedback>
                       </Form.Group>

@@ -27,21 +27,19 @@ export default function OTPVerification() {
   const [wrongOtp, setWrongOtp] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { buttonTracker } = useAnalyticsEventTracker('Button');
-  const [agree,setAgree]=useState(false)
+  const [agree, setAgree] = useState(false);
   useEffect(() => {
     const firstNameData = 'Sooraj';
     const lastNameData = 'Krishna';
     const organizationNameData = 'CapeStart, Inc';
     const emailData = 'sooraj.krishna@capestart.com';
-    const usersIdData = "00u6j4cqzu5ATVCwA5d7";
+    const usersIdData = '00u6j4cqzu5ATVCwA5d7';
     setFnameData(firstNameData);
     setLnameData(lastNameData);
     setOrgNameData(organizationNameData);
     setEmailData(emailData);
     setUserIdData(usersIdData);
-  }, [
-
-  ]);
+  }, []);
 
   const [stateData] = useState({
     email: '',
@@ -62,7 +60,7 @@ export default function OTPVerification() {
   const [validOTP, setValidOTP] = useState(false);
   const [otpNumber, setOtpNumber] = useState('');
   const [appVerifier, setAppVerifier] = useState(null);
-  const [validated,setValidate]=useState(false)
+  const [validated, setValidate] = useState(false);
 
   const phoneNumber = '+91' + phone;
 
@@ -71,14 +69,13 @@ export default function OTPVerification() {
       'sign-in-button',
       {
         size: 'invisible',
-        callback: () => { },
+        callback: () => {},
       },
       authentication,
     );
   };
 
   const requestotp = () => {
-    
     if (phone.length === 10 && agree) {
       setToogle(true);
       !appVerifier && generateRecaptcha();
@@ -111,35 +108,34 @@ export default function OTPVerification() {
   };
 
   const updatePhonenumber = async () => {
-    if(agree){
-    setIsLoading(true);
-    const sendingdata = {
-      firstName: fnameData,
-      lastName: lnameData,
-      orgName: orgNameData,
-      orgEmail: emData,
-      primaryPhone: phone,
-      userId: userIdData,
-    };
-    const response = await fetchCall(APIUrlConstants.UPDATE_PROFILE, apiMethods.POST, sendingdata);
-    const statusCode = response[0];
-    if (httpStatusCode.SUCCESS === statusCode) {
-      buttonTracker(gaEvents.UPDATE_MOBILE_NUMBER);
-      setAlertSucShow(true);
-      navigate('/', { replace: true });
-      Logout();
+    if (agree) {
+      setIsLoading(true);
+      const sendingdata = {
+        firstName: fnameData,
+        lastName: lnameData,
+        orgName: orgNameData,
+        orgEmail: emData,
+        primaryPhone: phone,
+        userId: userIdData,
+      };
+      const response = await fetchCall(APIUrlConstants.UPDATE_PROFILE, apiMethods.POST, sendingdata);
+      const statusCode = response[0];
+      if (httpStatusCode.SUCCESS === statusCode) {
+        buttonTracker(gaEvents.UPDATE_MOBILE_NUMBER);
+        setAlertSucShow(true);
+        navigate('/', { replace: true });
+        Logout();
+      } else {
+        setIsLoading(false);
+        setSucShow(true);
+        setOtpVariant('success');
+        setTimeout(() => {
+          setSucShow(false);
+        }, 5000);
+      }
     } else {
-      setIsLoading(false);
-      setSucShow(true);
-      setOtpVariant('success');
-      setTimeout(() => {
-        setSucShow(false);
-      }, 5000);
+      setValidate(true);
     }
-  }
-  else{
-    setValidate(true)
-  }
   };
   const verifyotp = (e) => {
     const otp = e.target.value;
@@ -238,12 +234,10 @@ export default function OTPVerification() {
                     onChange={phoneChange}
                   />
                   <img className="inputIcon" src={process.env.REACT_APP_PUBLIC_URL + 'images/login/key.svg'} alt="" />
-                  
-                    <Form.Control.Feedback type="invalid">Enter a valid Phone Number</Form.Control.Feedback>
-                  
+
+                  <Form.Control.Feedback type="invalid">Enter a valid Phone Number</Form.Control.Feedback>
                 </Form.Group>
-                
-                
+
                 <div id="sign-in-button" />
                 {toogle === true && (
                   <div className="formFooter d-flex align-items-center justify-content-center flex-column">
@@ -269,18 +263,24 @@ export default function OTPVerification() {
                       </Button>
                       {validOTP === true ? <p className="otpVerifyError">Enter a valid OTP</p> : null}
                     </div>
-                    </div>)}
-                    <Form.Group controlId="formBasicCheckbox" className="customCheck my-2">
-                  <Form.Check.Input data-testid="termsCheckbox" onChange={(e)=>setAgree(e.target.checked)} required className="checkBox" />
+                  </div>
+                )}
+                <Form.Group controlId="formBasicCheckbox" className="customCheck my-2">
+                  <Form.Check.Input
+                    data-testid="termsCheckbox"
+                    onChange={(e) => setAgree(e.target.checked)}
+                    required
+                    className="checkBox"
+                  />
                   <Form.Check.Label className="ml-4">
-                    Agree to <Link to="/termsandconditions"
-                    target='_blank'
-                    rel='noopener noreferrer'
-                    >terms and conditions</Link>
+                    Agree to{' '}
+                    <Link to="/termsandconditions" target="_blank" rel="noopener noreferrer">
+                      terms and conditions
+                    </Link>
                   </Form.Check.Label>
                   <Form.Control.Feedback type="invalid">Please agree to terms and conditions</Form.Control.Feedback>
                 </Form.Group>
-                    <div className="formFooter d-flex align-items-center justify-content-center flex-column">
+                <div className="formFooter d-flex align-items-center justify-content-center flex-column">
                   {toogle === false ? (
                     <Button
                       variant="primary"
@@ -288,14 +288,14 @@ export default function OTPVerification() {
                       type="submit"
                       className="d-flex align-items-center justify-content-center emailBtn"
                       onClick={(e) => {
-                        e.preventDefault()
+                        e.preventDefault();
                         requestotp();
                         buttonTracker(gaEvents.SEND_OTP);
                       }}
                     >
                       Verify
                     </Button>
-                  ):
+                  ) : (
                     <Button
                       variant="primary"
                       id="verifytest"
@@ -304,9 +304,9 @@ export default function OTPVerification() {
                       disabled={btnDisable}
                     >
                       Update
-                    </Button>}
-                  </div>
-                
+                    </Button>
+                  )}
+                </div>
               </Form>
             </div>
           </div>

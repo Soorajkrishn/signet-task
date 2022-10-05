@@ -150,9 +150,9 @@ function GetSSOUserdetails() {
     [getUserDetails, navigate],
   );
 
-  // useEffect(() => {
-  //   redirecttologin();
-  // }, [redirecttologin]);
+  useEffect(() => {
+    redirecttologin();
+  }, [redirecttologin]);
 
   const updateUser = async () => {
     buttonTracker(gaEvents.UPDATE_SSO_USER_DETAILS);

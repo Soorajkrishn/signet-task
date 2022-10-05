@@ -98,8 +98,8 @@ function App() {
           <Route exact path="/otpverify" element={<Layout component={components.OTP_VERIFY} />} />
           <Route exact path="/twofactor" element={<Layout component={components.TWO_FACTOR} />} />
           <Route exact path="/testtickets" element={<Layout component={components.TEST_TICKET} />} />
-          <Route exact path="/nav" element={<Navigation/>} />
-          <Route exact path="/mobticket" element={<TicketList/>} />
+          <Route exact path="/nav" element={<Navigation />} />
+          <Route exact path="/mobticket" element={<TicketList />} />
         </Routes>
       </Security>
     </Router>

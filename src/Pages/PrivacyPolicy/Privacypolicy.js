@@ -1,15 +1,20 @@
 import React from 'react';
+import {Link} from 'react-router-dom'
 import './Privacypolicy.css';
 
 function Privacypolicy() {
   return (
     <div className="container contentWrapper">
+      <div className='text-center'>
+          <img alt='' src='/images/header/logo.svg'/>
+      </div>
+      <br/>
       <h3>
         <b>Privacy Policy</b>
       </h3>
       <br />
       <p>
-        Your use of www.SIGNET.com and the SIGNET Mobile App is subject to SIGNET Privacy Policy Please review our Privacy Policy,
+        Your use of <a href='http://www.SIGNET.com'>www.SIGNET.com</a> and the SIGNET Mobile App is subject to SIGNET Privacy Policy Please review our Privacy Policy,
         which also governs the Site and informs users of our data collection practices.
       </p>
       <br />
@@ -18,7 +23,7 @@ function Privacypolicy() {
         <b>Electronic Communications</b>
       </h4>
       <p>
-        Visiting www.signetgroup.net, using the mobile app, or sending emails to SIGNET constitutes electronic communications. You
+        Visiting <a href='http://www.signetgroup.net'>www.signetgroup.net</a>, using the mobile app, or sending emails to SIGNET constitutes electronic communications. You
         consent to receive electronic communications and you agree that all agreements, notices, disclosures, and other
         communications that we provide to you electronically, via email and on the Site, satisfy any legal requirement that such
         communications be in writing.
@@ -43,7 +48,7 @@ function Privacypolicy() {
       </h4>
       <p>
         SIGNET does not knowingly collect, either online or offline, personal information from persons under the age of thirteen.
-        If you are under 18, you may use www.signetgroup.net or the SIGNET mobile app only with permission of a parent or
+        If you are under 18, you may use <a href='http://www.signetgroup.net'>www.signetgroup.net</a> or the SIGNET mobile app only with permission of a parent or
         guardian.
       </p>
       <br />
@@ -58,7 +63,7 @@ function Privacypolicy() {
         <b>Links to Third Party Sites/Third Party Services</b>
       </h4>
       <p>
-        www.signetgroup.net and the SIGNET mobile app may contain links to other websites (Linked Sites). The Linked Sites are not
+      <a href='http://www.signetgroup.net'>www.signetgroup.net</a> and the SIGNET mobile app may contain links to other websites (Linked Sites). The Linked Sites are not
         under the control of SIGNET and SIGNET is not responsible for the contents of any Linked Site, including without
         limitation any link contained in a Linked Site, or any changes or updates to a Linked Site. SIGNET is providing these
         links to you only as a convenience, and the inclusion of any link does not imply endorsement by SIGNET of the site or any
@@ -67,10 +72,10 @@ function Privacypolicy() {
       <br />
 
       <p>
-        Certain services made available via www.SIGNET.com are delivered by third party sites and organizations. By using any
-        product, service or functionality originating from the www.SIGNET.com domain, you hereby acknowledge and consent that
+        Certain services made available via <a href='http://www.SIGNET.com'>www.SIGNET.com</a> are delivered by third party sites and organizations. By using any
+        product, service or functionality originating from the <a href='http://www.SIGNET.com'>www.SIGNET.com</a> domain, you hereby acknowledge and consent that
         SIGNET may share such information and data with any third party with whom SIGNET has a contractual relationship to provide
-        the requested product, service, or functionality on behalf of www.signetgroup.net users and customers.
+        the requested product, service, or functionality on behalf of <a href='http://www.signetgroup.net'>www.signetgroup.net</a> users and customers.
       </p>
       <br />
 
@@ -78,7 +83,7 @@ function Privacypolicy() {
         <b>No Unlawful or Prohibited Use/Intellectual Property</b>
       </h4>
       <p>
-        You are granted a non-exclusive, non-transferable, revocable license to access and use www.signetgroup.net and the SIGNET
+        You are granted a non-exclusive, non-transferable, revocable license to access and use <a href='http://www.signetgroup.net'>www.signetgroup.net</a> and the SIGNET
         mobile app strictly in accordance with these terms of use. As a condition of your use of the Site, you warrant to SIGNET
         that you will not use the Site for any purpose that is unlawful or prohibited by these Terms. You may not use the Site in
         any manner which could damage, disable, overburden, or impair the Site or interfere with any other partys use and
@@ -114,7 +119,7 @@ function Privacypolicy() {
         The Service is controlled, operated, and administered by SIGNET from our offices within the USA. If you access the Service
         from a location outside the USA, you are responsible for compliance with all local laws. SIGNET is currently not available
         for, or intended for, use outside of the United States. You agree that you will not use the SIGNET Content accessed
-        through www.signetgroup.net and the SIGNET mobile app in any country outside of the USA or in any manner prohibited by any
+        through <a href='http://www.signetgroup.net'>www.signetgroup.net</a> and the SIGNET mobile app in any country outside of the USA or in any manner prohibited by any
         applicable laws, restrictions, or regulations.
       </p>
       <br />
@@ -238,7 +243,7 @@ function Privacypolicy() {
         <b>Changes to Terms</b>
       </h4>
       <p>
-        SIGNET reserves the right, in its sole discretion, to change the Terms under which www.signetgroup.net and the SIGNET
+        SIGNET reserves the right, in its sole discretion, to change the Terms under which <a href='http://www.signetgroup.net'>www.signetgroup.net</a> and the SIGNET
         mobile app is offered. The most current version of the Terms will supersede all previous versions. SIGNET encourages you
         to periodically review the Terms to stay informed of our updates.
       </p>
@@ -250,23 +255,23 @@ function Privacypolicy() {
       <p>SIGNET welcomes your questions or comments regarding the Terms:</p>
       <br />
 
-      <p>Contact https://signetgroup.net/contact-us/?subject=General+Information</p>
+      <span>Contact : <a href='https://signetgroup.net/contact-us/?subject=General+Information'>https://signetgroup.net/contact-us/?subject=General+Information</a></span>
       <br />
-      <p>Mail: SIGNET, Inc.</p>
+      <span>Mail: SIGNET, Inc.</span>
       <br />
-      <p>Corporate Headquarters</p>
+      <span>Corporate Headquarters</span>
       <br />
-      <p>SIGNET Electronic Systems, Inc.</p>
+      <span>SIGNET Electronic Systems, Inc.</span>
       <br />
-      <p>90 Longwater Drive</p>
+      <span>90 Longwater Drive</span>
       <br />
-      <p>Norwell, MA 02061</p>
+      <span>Norwell, MA 02061</span>
       <br />
-      <p>Phone: 781-871-5888</p>
+      <span>Phone: 781-871-5888</span>
       <br />
-      <p>Fax: 781-871-4757</p>
+      <span>Fax: 781-871-4757</span>
       <br />
-      <p>Effective as of June 01, 2022</p>
+      <span>Effective as of June 01, 2022</span>
       <br />
     </div>
   );

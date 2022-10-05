@@ -239,6 +239,7 @@ export default function Header() {
               buttonTracker(gaEvents.PRIVACY_POLICY);
               navigate('/privacypolicy');
             }}
+            
           >
             <span>Privacy</span>
             <img src="images/tasks/Group.svg" alt="" />

@@ -3,7 +3,7 @@ import { Alert, Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { fetchCall } from '../../Services/APIService';
 import APIUrlConstants from '../../Config/APIUrlConstants';
 import { aboutSignet, apiMethods, gaEvents, httpStatusCode } from '../../Constants/TextConstants';
-import { useNavigate, useLocation } from 'react-router-dom';
+import { useNavigate, useLocation, Link } from 'react-router-dom';
 import { authentication } from '../../Config/FirebaseConfig';
 import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth';
 import Alerts from '../Widgets/Alerts';
@@ -27,24 +27,20 @@ export default function OTPVerification() {
   const [wrongOtp, setWrongOtp] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
   const { buttonTracker } = useAnalyticsEventTracker('Button');
-
+  const [agree,setAgree]=useState(false)
   useEffect(() => {
-    const firstNameData = dataFromLogin.state.datas.firstName;
-    const lastNameData = dataFromLogin.state.datas.lastName;
-    const organizationNameData = dataFromLogin.state.datas.orgName;
-    const emailData = dataFromLogin.state.datas.orgEmail;
-    const usersIdData = dataFromLogin.state.datas.userId;
+    const firstNameData = 'Sooraj';
+    const lastNameData = 'Krishna';
+    const organizationNameData = 'CapeStart, Inc';
+    const emailData = 'sooraj.krishna@capestart.com';
+    const usersIdData = "00u6j4cqzu5ATVCwA5d7";
     setFnameData(firstNameData);
     setLnameData(lastNameData);
     setOrgNameData(organizationNameData);
     setEmailData(emailData);
     setUserIdData(usersIdData);
   }, [
-    dataFromLogin.state.datas.firstName,
-    dataFromLogin.state.datas.lastName,
-    dataFromLogin.state.datas.orgEmail,
-    dataFromLogin.state.datas.orgName,
-    dataFromLogin.state.datas.userId,
+
   ]);
 
   const [stateData] = useState({
@@ -66,6 +62,7 @@ export default function OTPVerification() {
   const [validOTP, setValidOTP] = useState(false);
   const [otpNumber, setOtpNumber] = useState('');
   const [appVerifier, setAppVerifier] = useState(null);
+  const [validated,setValidate]=useState(false)
 
   const phoneNumber = '+91' + phone;
 
@@ -74,16 +71,16 @@ export default function OTPVerification() {
       'sign-in-button',
       {
         size: 'invisible',
-        callback: () => {},
+        callback: () => { },
       },
       authentication,
     );
   };
 
-  const requestotp = (e) => {
-    setToogle(true);
-    if (phone.length === 10) {
-      e.preventDefault();
+  const requestotp = () => {
+    
+    if (phone.length === 10 && agree) {
+      setToogle(true);
       !appVerifier && generateRecaptcha();
       const appRecaptchaVerifier = window.recaptchaVerifier;
       setAppVerifier(appRecaptchaVerifier);
@@ -114,6 +111,7 @@ export default function OTPVerification() {
   };
 
   const updatePhonenumber = async () => {
+    if(agree){
     setIsLoading(true);
     const sendingdata = {
       firstName: fnameData,
@@ -138,6 +136,10 @@ export default function OTPVerification() {
         setSucShow(false);
       }, 5000);
     }
+  }
+  else{
+    setValidate(true)
+  }
   };
   const verifyotp = (e) => {
     const otp = e.target.value;
@@ -222,8 +224,8 @@ export default function OTPVerification() {
               <div className="regTxt d-flex align-items-start flex-column">
                 <h2>Phone Number Verification</h2>
               </div>
-              <Form noValidate validated={stateData.validated} className="fromWrap">
-                <Form.Group controlId="formBasicEmail" className="inputWrapper">
+              <Form noValidate validated={validated} className="fromWrap">
+                <Form.Group controlId="formBasicEmail" className="inputWrapper mb-4">
                   <Form.Control
                     required
                     className="email-input"
@@ -236,28 +238,14 @@ export default function OTPVerification() {
                     onChange={phoneChange}
                   />
                   <img className="inputIcon" src={process.env.REACT_APP_PUBLIC_URL + 'images/login/key.svg'} alt="" />
-                  {validPhone === true ? (
+                  
                     <Form.Control.Feedback type="invalid">Enter a valid Phone Number</Form.Control.Feedback>
-                  ) : null}
+                  
                 </Form.Group>
-                <div className="formFooter d-flex align-items-center justify-content-center flex-column">
-                  {toogle === false && (
-                    <Button
-                      variant="primary"
-                      id="verifytest"
-                      type="submit"
-                      className="d-flex align-items-center justify-content-center emailBtn"
-                      onClick={() => {
-                        requestotp();
-                        buttonTracker(gaEvents.SEND_OTP);
-                      }}
-                    >
-                      Verify
-                    </Button>
-                  )}
-                </div>
+                
+                
                 <div id="sign-in-button" />
-                {toogle === true && validPhone === false && (
+                {toogle === true && (
                   <div className="formFooter d-flex align-items-center justify-content-center flex-column">
                     <Form.Control
                       required
@@ -281,6 +269,33 @@ export default function OTPVerification() {
                       </Button>
                       {validOTP === true ? <p className="otpVerifyError">Enter a valid OTP</p> : null}
                     </div>
+                    </div>)}
+                    <Form.Group controlId="formBasicCheckbox" className="customCheck my-2">
+                  <Form.Check.Input data-testid="termsCheckbox" onChange={(e)=>setAgree(e.target.checked)} required className="checkBox" />
+                  <Form.Check.Label className="ml-4">
+                    Agree to <Link to="/termsandconditions"
+                    target='_blank'
+                    rel='noopener noreferrer'
+                    >terms and conditions</Link>
+                  </Form.Check.Label>
+                  <Form.Control.Feedback type="invalid">Please agree to terms and conditions</Form.Control.Feedback>
+                </Form.Group>
+                    <div className="formFooter d-flex align-items-center justify-content-center flex-column">
+                  {toogle === false ? (
+                    <Button
+                      variant="primary"
+                      id="verifytest"
+                      type="submit"
+                      className="d-flex align-items-center justify-content-center emailBtn"
+                      onClick={(e) => {
+                        e.preventDefault()
+                        requestotp();
+                        buttonTracker(gaEvents.SEND_OTP);
+                      }}
+                    >
+                      Verify
+                    </Button>
+                  ):
                     <Button
                       variant="primary"
                       id="verifytest"
@@ -289,9 +304,9 @@ export default function OTPVerification() {
                       disabled={btnDisable}
                     >
                       Update
-                    </Button>
+                    </Button>}
                   </div>
-                )}
+                
               </Form>
             </div>
           </div>

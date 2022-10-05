@@ -37,6 +37,10 @@ export const components = {
   TWO_FACTOR: 'TWO_FACTOR',
   NOTIFICATION: 'NOTIFICATION',
   PROFILE: 'PROFILE',
+  TEST_TICKET: 'TEST_TICKET',
+  STATISTICS: 'STATISTICS',
+  TERMSANDCONDITIONS: 'TERMSANDCONDITIONS',
+  PRIVACYPOLICY: 'PRIVACYPOLICY',
 };
 
 export const gaEvents = {
@@ -83,6 +87,9 @@ export const gaEvents = {
   CREATE_NEW_TICKET: 'create_new_ticket',
   UPDATE_TICKET_DETAILS: 'update_ticket_details',
   CONTACT_SALES: 'contact_sales',
+  ADMIN_STATISTICS: 'admin_statistics',
+  TERMS_AND_CONSDITIONS: 'terms_and_consitions',
+  PRIVACY_POLICY: 'PRIVACY_POLICY',
 };
 
 export const aboutSignet =

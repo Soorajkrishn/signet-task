@@ -6,7 +6,7 @@ import Loading from '../Widgets/Loading';
 import './Login.css';
 import './SignUp.css';
 import { fetchCall } from '../../Services/APIService';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import Alerts from '../Widgets/Alerts';
 import { useForm } from 'react-hook-form';
 import { authentication } from '../../Config/FirebaseConfig';
@@ -39,6 +39,7 @@ function GetSSOUserdetails() {
   const [showModal, setShowModal] = useState(false);
   const [wrongOtp, setWrongOtp] = useState(false);
   const { buttonTracker } = useAnalyticsEventTracker();
+  const [agree, setAgree] = useState(false);
 
   const [user, setUser] = useState({
     email: '',
@@ -52,6 +53,7 @@ function GetSSOUserdetails() {
     primaryPhone: '',
     isMobileVerify: false,
   });
+  const [validated, setValidate] = useState(false);
   const navigate = useNavigate();
 
   const handleClose = () => {
@@ -154,7 +156,7 @@ function GetSSOUserdetails() {
 
   const updateUser = async () => {
     buttonTracker(gaEvents.UPDATE_SSO_USER_DETAILS);
-    if (otpVer === true || !user.orgName) {
+    if (otpVer === true && agree) {
       setIsLoading(true);
       const { 0: statusCode, 1: responseData } = await fetchCall(APIUrlConstants.CREATE_USER_WITH_ORG, apiMethods.POST, user);
       if (statusCode === httpStatusCode.SUCCESS) {
@@ -172,6 +174,7 @@ function GetSSOUserdetails() {
         }, 5000);
       }
     } else {
+      setValidate(true);
       setShowAlert(true);
       setAlertVarient('danger');
       setIsLoading(false);
@@ -180,6 +183,7 @@ function GetSSOUserdetails() {
         setShowAlert(false);
       }, 5000);
     }
+    setPhoneValid(true);
   };
   function formatPhoneNumber(x) {
     const formated = x.replace(/\D+/g, '').replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
@@ -204,10 +208,9 @@ function GetSSOUserdetails() {
       authentication,
     );
   };
-  const phoneNumber = '+1' + user.primaryPhone;
-  const requestOtp = (e) => {
-    if (user.primaryPhone.length === 10) {
-      e.preventDefault();
+  const phoneNumber = '+91' + user.primaryPhone;
+  const requestOtp = () => {
+    if (user.primaryPhone.length === 10 && agree) {
       setToogle(true);
       !appVerifier && generateRecaptcha();
       const appRecaptchaVerifier = window.recaptchaVerifier;
@@ -299,7 +302,7 @@ function GetSSOUserdetails() {
                       <h1>Enter Details </h1>
                     </div>
 
-                    <Form onSubmit={handleSubmit(updateUser)}>
+                    <Form noValidate validated={validated} onSubmit={handleSubmit(updateUser)}>
                       {!isOrgName ? (
                         <div className="mb-2">
                           <Form.Group>
@@ -393,7 +396,7 @@ function GetSSOUserdetails() {
                               <Form.Group controlId="formPhone" className="inputHolder w-100">
                                 <Form.Control
                                   required
-                                  className="user-detail-button"
+                                  className="user-detail-button py-3"
                                   pattern="^\(\d{3}\)\s\d{3}-\d{4}"
                                   type="text"
                                   placeholder="Phone Number"
@@ -403,17 +406,15 @@ function GetSSOUserdetails() {
                                   isInvalid={validPhone}
                                 />
                                 {validPhone === true ? (
-                                  <Form.Control.Feedback type="invalid" data-testid="phonerr">
-                                    Enter a valid Phone Number
-                                  </Form.Control.Feedback>
+                                  <Form.Control.Feedback type="invalid">Enter a valid Phone Number</Form.Control.Feedback>
                                 ) : null}
                               </Form.Group>
                               <div className="verify-button-wrap">
                                 <Button
-                                  className="verifyBtn btn-block mt-0"
+                                  className="verifyBtn btn-block mt-0 "
                                   variant="primary"
-                                  type="submit"
-                                  onClick={() => {
+                                  onClick={(e) => {
+                                    e.preventDefault();
                                     requestOtp();
                                     buttonTracker(gaEvents.SEND_OTP);
                                   }}
@@ -426,7 +427,21 @@ function GetSSOUserdetails() {
                           </Col>
                         </Row>
                       ) : null}
-
+                      <Form.Group controlId="formBasicCheckbox" className="customCheck my-2">
+                        <Form.Check.Input
+                          data-testid="termsCheckbox"
+                          onChange={(e) => setAgree(e.target.checked)}
+                          required
+                          className="checkBox"
+                        />
+                        <Form.Check.Label className="ml-4">
+                          Agree to{' '}
+                          <Link to="/termsandconditions" target="_blank" rel="noopener noreferrer">
+                            terms and conditions
+                          </Link>
+                        </Form.Check.Label>
+                        <Form.Control.Feedback type="invalid">Please agree to terms and conditions</Form.Control.Feedback>
+                      </Form.Group>
                       <div className="d-flex justify-content-md-start justify-content-sm-center justify-content-center">
                         <input
                           className="buttonPrimary text-center mb-5 mt-4 me-2 update-button-wrap"

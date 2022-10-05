@@ -20,9 +20,13 @@ import TwoFactorSignIn from './Pages/Authentication/TwoFactorSignIn';
 import Notification from './Pages/Notification/Notification';
 import HealthCharts from './Pages/HealthCharts/HealthCharts';
 import Profile from './Pages/Profile/Profile';
+import Tickettask from './Pages/Tickets/Test/TicketTask';
+import Statistics from './Pages/Admin Chart/UserListChart';
+import TermsandConditions from './Pages/TermsandConditions/TermsandConditions';
 import { components } from './Constants/TextConstants';
 import { useLocation } from 'react-router-dom';
 import ReactGA from 'react-ga4';
+import Privacypolicy from './Pages/PrivacyPolicy/Privacypolicy';
 
 function Layout(props) {
   const { component } = props;
@@ -74,6 +78,14 @@ function Layout(props) {
       return LayoutWithHeader(<Notification />);
     case components.PROFILE:
       return LayoutWithHeader(<Profile />);
+    case components.TEST_TICKET:
+      return LayoutWithHeader(<Tickettask />);
+    case components.STATISTICS:
+      return LayoutWithHeader(<Statistics />);
+    case components.TERMSANDCONDITIONS:
+      return <TermsandConditions />;
+    case components.PRIVACYPOLICY:
+      return <Privacypolicy />;
 
     default:
       return <div>Component not found</div>;

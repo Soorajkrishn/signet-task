@@ -97,12 +97,12 @@ function TwoFactorSignIn() {
             navigate(`/users`);
           }
         } else if (responseData.data.roleId === userRoleId.nonRemoteSmartUser) {
-          navigate('/tickets');
+          navigate('/testtickets');
         } else if (responseData.data.roleId === userRoleId.remoteSmartUser && redirectTo) {
           localStorage.removeItem('redirectTo');
           navigate(redirectTo);
         } else {
-          navigate('/tickets');
+          navigate('/testtickets');
         }
       } else {
         dispatch(failedlogin(responseData.message));

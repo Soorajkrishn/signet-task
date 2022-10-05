@@ -163,3 +163,7 @@
   text-indent: 0;
   text-align: justify;
 }
+
+.hiddenRow {
+  margin-left: 50px;
+}

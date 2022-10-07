@@ -6,10 +6,10 @@
   padding: 10px;
 }
 
-.addTicket{
+.addTicket {
   text-align: end;
 }
-ul{
+ul {
   padding: 0px;
 }
 
@@ -31,5 +31,4 @@ ul{
     text-indent: 0;
     text-align: justify;
   }
-  
 }

@@ -12,7 +12,6 @@ import { components } from './Constants/TextConstants';
 import ReactGA from 'react-ga4';
 import Navigation from './MobileUI/NavBar/Navbar';
 
-
 const oktaAuth = new OktaAuth({
   issuer: process.env.REACT_APP_OKTA_AUTH_URL,
   clientId: process.env.REACT_APP_OKTA_AUTH_CLIENT_ID,

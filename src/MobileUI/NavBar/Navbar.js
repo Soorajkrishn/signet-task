@@ -7,7 +7,7 @@ import './Navbar.css';
 function Navigation() {
   return (
     <ThemeProvider>
-      <Mobileheader/>
+      <Mobileheader />
       <MoblieSidebar />
     </ThemeProvider>
   );

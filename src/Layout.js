@@ -27,6 +27,8 @@ import { components } from './Constants/TextConstants';
 import { useLocation } from 'react-router-dom';
 import ReactGA from 'react-ga4';
 import Privacypolicy from './Pages/PrivacyPolicy/Privacypolicy';
+import TicketList from './MobileUI/Ticket/ticket';
+import Navbar from './MobileUI/NavBar/Navbar'
 
 function Layout(props) {
   const { component } = props;
@@ -86,6 +88,8 @@ function Layout(props) {
       return <TermsandConditions />;
     case components.PRIVACYPOLICY:
       return <Privacypolicy />;
+      case components.TICKETMOB:
+      return <TicketList/>;
 
     default:
       return <div>Component not found</div>;

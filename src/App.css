@@ -163,7 +163,7 @@ a {
   }
   .showSidebar {
     display: block;
-    position: absolute;
+    position: fixed;
     background: var(--white);
     z-index: 9999999999;
     height: 100%;

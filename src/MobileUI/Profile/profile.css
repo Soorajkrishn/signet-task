@@ -1,0 +1,16 @@
+.profileAvatar {
+    width: 10%;
+    height: 150px;
+    text-align: end
+}
+
+.profileWrapper {
+    flex-direction: column;
+}
+
+@media screen and (max-width: 550px) {
+    .profileAvatar {
+        width: 20%;
+        height: 90px;
+    }
+}

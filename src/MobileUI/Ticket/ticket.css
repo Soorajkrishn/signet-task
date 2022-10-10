@@ -8,6 +8,9 @@
 
 .addTicket {
   text-align: end;
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
 }
 ul {
   padding: 0px;
@@ -20,6 +23,9 @@ ul {
   overflow: hidden;
   text-indent: 0;
   text-align: justify;
+}
+.close{
+  cursor: pointer;
 }
 
 @media screen and (max-width: 550px) {

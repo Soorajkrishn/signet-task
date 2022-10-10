@@ -11,6 +11,7 @@ import Layout from './Layout';
 import { components } from './Constants/TextConstants';
 import ReactGA from 'react-ga4';
 import Navigation from './MobileUI/NavBar/Navbar';
+import Profile from './MobileUI/Profile/profile';
 
 const oktaAuth = new OktaAuth({
   issuer: process.env.REACT_APP_OKTA_AUTH_URL,
@@ -99,6 +100,7 @@ function App() {
           <Route exact path="/testtickets" element={<Layout component={components.TEST_TICKET} />} />
           <Route exact path="/mobticket" element={<Layout component={components.TICKETMOB} />} />
           <Route exact path="/nav" element={<Navigation />} />
+          <Route exact path='/mobprofile' element={<Profile/>}/>
         </Routes>
       </Security>
     </Router>

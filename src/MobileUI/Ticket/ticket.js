@@ -11,21 +11,20 @@ import { Button, Modal, Form, Alert } from 'react-bootstrap';
 import moment from 'moment';
 import Select from 'react-select';
 
-
 function TicketList() {
   const [ticket, setTicket] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const [sliceTicket, setSliceTicket] = useState([]);
-  const [page, setPage] = useState(1)
-  const [start, setStart] = useState(0)
-  const [end, setEnd] = useState(10)
-  const [loader, setLoader] = useState(false)
-  const navigate = useNavigate()
+  const [page, setPage] = useState(1);
+  const [start, setStart] = useState(0);
+  const [end, setEnd] = useState(10);
+  const [loader, setLoader] = useState(false);
+  const navigate = useNavigate();
   const { buttonTracker } = useAnalyticsEventTracker();
-  const [show, setShow] = useState(false)
-  const [id, setId] = useState(null)
-  const [ticketNo, setTicketNo] = useState(null)
-  const [modalShow, setModalShow] = useState(false)
+  const [show, setShow] = useState(false);
+  const [id, setId] = useState(null);
+  const [ticketNo, setTicketNo] = useState(null);
+  const [modalShow, setModalShow] = useState(false);
   const [additiondes, setAdditionaldes] = useState('');
   const [date, setDate] = useState('');
   const [noApiError, setNoApiError] = useState(true);
@@ -55,7 +54,6 @@ function TicketList() {
     solutionProvided: '',
     ticketNo: '',
   });
-
 
   const format = 'yyyy-MM-DD HH:mm';
   const dateandtime = moment.utc(new Date()).subtract(4, 'hours').format(format);
@@ -90,24 +88,23 @@ function TicketList() {
     fetchAllUserDetails();
   }, []);
 
-  const pageNo = Math.ceil(ticket.length / 10)
+  const pageNo = Math.ceil(ticket.length / 10);
 
   const view = () => {
     setTimeout(() => {
       if (page <= pageNo) {
-        setPage(page + 1)
-        setStart(start + 10)
-        setEnd(end + 10)
+        setPage(page + 1);
+        setStart(start + 10);
+        setEnd(end + 10);
         const tempSlice = ticket?.slice(start, end);
-        const temp = sliceTicket.concat(tempSlice)
-        setSliceTicket(temp)
-        setLoader(false)
+        const temp = sliceTicket.concat(tempSlice);
+        setSliceTicket(temp);
+        setLoader(false);
       }
-    }, 1500)
+    }, 1500);
+  };
 
-  }
-
-  const filteredTicket = ticket.filter(each => each.ticketNo === ticketNo)
+  const filteredTicket = ticket.filter((each) => each.ticketNo === ticketNo);
 
   const fetchPromise = async () => {
     setLoading(true);
@@ -260,13 +257,13 @@ function TicketList() {
     }
   };
 
-  console.log(page)
+  console.log(page);
 
   window.onscroll = () => {
-    if ((window.innerHeight + window.pageYOffset) >= document.body.offsetHeight - 2) {
-      view()
+    if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight - 2) {
+      view();
       if (page <= pageNo) {
-        setLoader(true)
+        setLoader(true);
       }
     }
   };
@@ -281,12 +278,12 @@ function TicketList() {
   }, [ticket]);
 
   const handleShow = (ticketId) => {
-    setId(ticketId)
-    setShow(true)
-  }
+    setId(ticketId);
+    setShow(true);
+  };
   const modalClose = () => {
     setShow(false);
-  }
+  };
 
   const handleClose = () => {
     setModalShow(false);
@@ -314,47 +311,60 @@ function TicketList() {
     setDate(dateandtime);
   };
 
-  const editTicket=(number)=>{
-    setId(number)
-    setModalShow(true)
-    setShow(false)
-  }
+  const editTicket = (number) => {
+    setId(number);
+    setModalShow(true);
+    setShow(false);
+  };
 
   return (
     <>
       <Modal show={show} onHide={modalClose}>
         <Modal.Header>
-          <p><b>Ticket No : </b>{filteredTicket[0]?.ticketNo}</p>
-          <div onClick={modalClose} className='close'><img src="/images/tasks/close.svg" alt="" /></div>
+          <p>
+            <b>Ticket No : </b>
+            {filteredTicket[0]?.ticketNo}
+          </p>
+          <div onClick={modalClose} className="close">
+            <img src="/images/tasks/close.svg" alt="" />
+          </div>
         </Modal.Header>
         <Modal.Body>
           <div>
-            <h5><b>Description</b></h5>
+            <h5>
+              <b>Description</b>
+            </h5>
             <p>{filteredTicket[0]?.description}</p>
-            <h5><b>Status</b></h5>
+            <h5>
+              <b>Status</b>
+            </h5>
             <p>{filteredTicket[0]?.status}</p>
-            <h5><b>Problem</b></h5>
+            <h5>
+              <b>Problem</b>
+            </h5>
             <p>{filteredTicket[0]?.problem}</p>
-            <h5><b>Created Date</b></h5>
+            <h5>
+              <b>Created Date</b>
+            </h5>
             <p>{filteredTicket[0]?.createdDate}</p>
-            <h5><b>Priority</b></h5>
+            <h5>
+              <b>Priority</b>
+            </h5>
             <p>{filteredTicket[0]?.priority}</p>
-            <h5><b>Created By</b></h5>
+            <h5>
+              <b>Created By</b>
+            </h5>
             <p>{filteredTicket[0]?.createdBy}</p>
-            {filteredTicket[0]?.callerEmail === localStorage.getItem('email') &&
-              (<><h5><b>Edit</b></h5>
-                <Button
-                  variant="link"
-                  id={filteredTicket[0]?.ticketNo}
-                  onClick={() => editTicket(filteredTicket[0]?.ticketNo)}
-                >
-                  <img
-                    src="/images/users/edit.svg"
-                    id={filteredTicket[0]?.ticketNo}
-                    alt="Edit"
-                  />
-                </Button></>)
-            }
+            {filteredTicket[0]?.callerEmail === localStorage.getItem('email') && (
+              <>
+                <h5>
+                  <b>Edit</b>
+                </h5>
+                <Button variant="link" id={filteredTicket[0]?.ticketNo} onClick={() => editTicket(filteredTicket[0]?.ticketNo)}>
+                  <img src="/images/users/edit.svg" id={filteredTicket[0]?.ticketNo} alt="Edit" />
+                </Button>
+              </>
+            )}
           </div>
         </Modal.Body>
       </Modal>
@@ -432,13 +442,7 @@ function TicketList() {
               <Form.Group className="mb-3 input-group">
                 <div className="input-container col-6">
                   <Form.Label>Created By</Form.Label>
-                  <Form.Control
-                    placeholder="Created By"
-                    type="text"
-                    className="width-90"
-                    value={postObject.createdBy}
-                    disabled
-                  />
+                  <Form.Control placeholder="Created By" type="text" className="width-90" value={postObject.createdBy} disabled />
                 </div>
                 <div className="input-container col-6">
                   <Form.Label>Client Email</Form.Label>
@@ -504,10 +508,12 @@ function TicketList() {
           ))}
         </ul>
         {loader && <Loading />}
-        <div className="addTicket"
+        <div
+          className="addTicket"
           onClick={() => {
-            setModalShow(true)
-          }}>
+            setModalShow(true);
+          }}
+        >
           <img src="/images/tasks/plus.svg" alt="" />
         </div>
       </div>
@@ -517,7 +523,6 @@ function TicketList() {
         </Alert>
       )}
     </>
-
   );
 }
 

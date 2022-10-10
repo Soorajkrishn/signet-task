@@ -100,7 +100,7 @@ function App() {
           <Route exact path="/testtickets" element={<Layout component={components.TEST_TICKET} />} />
           <Route exact path="/mobticket" element={<Layout component={components.TICKETMOB} />} />
           <Route exact path="/nav" element={<Navigation />} />
-          <Route exact path='/mobprofile' element={<Profile/>}/>
+          <Route exact path="/mobprofile" element={<Profile />} />
         </Routes>
       </Security>
     </Router>

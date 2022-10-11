@@ -332,10 +332,9 @@ export default function Profile() {
           </label>
           {test.profileEdit ? (
             <div className="d-flex  align-items-start w-100 customVerifyBox">
-              <Form.Group controlId="formMobileNumber" className="inputHolder">
+              <Form.Group controlId="formMobileNumber" className="inputHolder w-75">
                 <Form.Control
                   required
-                  className="w-75"
                   pattern="^\(\d{3}\)\s\d{3}-\d{4}"
                   type="text"
                   placeholder="Phone Number"
@@ -356,7 +355,7 @@ export default function Profile() {
               </Form.Group>
               {!toogle && test.profileEdit && (
                 <Button
-                  className="verifyBtn w-25"
+                  className="verifyBtn w-15"
                   variant="primary"
                   onClick={() => {
                     requestotp();
@@ -421,7 +420,7 @@ export default function Profile() {
         </Form>
         <div id="mobile-number-button" />
         {test.profileEdit && (
-          <div className="profileButtons">
+          <div className="d-flex align-items-center justify-content-center container w-75">
             <Button onClick={cancelButton} className="buttonPrimary mb-5 mt-4 mr-1">
               {' '}
               Cancel

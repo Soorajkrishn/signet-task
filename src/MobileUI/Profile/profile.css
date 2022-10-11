@@ -11,6 +11,9 @@
 @media screen and (max-width: 550px) {
   .profileAvatar {
     width: 20%;
-    height: 90px;
+    height: 80px;
+  }
+  .buttonPrimary{
+    width: 30% !important;
   }
 }

@@ -261,9 +261,10 @@ function TicketList() {
 
   window.onscroll = () => {
     if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight - 2) {
-      view();
+      
       if (page <= pageNo) {
         setLoader(true);
+        view();    
       }
     }
   };

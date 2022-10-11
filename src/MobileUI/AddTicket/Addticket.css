@@ -1,8 +1,8 @@
-.selectOption{
-    padding: 5%;
+.selectOption {
+  padding: 5%;
 }
 
-#op option{
-    width: 20px;
-    background-color: blue;
+#op option {
+  width: 20px;
+  background-color: blue;
 }

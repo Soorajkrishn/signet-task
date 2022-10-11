@@ -5,7 +5,7 @@ import { apiMethods, httpStatusCode } from '../../Constants/TextConstants';
 import { Button } from 'react-bootstrap';
 import Loading from '../../Pages/Widgets/Loading';
 import Navigation from '../NavBar/Navbar';
-import './Notification.css'
+import './Notification.css';
 
 export default function Notification() {
   const organizationName = localStorage.getItem('orgName');
@@ -38,7 +38,7 @@ export default function Notification() {
   useEffect(() => {
     fetchNotifications(0);
   }, []);
-console.log(notifications)
+  console.log(notifications);
   const next = () => {
     const nextPageNumber = pageNumber + 1;
     fetchNotifications(nextPageNumber);
@@ -51,12 +51,11 @@ console.log(notifications)
 
   return (
     <>
-    <Navigation/>
-    <div className="wrapperBase">
-      {isLoading ? (
-        <Loading />
-      ) : (
-        
+      <Navigation />
+      <div className="wrapperBase">
+        {isLoading ? (
+          <Loading />
+        ) : (
           <div className="notifyBodyWrap">
             {notifications.map((i) => (
               <div className="notifyBodyBox" key={i.id}>
@@ -75,10 +74,8 @@ console.log(notifications)
               </Button>
             </div>
           </div>
-        
-      )}
-    </div>
+        )}
+      </div>
     </>
-    
   );
 }

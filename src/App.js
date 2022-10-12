@@ -14,6 +14,7 @@ import Navigation from './MobileUI/NavBar/Navbar';
 import Profile from './MobileUI/Profile/profile';
 import Notification from './MobileUI/Notification/Notification';
 import AddTicket from './MobileUI/AddTicket/Addticket';
+import Viewticket from './MobileUI/ViewTicket/Viewticket';
 
 const oktaAuth = new OktaAuth({
   issuer: process.env.REACT_APP_OKTA_AUTH_URL,
@@ -105,6 +106,7 @@ function App() {
           <Route exact path="/mobprofile" element={<Profile />} />
           <Route exact path="/mobnoti" element={<Notification />} />
           <Route exact path="/mobadd" element={<AddTicket />} />
+          <Route exact path="/mobview" element={<Viewticket />} />
         </Routes>
       </Security>
     </Router>

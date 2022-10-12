@@ -14,6 +14,7 @@ export default function Notification() {
   const [firstPage, setFirstPage] = useState(false);
   const [pageNumber, setPageNumber] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
+  const [totalPage,setTotalPage] = useState(firstPage)
 
   const fetchNotifications = async (pageNo) => {
     setIsLoading(true);
@@ -21,7 +22,7 @@ export default function Notification() {
       userId: localStorage.getItem('id'),
       orgName: organizationName,
       page: pageNo,
-      pageSize: 10,
+      pageSize: 5,
       status: 'All',
     });
     if (statusCode === httpStatusCode.SUCCESS) {
@@ -29,11 +30,15 @@ export default function Notification() {
       setNotifications(response.data.content);
       setLastPage(response.data.last);
       setFirstPage(response.data.first);
+      setTotalPage(response.data.totalPages)
       setPageNumber(pageNo);
     } else {
       setIsLoading(false);
     }
   };
+  const newPage=firstPage+1
+
+ console.log(lastPage)
 
   useEffect(() => {
     fetchNotifications(0);
@@ -49,6 +54,22 @@ export default function Notification() {
     fetchNotifications(previousPageNumber);
   };
 
+  const notificationPage=()=>{
+    if(newPage<=totalPage){
+      const temp=notifications.concat(notifications)
+      setNotifications(temp)
+      next()
+    }
+  }
+
+  window.onscroll = () => {
+    if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight - 2) {
+      
+      notificationPage()
+        
+      
+    }
+  };
   return (
     <>
       <Navigation />

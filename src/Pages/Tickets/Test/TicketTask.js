@@ -92,7 +92,7 @@ function Tickettask() {
   const pages = listSize / 7;
   const lastpageNO = Math.ceil(pages);
 
-  const priority = ticketdetails !== null ? ticketdetails[0].priority : firstTicket !== null && firstTicket.priority;
+  const priority = ticketdetails !== null ? ticketdetails[0]?.priority : firstTicket !== null && firstTicket?.priority;
   const prioritylist = (p) => {
     switch (p) {
       case '1':
@@ -200,9 +200,9 @@ function Tickettask() {
       if (i[0] !== httpStatusCode.SUCCESS) {
         setNoApiError(false);
         setLoading(true);
-        setApiErrorMsg(i[1].message ?? 'There was a problem with our ticketing service. Please try again later');
+        setApiErrorMsg(i[1]?.message ?? 'There was a problem with our ticketing service. Please try again later');
         setShowAlert(true);
-        setAlertMessage(i[1].message ?? 'There was a problem with our ticketing service. Please try again later');
+        setAlertMessage(i[1]?.message ?? 'There was a problem with our ticketing service. Please try again later');
         setTimeout(() => {
           setShowAlert(false);
         }, 5000);
@@ -218,7 +218,7 @@ function Tickettask() {
       setOptions(optionArray);
       setPostObject((prev) => {
         const Current = { ...prev };
-        Current.site = Sitelist[1]?.data[0].siteNo;
+        Current.site = Sitelist[1]?.data[0]?.siteNo;
         return Current;
       });
       setPriority(PriorityList[1]?.data);
@@ -227,24 +227,24 @@ function Tickettask() {
         setLoading(true);
         setPostObject((prev) => {
           const Current = { ...prev };
-          Current.requestType = fetchTicket[1]?.data[0].requestType;
-          Current.description = fetchTicket[1]?.data[0].description;
-          Current.phoneNumber = fetchTicket[1]?.data[0].phoneNumber;
-          Current.priority = fetchTicket[1]?.data[0].priority;
-          Current.status = fetchTicket[1]?.data[0].status;
-          Current.callerEmail = fetchTicket[1]?.data[0].callerEmail;
-          Current.solutionProvided = fetchTicket[1]?.data[0].solutionProvided;
-          Current.problem = fetchTicket[1]?.data[0].problem;
-          Current.ticketNo = fetchTicket[1]?.data[0].ticketNo;
-          Current.createdBy = fetchTicket[1]?.data[0].createdBy;
-          Current.createdDate = fetchTicket[1]?.data[0].createdDate;
-          Current.assignedTo = fetchTicket[1]?.data[0].assignedTo;
-          Current.site = Sitelist[1]?.data.filter((i) => i.siteName === fetchTicket[1]?.data[0].site)[0].siteNo;
+          Current.requestType = fetchTicket[1]?.data[0]?.requestType;
+          Current.description = fetchTicket[1]?.data[0]?.description;
+          Current.phoneNumber = fetchTicket[1]?.data[0]?.phoneNumber;
+          Current.priority = fetchTicket[1]?.data[0]?.priority;
+          Current.status = fetchTicket[1]?.data[0]?.status;
+          Current.callerEmail = fetchTicket[1]?.data[0]?.callerEmail;
+          Current.solutionProvided = fetchTicket[1]?.data[0]?.solutionProvided;
+          Current.problem = fetchTicket[1]?.data[0]?.problem;
+          Current.ticketNo = fetchTicket[1]?.data[0]?.ticketNo;
+          Current.createdBy = fetchTicket[1]?.data[0]?.createdBy;
+          Current.createdDate = fetchTicket[1]?.data[0]?.createdDate;
+          Current.assignedTo = fetchTicket[1]?.data[0]?.assignedTo;
+          Current.site = Sitelist[1]?.data.filter((i) => i.siteName === fetchTicket[1]?.data[0]?.site)[0]?.siteNo;
           return Current;
         });
         setSelectedValue({
-          label: fetchTicket[1]?.data[0].site,
-          value: Sitelist[1]?.data.filter((i) => i.siteName === fetchTicket[1]?.data[0].site)[0].siteNo,
+          label: fetchTicket[1]?.data[0]?.site,
+          value: Sitelist[1]?.data.filter((i) => i.siteName === fetchTicket[1]?.data[0]?.site)[0]?.siteNo,
         });
       }
     }
@@ -559,13 +559,13 @@ function Tickettask() {
                 <div className="content">
                   <p>
                     <i className="fa-sharp fa-solid fa-bookmark" />{' '}
-                    {ticketdetails !== null ? ticketdetails[0].ticketNo : firstTicket !== null && firstTicket.ticketNo}
+                    {ticketdetails !== null ? ticketdetails[0]?.ticketNo : firstTicket !== null && firstTicket?.ticketNo}
                   </p>
                   <h4 className="heading">Description</h4>
                   <p>
                     <Markup
                       content={
-                        ticketdetails !== null ? ticketdetails[0].description : firstTicket !== null && firstTicket.description
+                        ticketdetails !== null ? ticketdetails[0]?.description : firstTicket !== null && firstTicket?.description
                       }
                     />
                   </p>
@@ -575,7 +575,7 @@ function Tickettask() {
                 <div className="details">
                   <h4 className="heading">Status</h4>
                   <div className="values">
-                    <p>{ticketdetails !== null ? ticketdetails[0].status : firstTicket !== null && firstTicket.status}</p>
+                    <p>{ticketdetails !== null ? ticketdetails[0]?.status : firstTicket !== null && firstTicket?.status}</p>
                   </div>
 
                   <h4 className="heading">Priority</h4>
@@ -586,38 +586,38 @@ function Tickettask() {
                   <h4 className="heading">Created Date</h4>
                   <div className="values">
                     <p>
-                      {ticketdetails !== null ? ticketdetails[0].createdDate : firstTicket !== null && firstTicket.createdDate}
+                      {ticketdetails !== null ? ticketdetails[0]?.createdDate : firstTicket !== null && firstTicket?.createdDate}
                     </p>
                   </div>
 
                   <h4 className="heading">Problem</h4>
                   <div className="values">
-                    <p>{ticketdetails !== null ? ticketdetails[0].problem : firstTicket !== null && firstTicket.problem}</p>
+                    <p>{ticketdetails !== null ? ticketdetails[0]?.problem : firstTicket !== null && firstTicket?.problem}</p>
                   </div>
 
                   <h4 className="heading">Phone Number</h4>
                   <div>
                     <p>
-                      {ticketdetails !== null ? ticketdetails[0].phoneNumber : firstTicket !== null && firstTicket.phoneNumber}
+                      {ticketdetails !== null ? ticketdetails[0]?.phoneNumber : firstTicket !== null && firstTicket?.phoneNumber}
                     </p>
                   </div>
 
-                  {(ticketdetails !== null ? ticketdetails[0].callerEmail : firstTicket !== null && firstTicket.callerEmail) ===
+                  {(ticketdetails !== null ? ticketdetails[0]?.callerEmail : firstTicket !== null && firstTicket?.callerEmail) ===
                     localStorage.getItem('email') && (
                     <>
                       <h4>Edit</h4>
                       <Button
                         variant="link"
-                        id={ticketdetails !== null ? ticketdetails[0].ticketNo : firstTicket !== null && firstTicket.ticketNo}
+                        id={ticketdetails !== null ? ticketdetails[0]?.ticketNo : firstTicket !== null && firstTicket?.ticketNo}
                         onClick={() =>
                           handleClick(
-                            ticketdetails !== null ? ticketdetails[0].ticketNo : firstTicket !== null && firstTicket.ticketNo,
+                            ticketdetails !== null ? ticketdetails[0]?.ticketNo : firstTicket !== null && firstTicket?.ticketNo,
                           )
                         }
                       >
                         <img
                           src="/images/users/edit.svg"
-                          id={ticketdetails !== null ? ticketdetails[0].ticketNo : firstTicket !== null && firstTicket.ticketNo}
+                          id={ticketdetails !== null ? ticketdetails[0]?.ticketNo : firstTicket !== null && firstTicket?.ticketNo}
                           alt="Edit"
                         />
                       </Button>

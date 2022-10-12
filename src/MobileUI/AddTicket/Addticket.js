@@ -40,8 +40,8 @@ export default function AddTicket() {
   const { id } = useParams();
   const [validated, setValidated] = useState(false);
   const [selectedValue, setSelectedValue] = useState(null);
-  const [priorityValue, setPriorityValue] = useState(null)
-  const [problemCodeValue, setProblemCodeValue] = useState(null)
+  const [priorityValue, setPriorityValue] = useState(null);
+  const [problemCodeValue, setProblemCodeValue] = useState(null);
   const { buttonTracker } = useAnalyticsEventTracker();
   const [noApiError, setNoApiError] = useState(true);
   const [apiErrorMsg, setApiErrorMsg] = useState('');
@@ -87,7 +87,7 @@ export default function AddTicket() {
 
   const priorityOptions = Priority.map((i) => Object.create({ value: i, label: i }));
 
-  const ProblemCodeOption = ProblemCode.map((item) => Object.create({ value: item, label: item }))
+  const ProblemCodeOption = ProblemCode.map((item) => Object.create({ value: item, label: item }));
 
   const newDescription = (e) => {
     setAdditionaldes(e.target.value);
@@ -229,19 +229,13 @@ export default function AddTicket() {
   };
   return (
     <>
-    
       <Navigation />
-      {isLoading && <Loading/>}
+      {isLoading && <Loading />}
       <div className="container">
         <Form noValidate validated={validated} className="fromWrap">
           <Form.Group>
             <Form.Label>Description {!id && <span className="requiredTxt">*</span>}</Form.Label>
-            <Form.Control 
-            as="textarea" 
-            required
-            placeholder="Enter description"  
-            name="description" 
-            disabled={id}/>
+            <Form.Control as="textarea" required placeholder="Enter description" name="description" disabled={id} />
           </Form.Group>
           {id && (
             <Form.Group>
@@ -293,51 +287,35 @@ export default function AddTicket() {
           {id && (
             <div className="input-container">
               <Form.Label>Created Date</Form.Label>
-              <Form.Control
-                placeholder="Created Date"
-                type="text"
-                value={PostObject.createdDate}
-                disabled
-              />
+              <Form.Control placeholder="Created Date" type="text" value={PostObject.createdDate} disabled />
             </div>
           )}
           {id && (
-
             <div className="input-container">
               <Form.Label>Created By</Form.Label>
-              <Form.Control
-                placeholder="Created By"
-                type="text"
-                value={PostObject.createdBy}
-                disabled
-              />
+              <Form.Control placeholder="Created By" type="text" value={PostObject.createdBy} disabled />
             </div>
-
           )}
-          {id && (<div className="input-container">
-            <Form.Label>Assigned To</Form.Label>
-            <Form.Control
-              placeholder="Assigned To"
-              type="text"
-              value={PostObject.assignedTo}
-              disabled
-            />
-          </div>)}
           {id && (
-
+            <div className="input-container">
+              <Form.Label>Assigned To</Form.Label>
+              <Form.Control placeholder="Assigned To" type="text" value={PostObject.assignedTo} disabled />
+            </div>
+          )}
+          {id && (
             <div className="input-container">
               <Form.Label>Solution Provided</Form.Label>
-              <Form.Control
-                placeholder="Solution Provided"
-                type="text"
-                value={PostObject.solutionProvided}
-                disabled
-              />
-            </div>)}
+              <Form.Control placeholder="Solution Provided" type="text" value={PostObject.solutionProvided} disabled />
+            </div>
+          )}
         </Form>
-        <div className=' d-flex align-items-center justify-content-center'>
-          <Button type='submit' className="buttonPrimary mb-5 mt-4 mr-1" onClick={()=>navigate('/mobticket')}>Cancel</Button>
-          <Button className="buttonPrimary mb-5 mt-4 mr-1" onClick={createEditTicket}>{id ? 'Edit' : 'Create'}</Button>
+        <div className=" d-flex align-items-center justify-content-center">
+          <Button type="submit" className="buttonPrimary mb-5 mt-4 mr-1" onClick={() => navigate('/mobticket')}>
+            Cancel
+          </Button>
+          <Button className="buttonPrimary mb-5 mt-4 mr-1" onClick={createEditTicket}>
+            {id ? 'Edit' : 'Create'}
+          </Button>
         </div>
       </div>
     </>

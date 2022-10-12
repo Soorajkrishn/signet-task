@@ -22,13 +22,11 @@ function TicketList() {
   const [show, setShow] = useState(false);
   const [id, setId] = useState(null);
   const [ticketNo, setTicketNo] = useState(null);
-  
+
   const [showAlert, setShowAlert] = useState(false);
   const [error, setError] = useState(false);
   const closeAlert = () => setShowAlert(false);
   const [alertMessage, setAlertMessage] = useState('');
-
-
 
   const fetchAllUserDetails = async () => {
     setLoading(true);
@@ -70,8 +68,6 @@ function TicketList() {
 
   // const filteredTicket = ticket.filter((each) => each.ticketNo === ticketNo);
 
-  
-
   window.onscroll = () => {
     if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight - 2) {
       if (page <= pageNo) {
@@ -89,8 +85,6 @@ function TicketList() {
       setSliceTicket(ticket);
     }
   }, [ticket]);
-
-  
 
   return (
     <>
@@ -148,7 +142,7 @@ function TicketList() {
         <Navbar />
         <ul>
           {sliceTicket.map((v) => (
-            <li className="ticketData" >
+            <li className="ticketData">
               <p className="truncate">{v.description}</p>
               <p>{v.ticketNo}</p>
             </li>
@@ -158,7 +152,7 @@ function TicketList() {
         <div
           className="addTicket"
           onClick={() => {
-            navigate('/mobadd')
+            navigate('/mobadd');
           }}
         >
           <img src="/images/tasks/plus.svg" alt="" />

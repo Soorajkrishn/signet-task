@@ -14,7 +14,15 @@ export default function Notification() {
   const [firstPage, setFirstPage] = useState(false);
   const [pageNumber, setPageNumber] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
-  const [totalPage, setTotalPage] = useState(firstPage);
+  const [totalPage, setTotalPage] = useState(0);
+  const [newPage,setNewPage] = useState(0)
+  const [notificationData,setNotificationData]=useState([])
+
+
+  // const t=()=>{
+  //   const temp=notificationData.concat(notifications)
+  //     setNotificationData(temp)
+  // }
 
   const fetchNotifications = async (pageNo) => {
     setIsLoading(true);
@@ -35,15 +43,26 @@ export default function Notification() {
     } else {
       setIsLoading(false);
     }
+    
   };
-  const newPage = firstPage + 1;
+  // useEffect(()=>{
+  //   const temp=notificationData.concat(notifications)
+  //   const a=[...new Set(temp)]
+  //     setNotificationData(a)
+      
+  // },[notifications])
+  
 
-  console.log(lastPage);
+ 
+
+  console.log(totalPage);
 
   useEffect(() => {
     fetchNotifications(0);
   }, []);
-  console.log(notifications);
+
+  console.log(notificationData);
+
   const next = () => {
     const nextPageNumber = pageNumber + 1;
     fetchNotifications(nextPageNumber);
@@ -55,15 +74,13 @@ export default function Notification() {
   };
 
   const notificationPage = () => {
-    if (newPage <= totalPage) {
-      const temp = notifications.concat(notifications);
-      setNotifications(temp);
+    if (lastPage===false) {
       next();
     }
   };
 
   window.onscroll = () => {
-    if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight - 2) {
+    if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight - 2) {      
       notificationPage();
     }
   };

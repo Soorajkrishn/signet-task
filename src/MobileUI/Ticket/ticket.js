@@ -20,7 +20,7 @@ function TicketList() {
   const navigate = useNavigate();
   const { buttonTracker } = useAnalyticsEventTracker();
   const [show, setShow] = useState(false);
-  const [id, setId] = useState(null);
+
   const [ticketNo, setTicketNo] = useState(null);
 
   const [showAlert, setShowAlert] = useState(false);
@@ -66,8 +66,6 @@ function TicketList() {
     }, 1500);
   };
 
-  // const filteredTicket = ticket.filter((each) => each.ticketNo === ticketNo);
-
   window.onscroll = () => {
     if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight - 2) {
       if (page <= pageNo) {
@@ -86,63 +84,18 @@ function TicketList() {
     }
   }, [ticket]);
 
+  const handleClick=(id)=>{
+    navigate(`/mobview/${id}`)
+  }
+
   return (
     <>
-      {/* <Modal show={show} onHide={modalClose}>
-        <Modal.Header>
-          <p>
-            <b>Ticket No : </b>
-            {filteredTicket[0]?.ticketNo}
-          </p>
-          <div onClick={modalClose} className="close">
-            <img src="/images/tasks/close.svg" alt="" />
-          </div>
-        </Modal.Header>
-        <Modal.Body>
-          <div>
-            <h5>
-              <b>Description</b>
-            </h5>
-            <p>{filteredTicket[0]?.description}</p>
-            <h5>
-              <b>Status</b>
-            </h5>
-            <p>{filteredTicket[0]?.status}</p>
-            <h5>
-              <b>Problem</b>
-            </h5>
-            <p>{filteredTicket[0]?.problem}</p>
-            <h5>
-              <b>Created Date</b>
-            </h5>
-            <p>{filteredTicket[0]?.createdDate}</p>
-            <h5>
-              <b>Priority</b>
-            </h5>
-            <p>{filteredTicket[0]?.priority}</p>
-            <h5>
-              <b>Created By</b>
-            </h5>
-            <p>{filteredTicket[0]?.createdBy}</p>
-            {filteredTicket[0]?.callerEmail === localStorage.getItem('email') && (
-              <>
-                <h5>
-                  <b>Edit</b>
-                </h5>
-                <Button variant="link" id={filteredTicket[0]?.ticketNo} onClick={() => editTicket(filteredTicket[0]?.ticketNo)}>
-                  <img src="/images/users/edit.svg" id={filteredTicket[0]?.ticketNo} alt="Edit" />
-                </Button>
-              </>
-            )}
-          </div>
-        </Modal.Body>
-      </Modal> */}
       <div className="container">
         {isLoading && <Loading />}
         <Navbar />
         <ul>
           {sliceTicket.map((v) => (
-            <li className="ticketData">
+            <li onClick={()=>handleClick(v.ticketNo)} className="ticketData">
               <p className="truncate">{v.description}</p>
               <p>{v.ticketNo}</p>
             </li>

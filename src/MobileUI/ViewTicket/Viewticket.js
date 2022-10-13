@@ -1,16 +1,15 @@
 import React, { useEffect, useState } from 'react';
 import Navigation from '../NavBar/Navbar';
-import useAnalyticsEventTracker from '../../Hooks/useAnalyticsEventTracker';
 import { httpStatusCode } from '../../Constants/TextConstants';
 import { useParams } from 'react-router-dom';
 import { makeRequest } from '../../Services/APIService';
 import APIUrlConstants from '../../Config/APIUrlConstants';
+import Loading from '../../Pages/Widgets/Loading';
 
 export default function Viewticket() {
   const { id } = useParams();
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState({});
-  const { buttonTracker } = useAnalyticsEventTracker();
 
   const fetchTicketDetails = async () => {
     setLoading(true);
@@ -25,29 +24,55 @@ export default function Viewticket() {
     fetchTicketDetails();
   }, []);
   return (
+
     <>
-      <Navigation />
-      <p>
-        <b>Ticket No : </b>
-      </p>
-      <p>
-        <b>Description </b>
-      </p>
-      <p>
-        <b>Status </b>
-      </p>
-      <p>
-        <b>Problem Code</b>
-      </p>
-      <p>
-        <b>Created Date</b>
-      </p>
-      <p>
-        <b>Priority</b>
-      </p>
-      <p>
-        <b>Created By</b>
-      </p>
+      {isLoading && <Loading />}
+      {!isLoading ? <>
+        <Navigation />
+        <div className='container'>
+          <p>
+            <b>Ticket No :</b>{data.ticketNo}
+          </p>
+          <div>
+            <label>
+              <b>Description </b>
+            </label>
+            <p>{data.description}</p>
+            <label>
+              <b>Status </b>
+            </label>
+            <p>{data.status}</p>
+            <label>
+              <b>Problem Code</b>
+            </label>
+            <p>{data.problem}</p>
+            <label>
+              <b>Created Date</b>
+            </label>
+            <p>{data.createdDate}</p>
+            <label>
+              <b>Priority</b>
+            </label>
+            <p>{data.priority}</p>
+            <label>
+              <b>Created By</b>
+            </label>
+            <p>{data.createdBy}</p>
+            <label>
+              <b>Caller Email</b>
+            </label>
+            <p>{data.callerEmail}</p>
+            <label>
+              <b>Phone Number</b>
+            </label>
+            <p>{data.phoneNumber}</p>
+
+          </div>
+
+
+        </div>
+      </> : null}
+
     </>
   );
 }

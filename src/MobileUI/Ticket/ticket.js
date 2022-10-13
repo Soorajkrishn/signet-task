@@ -84,9 +84,9 @@ function TicketList() {
     }
   }, [ticket]);
 
-  const handleClick=(id)=>{
-    navigate(`/mobview/${id}`)
-  }
+  const handleClick = (id) => {
+    navigate(`/mobview/${id}`);
+  };
 
   return (
     <>
@@ -95,7 +95,7 @@ function TicketList() {
         <Navbar />
         <ul>
           {sliceTicket.map((v) => (
-            <li onClick={()=>handleClick(v.ticketNo)} className="ticketData">
+            <li onClick={() => handleClick(v.ticketNo)} className="ticketData">
               <p className="truncate">{v.description}</p>
               <p>{v.ticketNo}</p>
             </li>

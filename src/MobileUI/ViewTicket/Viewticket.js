@@ -24,55 +24,53 @@ export default function Viewticket() {
     fetchTicketDetails();
   }, []);
   return (
-
     <>
       {isLoading && <Loading />}
-      {!isLoading ? <>
-        <Navigation />
-        <div className='container'>
-          <p>
-            <b>Ticket No :</b>{data.ticketNo}
-          </p>
-          <div>
-            <label>
-              <b>Description </b>
-            </label>
-            <p>{data.description}</p>
-            <label>
-              <b>Status </b>
-            </label>
-            <p>{data.status}</p>
-            <label>
-              <b>Problem Code</b>
-            </label>
-            <p>{data.problem}</p>
-            <label>
-              <b>Created Date</b>
-            </label>
-            <p>{data.createdDate}</p>
-            <label>
-              <b>Priority</b>
-            </label>
-            <p>{data.priority}</p>
-            <label>
-              <b>Created By</b>
-            </label>
-            <p>{data.createdBy}</p>
-            <label>
-              <b>Caller Email</b>
-            </label>
-            <p>{data.callerEmail}</p>
-            <label>
-              <b>Phone Number</b>
-            </label>
-            <p>{data.phoneNumber}</p>
-
+      {!isLoading ? (
+        <>
+          <Navigation />
+          <div className="container">
+            <p>
+              <b>Ticket No :</b>
+              {data.ticketNo}
+            </p>
+            <div>
+              <label>
+                <b>Description </b>
+              </label>
+              <p>{data.description}</p>
+              <label>
+                <b>Status </b>
+              </label>
+              <p>{data.status}</p>
+              <label>
+                <b>Problem Code</b>
+              </label>
+              <p>{data.problem}</p>
+              <label>
+                <b>Created Date</b>
+              </label>
+              <p>{data.createdDate}</p>
+              <label>
+                <b>Priority</b>
+              </label>
+              <p>{data.priority}</p>
+              <label>
+                <b>Created By</b>
+              </label>
+              <p>{data.createdBy}</p>
+              <label>
+                <b>Caller Email</b>
+              </label>
+              <p>{data.callerEmail}</p>
+              <label>
+                <b>Phone Number</b>
+              </label>
+              <p>{data.phoneNumber}</p>
+            </div>
           </div>
-
-
-        </div>
-      </> : null}
-
+        </>
+      ) : null}
     </>
   );
 }

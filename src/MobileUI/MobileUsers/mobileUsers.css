@@ -1,7 +1,7 @@
-.userList{
-    border-radius: 10px;
-    border: 1px solid black;
-    padding-left: 30px;
-    margin: 10px;
-    list-style: none;
+.userList {
+  border-radius: 10px;
+  border: 1px solid black;
+  padding-left: 30px;
+  margin: 10px;
+  list-style: none;
 }

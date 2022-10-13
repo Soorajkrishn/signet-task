@@ -15,9 +15,8 @@ export default function Notification() {
   const [pageNumber, setPageNumber] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [totalPage, setTotalPage] = useState(0);
-  const [newPage,setNewPage] = useState(0)
-  const [notificationData,setNotificationData]=useState([])
-
+  const [newPage, setNewPage] = useState(0);
+  const [notificationData, setNotificationData] = useState([]);
 
   // const t=()=>{
   //   const temp=notificationData.concat(notifications)
@@ -43,17 +42,13 @@ export default function Notification() {
     } else {
       setIsLoading(false);
     }
-    
   };
   // useEffect(()=>{
   //   const temp=notificationData.concat(notifications)
   //   const a=[...new Set(temp)]
   //     setNotificationData(a)
-      
-  // },[notifications])
-  
 
- 
+  // },[notifications])
 
   console.log(totalPage);
 
@@ -74,13 +69,13 @@ export default function Notification() {
   };
 
   const notificationPage = () => {
-    if (lastPage===false) {
+    if (lastPage === false) {
       next();
     }
   };
 
   window.onscroll = () => {
-    if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight - 2) {      
+    if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight - 2) {
       notificationPage();
     }
   };

@@ -11,17 +11,17 @@ import AsyncSelect from 'react-select/async';
 import useAnalyticsEventTracker from '../../Hooks/useAnalyticsEventTracker';
 import Navigation from '../NavBar/Navbar';
 import Select from 'react-select';
+import { setDefaultEventParameters } from 'firebase/analytics';
 
 export default function EditUserDetails() {
   const { id } = useParams();
   const [roles, setRoles] = useState();
-  const [tempRole, setTempRole] = useState([]);
   const [alertVarient, setAlertVarient] = useState('');
-  const [roleId, setRoleId] = useState(null);
+  const [rName,setRname]=useState('')
   const [isLoading, setIsLoading] = useState(false);
   const [alertMessage, setAlertMessage] = useState('');
   const [selectedValue, setSelectedValue] = useState(null);
-  const [updateRole, setUpdateRole] = useState(null);
+  const [updateRole, setUpdateRole] = useState('');
   const [user, setUser] = useState({
     firstName: '',
     lastName: '',
@@ -46,6 +46,9 @@ export default function EditUserDetails() {
     mode: 'all',
   });
   const timer = useRef(null);
+  const {roleId}=user
+
+  console.log(user.roleId)
 
   const fetchRoles = async () => {
     const { 0: status, 1: result } = await makeRequest(APIUrlConstants.GET_USER_ROLES);
@@ -54,31 +57,20 @@ export default function EditUserDetails() {
       setRoles(result.data);
     }
   };
-  useEffect(() => {
-    const temp = [];
-    roles?.map((item) => temp.push(item.name));
-    setTempRole(temp);
-  }, [roles]);
 
-  const roleName = tempRole?.map((i) => Object.create({ value: i, label: i }));
+  const roleName = roles?.map((i) => Object.create({ value: i.roleId, label: i.name }));
 
-  console.log(roleName);
 
-  const roleChange = (value) => {
-    setUpdateRole(value.value);
+  const roleChange = (item) => {
+    setUpdateRole(item.label);
+    setUser((prevState) => ({ ...prevState, roleId:item?.value }));
   };
 
-  useEffect(() => {
-    const tempId = roles?.filter((each) => each.name === updateRole);
-    setUser((prevState) => ({ ...prevState, roleId: tempId?.roleId }));
-  }, [updateRole]);
-
   const Option = [
+    {value: 'Pending', label: 'Pending' },
     { value: 'Active', label: 'Active' },
     { value: 'Inactive', label: 'Inactive' },
   ];
-
-  console.log(Option);
 
   const handleChange = (value) => {
     setSelectedValue(value);
@@ -93,6 +85,12 @@ export default function EditUserDetails() {
     }),
   };
 
+  const statusChange=(value)=>{
+    setUser((prevState) => ({ ...prevState, status: value?.value }));
+  }
+
+  // console.log(updateRole)
+
   const loadOptions = async (searchtext) => {
     if (searchtext.length >= 3) {
       const response = await makeRequest(`${APIUrlConstants.SEARCH_ORG}?company=${searchtext}`);
@@ -105,6 +103,14 @@ export default function EditUserDetails() {
     }
     return null;
   };
+
+  useEffect(()=>{
+    if(roles && roleId){
+      const filterRole=roles?.filter((each)=>each.roleId===roleId)
+    console.log(filterRole)
+    setRname(filterRole[0].name)
+    }
+  },[roles,roleId])
 
   const fetchUserDetails = useCallback(async () => {
     setIsLoading(true);
@@ -165,9 +171,12 @@ export default function EditUserDetails() {
     }
   };
 
+
   useEffect(() => () => clearTimeout(timer.current), []);
 
   return (
+    <>
+    <Navigation />
     <div className="wrapperBase">
       {showAlert && (
         <Alerts
@@ -178,10 +187,10 @@ export default function EditUserDetails() {
           alertshow={alertMessage}
         />
       )}
-      <Navigation />
-      <div className="wrapperCard">
+      
+      <div className="container">
         {isLoading && <Loading />}
-        <div className="wrapperCard--body">
+        <div>
           <div className="editWrap">
             <Form onSubmit={handleSubmit(updateUser)} id="editUserForm">
               <div className="mb-3">
@@ -297,10 +306,8 @@ export default function EditUserDetails() {
                   <Select
                     options={roleName}
                     onChange={roleChange}
-                    placeholder="Role"
-                    value={updateRole}
+                    placeholder={rName}
                     styles={{ customStyles }}
-                    data-testid="siteName"
                   />
                   {roleValidated ? <Form.Control.Feedback type="invalid">Role is required </Form.Control.Feedback> : null}
                 </Form.Group>
@@ -312,9 +319,8 @@ export default function EditUserDetails() {
                 <Form.Group className="userSelect mb-2">
                   <Select
                     options={Option}
-                    onChange={roleChange}
-                    placeholder="Role"
-                    value={updateRole}
+                    onChange={statusChange}
+                    placeholder={user.status}
                     styles={{ customStyles }}
                     data-testid="siteName"
                   />
@@ -325,8 +331,7 @@ export default function EditUserDetails() {
                   className="buttonDefault text-center"
                   type="submit"
                   onClick={() => {
-                    buttonTracker(gaEvents.NAVIGATE_USERS_LIST);
-                    navigate('/users');
+                    navigate('/mobusers');
                   }}
                   value="Cancel"
                 />
@@ -342,5 +347,7 @@ export default function EditUserDetails() {
         </div>
       </div>
     </div>
+    </>
+    
   );
 }

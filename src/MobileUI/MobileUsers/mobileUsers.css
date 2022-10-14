@@ -1,7 +1,20 @@
 .userList {
+  position: relative;
   border-radius: 10px;
   border: 1px solid black;
   padding-left: 30px;
   margin: 10px;
   list-style: none;
+}
+
+.addUser{
+  position: fixed;
+  bottom: 10px;
+  right: 10px;
+}
+
+.userDelete{
+  position: absolute;
+  top: 5px;
+  right: 5px;
 }

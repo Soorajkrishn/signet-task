@@ -110,7 +110,7 @@ function App() {
           <Route exact path="/mobadd" element={<AddTicket />} />
           <Route exact path="/mobusers" element={<MobileUsers />} />
           <Route exact path="/mobview/:id" element={<Viewticket />} />
-          <Route exact path="/mobedit" element={<EditUserDetails />} />
+          <Route exact path="/mobedit/:id" element={<EditUserDetails />} />
         </Routes>
       </Security>
     </Router>

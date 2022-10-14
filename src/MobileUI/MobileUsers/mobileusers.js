@@ -34,7 +34,7 @@ export default function MobileUsers() {
 
   const view = () => {
     setTimeout(() => {
-      if (page < pageNo) { 
+      if (page < pageNo) {
         setPage(page + 1);
         setStart(start + 10);
         setEnd(end + 10);
@@ -42,7 +42,7 @@ export default function MobileUsers() {
       }
     }, 1500);
   };
-  console.log(sliceTicket )
+  console.log(sliceTicket);
   window.onscroll = () => {
     if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight - 2) {
       if (page < pageNo) {
@@ -55,20 +55,20 @@ export default function MobileUsers() {
   useEffect(() => {
     if (user.length > 10) {
       const tempSlice = user?.slice(start, end);
-      const temp = sliceTicket.concat(tempSlice) ;
+      const temp = sliceTicket.concat(tempSlice);
       setSliceTicket(temp);
     } else {
       setSliceTicket(user);
     }
-  }, [user,start,end]);
+  }, [user, start, end]);
 
-  const handleClick=(id)=>{
-    navigate(`/mobedit/${id}`)
-  }
+  const handleClick = (id) => {
+    navigate(`/mobedit/${id}`);
+  };
 
-  const deleteUser=()=>{
-    window.confirm()
-  }
+  const deleteUser = () => {
+    window.confirm();
+  };
   return (
     <>
       {isLoading && <Loading />}
@@ -77,11 +77,11 @@ export default function MobileUsers() {
       <div className="wrapperBase">
         <ul>
           {sliceTicket.map((v) => (
-            <li className="userList" onClick={()=>handleClick(v.userId)} key={v.userId}>
-              <div className='userDelete'>
-                <img onClick={()=>deleteUser()} src= 'images/users/bin.svg' alt=''/>
+            <li className="userList" onClick={() => handleClick(v.userId)} key={v.userId}>
+              <div className="userDelete">
+                <img onClick={() => deleteUser()} src="images/users/bin.svg" alt="" />
               </div>
-              
+
               <p>
                 <b>Name : </b>
                 {v.firstName} {v.lastName}
@@ -101,7 +101,7 @@ export default function MobileUsers() {
             </li>
           ))}
         </ul>
-        <div className='addUser'>
+        <div className="addUser">
           <img src="/images/tasks/plus.svg" alt="" />
         </div>
       </div>

@@ -86,14 +86,14 @@ function MobileTicket() {
 
   return (
     <>
-      <div className="container">
+      <div className="container mt-3">
         {isLoading && <Loading />}
 
         <ul>
           {sliceTicket.map((v) => (
-            <li onClick={() => handleClick(v.ticketNo, v.callerEmail)} key={v.ticketNo} className="ticketData">
-              <p className="truncate">{v.description}</p>
-              <p>{v.ticketNo}</p>
+            <li onClick={() => handleClick(v.ticketNo, v.callerEmail)} key={v?.ticketNo} className="ticketData">
+              <p className="truncate">{v?.description}</p>
+              <p>{v?.ticketNo}</p>
             </li>
           ))}
         </ul>

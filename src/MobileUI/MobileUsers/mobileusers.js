@@ -84,20 +84,20 @@ export default function MobileUsers() {
 
               <p>
                 <b>Name : </b>
-                {v.firstName} {v.lastName}
+                {v?.firstName} {v?.lastName}
               </p>
               <p>
                 <b>Status : </b>
-                {v.status}
+                {v?.status}
               </p>
               <p>
                 <b>Mobile : </b>
-                {v.mobileNumber}
+                {v?.mobileNumber}
               </p>
-              <p>
+              <span>
                 <b>Organization : </b>
-                {v.organization}
-              </p>
+                {v?.organization}
+              </span>
             </li>
           ))}
         </ul>

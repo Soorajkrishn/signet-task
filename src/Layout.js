@@ -35,7 +35,7 @@ import MobileAddTicket from './MobileUI/AddTicket/Addticket';
 import MobileViewticket from './MobileUI/ViewTicket/Viewticket';
 import MobileUsers from './MobileUI/MobileUsers/mobileusers';
 import MobileEditUserDetails from './MobileUI/EditUser/Edituser';
-import MobileCreateuser from './MobileUI/Createuser/createuser';
+import MobileCreateuser from './MobileUI/CreateUser/Createuser';
 import MobileDashboard from './MobileUI/Dashboard/Dashboard';
 
 function Layout(props) {

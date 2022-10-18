@@ -51,7 +51,7 @@ export default function Notification() {
   };
 
   return (
-    <div className="wrapperBase">
+    <div className="wrapperBase mt-3">
       {isLoading ? (
         <Loading />
       ) : (
@@ -60,7 +60,7 @@ export default function Notification() {
             <div className="notifyBodyBox" key={i.id}>
               <span />
               <div className="notifyBodyInfo">
-                <div dangerouslySetInnerHTML={{ __html: i.notificationMessage }} />
+                <div dangerouslySetInnerHTML={{ __html: i?.notificationMessage }} />
               </div>
             </div>
           ))}

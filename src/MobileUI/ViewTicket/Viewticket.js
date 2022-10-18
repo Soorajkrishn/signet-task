@@ -32,61 +32,61 @@ export default function MobileViewticket() {
       {isLoading && <Loading />}
       {!isLoading ? (
         <>
-          <div className="container">
+          <div className="container mt-3">
             <p>
               <b>Ticket No :</b>
-              {data.ticketNo}
+              {data?.ticketNo}
             </p>
             <div>
               <label>
                 <b>Description </b>
               </label>
               <div className="textContainer">
-                <p>{data.description}</p>
+                <p>{data?.description}</p>
               </div>
 
               <label>
                 <b>Status </b>
               </label>
               <div className="textContainer">
-                <p>{data.status}</p>
+                <p>{data?.status}</p>
               </div>
 
               <label>
                 <b>Problem Code</b>
               </label>
               <div className="textContainer">
-                <p>{data.problem}</p>
+                <p>{data?.problem}</p>
               </div>
               <label>
                 <b>Created Date</b>
               </label>
               <div className="textContainer">
-                <p>{data.createdDate}</p>
+                <p>{data?.createdDate}</p>
               </div>
               <label>
                 <b>Priority</b>
               </label>
               <div className="textContainer">
-                <p>{data.priority}</p>
+                <p>{data?.priority}</p>
               </div>
               <label>
                 <b>Created By</b>
               </label>
               <div className="textContainer">
-                <p>{data.createdBy}</p>
+                <p>{data?.createdBy}</p>
               </div>
               <label>
                 <b>Caller Email</b>
               </label>
               <div className="textContainer">
-                <p>{data.callerEmail}</p>
+                <p>{data?.callerEmail}</p>
               </div>
               <label>
                 <b>Phone Number</b>
               </label>
               <div className="textContainer">
-                <p>{data.phoneNumber}</p>
+                <p>{data?.phoneNumber}</p>
               </div>
             </div>
           </div>

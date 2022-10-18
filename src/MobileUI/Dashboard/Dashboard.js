@@ -69,16 +69,16 @@ export default function MobileDashboard() {
     <Tooltip id="button-tooltip" {...props}>
       <div className="p-2">
         <p>
-          <b>{systemAvailability.title}</b>
+          <b>{systemAvailability?.title}</b>
         </p>
         <hr />
         <div className="d-flex justify-content-between bg-lightred p-1">
           <span className="">Percent Downtime</span>
-          <span className="">{systemAvailability.system.systemAvailabilityDTOs[0].percentageDown.toFixed(2)}%</span>
+          <span className="">{systemAvailability?.system.systemAvailabilityDTOs[0]?.percentageDown?.toFixed(2)}%</span>
         </div>
         <div className="d-flex justify-content-between bg-lightgreen p-1 mt-2">
           <span className="">Percent Uptime</span>
-          <span className="">{systemAvailability.system.systemAvailabilityDTOs[0].percentageUp.toFixed(2)}%</span>
+          <span className="">{systemAvailability?.system.systemAvailabilityDTOs[0]?.percentageUp?.toFixed(2)}%</span>
         </div>
       </div>
     </Tooltip>
@@ -97,7 +97,7 @@ export default function MobileDashboard() {
   );
 
   const renderChart = (type, data) => {
-    if (type === 'ticketByPriority' && data && data.ticket && data.ticket.ticketPrioritys && data.ticket.ticketPrioritys.length) {
+    if (type === 'ticketByPriority' && data && data?.ticket && data.ticket?.ticketPrioritys && data.ticket.ticketPrioritys.length) {
       return (
         <div className="cardBody">
           <VerticalBarChart data={data.ticket.ticketPrioritys} />

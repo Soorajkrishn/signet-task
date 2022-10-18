@@ -1,5 +1,8 @@
-<svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-<path d="M19.1901 17.63C17.4501 16.07 14.8701 15.09 12.0001 15.09C9.13006 15.09 6.55006 16.08 4.81006 17.63" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M11.9999 12C13.4193 12 14.5699 10.8494 14.5699 9.42999C14.5699 8.01062 13.4193 6.85999 11.9999 6.85999C10.5806 6.85999 9.42993 8.01062 9.42993 9.42999C9.42993 10.8494 10.5806 12 11.9999 12Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
-<path d="M12 21.25C17.1086 21.25 21.25 17.1086 21.25 12C21.25 6.89137 17.1086 2.75 12 2.75C6.89137 2.75 2.75 6.89137 2.75 12C2.75 17.1086 6.89137 21.25 12 21.25Z" stroke="black" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="18px" height="18px" viewBox="0 0 18 18" version="1.1">
+<g id="surface1">
+<path style="fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:4;" d="M 19.1875 17.630208 C 17.447917 16.067708 14.869792 15.088542 12 15.088542 C 9.130208 15.088542 6.552083 16.078125 4.8125 17.630208 " transform="matrix(0.75,0,0,0.75,0,0)"/>
+<path style="fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:4;" d="M 12 12 C 13.421875 12 14.567708 10.848958 14.567708 9.432292 C 14.567708 8.010417 13.421875 6.859375 12 6.859375 C 10.578125 6.859375 9.432292 8.010417 9.432292 9.432292 C 9.432292 10.848958 10.578125 12 12 12 Z M 12 12 " transform="matrix(0.75,0,0,0.75,0,0)"/>
+<path style="fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;stroke:rgb(0%,0%,0%);stroke-opacity:1;stroke-miterlimit:4;" d="M 12 21.25 C 17.109375 21.25 21.25 17.109375 21.25 12 C 21.25 6.890625 17.109375 2.75 12 2.75 C 6.890625 2.75 2.75 6.890625 2.75 12 C 2.75 17.109375 6.890625 21.25 12 21.25 Z M 12 21.25 " transform="matrix(0.75,0,0,0.75,0,0)"/>
+</g>
 </svg>

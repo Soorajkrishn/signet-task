@@ -4,7 +4,6 @@ import { useNavigate, useParams } from 'react-router-dom';
 import Select from 'react-select';
 import useAnalyticsEventTracker from '../../Hooks/useAnalyticsEventTracker';
 import moment from 'moment';
-import './Addticket.css';
 import { fetchCall, makeRequest } from '../../Services/APIService';
 import APIUrlConstants from '../../Config/APIUrlConstants';
 import { apiMethods, gaEvents, httpStatusCode } from '../../Constants/TextConstants';
@@ -240,7 +239,7 @@ export default function MobileAddTicket() {
   return (
     <>
       {isLoading && <Loading />}
-      <div className="container">
+      <div className="container mt-3">
         <Form noValidate validated={validated} className="fromWrap">
           <Form.Group>
             <Form.Label>Description {!id && <span className="requiredTxt">*</span>}</Form.Label>
@@ -257,7 +256,7 @@ export default function MobileAddTicket() {
               placeholder="Enter description"
               name="description"
               disabled={id}
-              value={PostObject.description}
+              value={PostObject?.description}
             />
           </Form.Group>
           {id && (
@@ -310,25 +309,25 @@ export default function MobileAddTicket() {
           {id && (
             <div className="input-container">
               <Form.Label>Created Date</Form.Label>
-              <Form.Control placeholder="Created Date" type="text" value={PostObject.createdDate} disabled />
+              <Form.Control placeholder="Created Date" type="text" value={PostObject?.createdDate} disabled />
             </div>
           )}
           {id && (
             <div className="input-container">
               <Form.Label>Created By</Form.Label>
-              <Form.Control placeholder="Created By" type="text" value={PostObject.createdBy} disabled />
+              <Form.Control placeholder="Created By" type="text" value={PostObject?.createdBy} disabled />
             </div>
           )}
           {id && (
             <div className="input-container">
               <Form.Label>Assigned To</Form.Label>
-              <Form.Control placeholder="Assigned To" type="text" value={PostObject.assignedTo} disabled />
+              <Form.Control placeholder="Assigned To" type="text" value={PostObject?.assignedTo} disabled />
             </div>
           )}
           {id && (
             <div className="input-container">
               <Form.Label>Solution Provided</Form.Label>
-              <Form.Control placeholder="Solution Provided" type="text" value={PostObject.solutionProvided} disabled />
+              <Form.Control placeholder="Solution Provided" type="text" value={PostObject?.solutionProvided} disabled />
             </div>
           )}
         </Form>

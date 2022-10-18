@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { useThemeUpdate } from '../../../Context/MenuContext';
+import { useTheme, useThemeUpdate } from '../../../Context/MenuContext';
 import { editprofile } from '../../../Redux/Actions/Actions';
 import './Header.css';
 
@@ -11,6 +11,7 @@ function Mobileheader() {
   const toggleMenu = useThemeUpdate();
   const dispatch = useDispatch();
   const location = useLocation();
+  const sidebarOpen = useTheme();
   const userProfile = useSelector((state) => state.MoblieuiReducer);
   const { email } = userProfile;
   const { id } = userProfile;
@@ -38,13 +39,13 @@ function Mobileheader() {
   return (
     <div className="d-flex  justify-content-between headerWrapper ">
       <div className="align-items-start">
-        <img src={process.env.REACT_APP_PUBLIC_URL + 'images/header/menu.svg'} aria-hidden="true" alt="" onClick={toggleMenu} />
+        {sidebarOpen?<img alt='' src='/images/tasks/x-mark.svg' onClick={toggleMenu}/>:<img src={process.env.REACT_APP_PUBLIC_URL + 'images/header/menu.svg'} aria-hidden="true" alt="" onClick={toggleMenu} />}
       </div>
       <div className="align-items-center">
-        <h3>{userProfile.pageName}</h3>
+        <h3>{userProfile?.pageName}</h3>
       </div>
       <div className="align-items-end">
-        {ticketEdit ? <img onClick={() => edit()} alt="" src="/images/tasks/edit.svg" /> : null}
+        {ticketEdit ? <img onClick={() => edit()} alt="" src="/images/tasks/edit.svg" /> : <img alt=''/>}
       </div>
     </div>
   );

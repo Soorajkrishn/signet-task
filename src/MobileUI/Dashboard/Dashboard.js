@@ -97,7 +97,13 @@ export default function MobileDashboard() {
   );
 
   const renderChart = (type, data) => {
-    if (type === 'ticketByPriority' && data && data?.ticket && data.ticket?.ticketPrioritys && data.ticket.ticketPrioritys.length) {
+    if (
+      type === 'ticketByPriority' &&
+      data &&
+      data?.ticket &&
+      data.ticket?.ticketPrioritys &&
+      data.ticket.ticketPrioritys.length
+    ) {
       return (
         <div className="cardBody">
           <VerticalBarChart data={data.ticket.ticketPrioritys} />

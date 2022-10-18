@@ -39,13 +39,17 @@ function Mobileheader() {
   return (
     <div className="d-flex  justify-content-between headerWrapper ">
       <div className="align-items-start">
-        {sidebarOpen?<img alt='' src='/images/tasks/x-mark.svg' onClick={toggleMenu}/>:<img src={process.env.REACT_APP_PUBLIC_URL + 'images/header/menu.svg'} aria-hidden="true" alt="" onClick={toggleMenu} />}
+        {sidebarOpen ? (
+          <img alt="" src="/images/tasks/x-mark.svg" onClick={toggleMenu} />
+        ) : (
+          <img src={process.env.REACT_APP_PUBLIC_URL + 'images/header/menu.svg'} aria-hidden="true" alt="" onClick={toggleMenu} />
+        )}
       </div>
       <div className="align-items-center">
         <h3>{userProfile?.pageName}</h3>
       </div>
       <div className="align-items-end">
-        {ticketEdit ? <img onClick={() => edit()} alt="" src="/images/tasks/edit.svg" /> : <img alt=''/>}
+        {ticketEdit ? <img onClick={() => edit()} alt="" src="/images/tasks/edit.svg" /> : <img alt="" />}
       </div>
     </div>
   );

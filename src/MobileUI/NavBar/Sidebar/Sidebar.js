@@ -69,9 +69,9 @@ function MoblieSidebar() {
     }
   };
 
-  const close=()=>{
-    toggleMenu()
-  }
+  const close = () => {
+    toggleMenu();
+  };
 
   return (
     <div className={'sidebarBox ' + (sidebarOpen ? 'showSidebar' : 'hideSidebar')}>
@@ -94,35 +94,35 @@ function MoblieSidebar() {
               <Nav.Link
                 className="align-items-start"
                 onClick={() => {
-                  close()
+                  close();
                   dispatch(profileIcon('Ticket'));
                   navigate('/mobticket');
                 }}
               >
-                <img alt="" src="/images/tasks/ticket.svg"/>
+                <img alt="" src="/images/tasks/ticket.svg" />
                 <span className="ml-3">Ticket</span>
               </Nav.Link>
               <Nav.Link
                 className="align-items-start"
                 onClick={() => {
-                  close()
+                  close();
                   dispatch(profileIcon('Dashboard'));
                   navigate('/mobdashboard');
                 }}
               >
-                <img alt="" src="/images/tasks/dashboard.svg"/>
+                <img alt="" src="/images/tasks/dashboard.svg" />
                 <span className="ml-3">Dashboard</span>
               </Nav.Link>
               <Nav.Link
                 className="align-items-start"
                 onClick={() => {
-                  close()
+                  close();
                   dispatch(profileIcon('Notification'));
                   navigate('/mobnoti');
                 }}
               >
-                <img alt="" src="/images/tasks/notification.svg"/>
-                <span  className="ml-3">Notification</span>{' '}
+                <img alt="" src="/images/tasks/notification.svg" />
+                <span className="ml-3">Notification</span>{' '}
                 <span className="ml-5">
                   <b>{newNotification}</b>
                 </span>
@@ -131,98 +131,98 @@ function MoblieSidebar() {
               <Nav.Link
                 className="align-items-start"
                 onClick={() => {
-                  close()
+                  close();
                   dispatch(profile('Profile'));
                   navigate('/mobprofile');
                 }}
               >
-                <img alt="" src="/images/tasks/profile.svg"  />
+                <img alt="" src="/images/tasks/profile.svg" />
                 <span className="ml-3">Profile</span>
               </Nav.Link>
             </>
           )}
           {role === userRoleId.nonRemoteSmartUser && (
             <>
-            <Nav.Link
-              className="align-items-start"
-              onClick={() => {
-                close()
-                dispatch(profileIcon('Ticket'));
-                navigate('/mobticket');
-              }}
-            >
-              <img alt="" src="/images/tasks/ticket.svg"/>
-              <span className="ml-3">Ticket</span>
-            </Nav.Link>
-            <Nav.Link
-              className="align-items-start"
-              onClick={() => {
-                close()
-                dispatch(profileIcon('Dashboard'));
-                navigate('/mobdashboard');
-              }}
-            >
-              <img alt="" src="/images/tasks/dashboard.svg"/>
-              <span className="ml-3">Dashboard</span>
-            </Nav.Link>
-            <Nav.Link
-              className="align-items-start"
-              onClick={() => {
-                close()
-                dispatch(profileIcon('Notification'));
-                navigate('/mobnoti');
-              }}
-            >
-              <img alt="" src="/images/tasks/notification.svg"/>
-              <span  className="ml-3">Notification</span>{' '}
-              <span className="ml-5">
-                <b>{newNotification}</b>
-              </span>
-            </Nav.Link>
+              <Nav.Link
+                className="align-items-start"
+                onClick={() => {
+                  close();
+                  dispatch(profileIcon('Ticket'));
+                  navigate('/mobticket');
+                }}
+              >
+                <img alt="" src="/images/tasks/ticket.svg" />
+                <span className="ml-3">Ticket</span>
+              </Nav.Link>
+              <Nav.Link
+                className="align-items-start"
+                onClick={() => {
+                  close();
+                  dispatch(profileIcon('Dashboard'));
+                  navigate('/mobdashboard');
+                }}
+              >
+                <img alt="" src="/images/tasks/dashboard.svg" />
+                <span className="ml-3">Dashboard</span>
+              </Nav.Link>
+              <Nav.Link
+                className="align-items-start"
+                onClick={() => {
+                  close();
+                  dispatch(profileIcon('Notification'));
+                  navigate('/mobnoti');
+                }}
+              >
+                <img alt="" src="/images/tasks/notification.svg" />
+                <span className="ml-3">Notification</span>{' '}
+                <span className="ml-5">
+                  <b>{newNotification}</b>
+                </span>
+              </Nav.Link>
 
-            <Nav.Link
-              className="align-items-start"
-              onClick={() => {
-                close()
-                dispatch(profile('Profile'));
-                navigate('/mobprofile');
-              }}
-            >
-              <img alt="" src="/images/tasks/profile.svg"  />
-              <span className="ml-3">Profile</span>
-            </Nav.Link>
-          </>
+              <Nav.Link
+                className="align-items-start"
+                onClick={() => {
+                  close();
+                  dispatch(profile('Profile'));
+                  navigate('/mobprofile');
+                }}
+              >
+                <img alt="" src="/images/tasks/profile.svg" />
+                <span className="ml-3">Profile</span>
+              </Nav.Link>
+            </>
           )}
           {role === userRoleId.signetAdmin && (
             <>
               <Nav.Link
                 className="align-items-start"
                 onClick={() => {
-                  close()
+                  close();
                   dispatch(profileIcon('Users'));
                   navigate('/mobusers');
                 }}
               >
-                <img alt="" src="/images/tasks/User.svg"/>
+                <img alt="" src="/images/tasks/User.svg" />
                 <span className="ml-3">Users</span>
               </Nav.Link>
 
               <Nav.Link
                 className="align-items-start"
                 onClick={() => {
-                  close()
+                  close();
                   dispatch(profile('Profile'));
                   navigate('/mobprofile');
                 }}
               >
-                <img alt="" src="/images/tasks/profile.svg"/>
+                <img alt="" src="/images/tasks/profile.svg" />
                 <span className="ml-3">Profile</span>
               </Nav.Link>
             </>
           )}
 
           <Nav.Link onClick={() => Logout()} className="align-items-start">
-            <img alt="" src="/images/tasks/logout.svg"/>
+            <img alt="" src="/images/tasks/logout.svg" />
             <span className="ml-3">Logout</span>
           </Nav.Link>
         </Nav>

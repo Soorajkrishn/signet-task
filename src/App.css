@@ -163,16 +163,24 @@ a {
   }
   .showSidebar {
     display: block;
-    position: absolute;
+    position: fixed;
     background: var(--white);
-    z-index: 9999999999;
+    z-index: 999;
     height: 100%;
-    min-width: 60%;
+    min-width: 40%;
     box-shadow: 1px 2px 3px var(--gray1);
     border-top: 1px solid var(--gray2);
   }
   .wrapperBase {
     padding: 15px;
+  }
+  .buttonPrimary {
+    background-color: #16216c !important;
+    color: #fff !important;
+    min-height: 45px !important;
+    min-width: 100px !important;
+    border-radius: 10px !important;
+    border: 0;
   }
 }
 
@@ -196,15 +204,6 @@ a {
   .customInputBox textarea {
     font-size: 14px;
   }
-}
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-input[type='number'] {
-  -moz-appearance: textfield;
 }
 .blueBtn {
   background-color: #16216c !important;

@@ -1,0 +1,40 @@
+.ticketData {
+  border-radius: 5px;
+  box-shadow: 1px 1px 1px 1px;
+  margin-bottom: 10px;
+  list-style: none;
+  padding: 10px;
+}
+
+.addTicket {
+  text-align: end;
+  position: fixed;
+  right: 10px;
+  bottom: 10px;
+}
+ul {
+  padding: 0px;
+}
+
+.truncate {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-indent: 0;
+  text-align: justify;
+}
+.close {
+  cursor: pointer;
+}
+
+@media screen and (max-width: 550px) {
+  .truncate {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-indent: 0;
+    text-align: justify;
+  }
+}

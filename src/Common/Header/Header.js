@@ -233,6 +233,16 @@ export default function Header() {
           >
             <span>Profile</span> <img src={process.env.REACT_APP_PUBLIC_URL + 'images/login/user.svg'} alt="" />
           </NavDropdown.Item>
+          <NavDropdown.Item
+            className="actionMenu"
+            onClick={() => {
+              buttonTracker(gaEvents.PRIVACY_POLICY);
+              navigate('/privacypolicy');
+            }}
+          >
+            <span>Privacy</span>
+            <img src="images/tasks/Group.svg" alt="" />
+          </NavDropdown.Item>
           <NavDropdown.Item onClick={Logout} className="actionMenu">
             <span>Logout</span> <img src={process.env.REACT_APP_PUBLIC_URL + 'images/login/logout.svg'} alt="" />
           </NavDropdown.Item>

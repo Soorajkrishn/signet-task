@@ -1,0 +1,25 @@
+* {
+  margin: 0px;
+  padding: 0px;
+}
+
+.imageWrapper {
+  width: 70%;
+  height: 70%;
+  margin: 0px 30px;
+}
+
+.imagecontainer {
+  width: 100%;
+  height: 100%;
+}
+
+.tableBackground {
+  background-color: white;
+}
+
+.chartWrapper {
+  width: 85%;
+  height: 85%;
+  margin: 0px 30px;
+}

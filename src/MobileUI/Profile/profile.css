@@ -8,6 +8,11 @@
   flex-direction: column;
 }
 
+.textContainer{
+  background-color: aliceblue;
+  padding: 5px;
+}
+
 @media screen and (max-width: 550px) {
   .profileAvatar {
     width: 20%;

@@ -9,11 +9,11 @@ import Alerts from '../../Pages/Widgets/Alerts';
 import Loading from '../../Pages/Widgets/Loading';
 import AsyncSelect from 'react-select/async';
 import useAnalyticsEventTracker from '../../Hooks/useAnalyticsEventTracker';
-import Navigation from '../NavBar/Navbar';
 import Select from 'react-select';
-import { setDefaultEventParameters } from 'firebase/analytics';
+import { profileIcon } from '../../Redux/Actions/Actions';
+import { useDispatch } from 'react-redux';
 
-export default function EditUserDetails() {
+export default function MobileEditUserDetails() {
   const { id } = useParams();
   const [roles, setRoles] = useState();
   const [alertVarient, setAlertVarient] = useState('');
@@ -37,6 +37,7 @@ export default function EditUserDetails() {
   const closeAlert = () => setShowAlert(false);
   const [roleValidated, setRoleValidated] = useState(false);
   const navigate = useNavigate();
+  const dispatch=useDispatch()
   const {
     register,
     handleSubmit,
@@ -48,7 +49,6 @@ export default function EditUserDetails() {
   const timer = useRef(null);
   const { roleId } = user;
 
-  console.log(user.roleId);
 
   const fetchRoles = async () => {
     const { 0: status, 1: result } = await makeRequest(APIUrlConstants.GET_USER_ROLES);
@@ -88,7 +88,6 @@ export default function EditUserDetails() {
     setUser((prevState) => ({ ...prevState, status: value?.value }));
   };
 
-  // console.log(updateRole)
 
   const loadOptions = async (searchtext) => {
     if (searchtext.length >= 3) {
@@ -106,7 +105,6 @@ export default function EditUserDetails() {
   useEffect(() => {
     if (roles && roleId) {
       const filterRole = roles?.filter((each) => each.roleId === roleId);
-      console.log(filterRole);
       setRname(filterRole[0].name);
     }
   }, [roles, roleId]);
@@ -173,8 +171,7 @@ export default function EditUserDetails() {
   useEffect(() => () => clearTimeout(timer.current), []);
 
   return (
-    <>
-      <Navigation />
+    
       <div className="wrapperBase">
         {showAlert && (
           <Alerts
@@ -321,9 +318,10 @@ export default function EditUserDetails() {
                 </div>
                 <div className="d-flex justify-content-md-start justify-content-sm-center justify-content-center editAction">
                   <input
-                    className="buttonDefault text-center"
+                    className="buttonPrimary text-center"
                     type="submit"
                     onClick={() => {
+                      dispatch(profileIcon('Users'))
                       navigate('/mobusers');
                     }}
                     value="Cancel"
@@ -340,6 +338,6 @@ export default function EditUserDetails() {
           </div>
         </div>
       </div>
-    </>
+  
   );
 }

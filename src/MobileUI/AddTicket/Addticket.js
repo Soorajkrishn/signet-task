@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import Navigation from '../NavBar/Navbar';
 import { useNavigate, useParams } from 'react-router-dom';
 import Select from 'react-select';
 import useAnalyticsEventTracker from '../../Hooks/useAnalyticsEventTracker';
@@ -10,8 +9,10 @@ import { fetchCall, makeRequest } from '../../Services/APIService';
 import APIUrlConstants from '../../Config/APIUrlConstants';
 import { apiMethods, gaEvents, httpStatusCode } from '../../Constants/TextConstants';
 import Loading from '../../Pages/Widgets/Loading';
+import { profileIcon } from '../../Redux/Actions/Actions';
+import { useDispatch } from 'react-redux';
 
-export default function AddTicket() {
+export default function MobileAddTicket() {
   const navigate = useNavigate();
   const [isLoading, setLoading] = useState(true);
   const [saveLoading, setSaveLoading] = useState(false);
@@ -47,7 +48,7 @@ export default function AddTicket() {
   const [apiErrorMsg, setApiErrorMsg] = useState('');
   const [additiondes, setAdditionaldes] = useState('');
   const [date, setDate] = useState('');
-
+  const dispatch = useDispatch()
   const format = 'yyyy-MM-DD HH:mm';
   const dateandtime = moment.utc(new Date()).subtract(4, 'hours').format(format);
 
@@ -160,6 +161,14 @@ export default function AddTicket() {
     setLoading(false);
   };
   useEffect(() => {
+    setPostObject((prev) => {
+      const Current = { ...prev };
+      Current.customerId = localStorage.getItem('orgNo');
+      Current.createdBy = localStorage.getItem('firstName') + ' ' + localStorage.getItem('lastName');
+      Current.callerEmail = localStorage.getItem('email');
+      Current.phoneNumber = localStorage.getItem('mobile');
+      return Current;
+    });
     fetchPromise();
   }, []);
 
@@ -183,7 +192,8 @@ export default function AddTicket() {
 
       if (statusCode === httpStatusCode.SUCCESS) {
         setSaveLoading(false);
-        navigate('/tickets');
+        dispatch(profileIcon('Ticket'))
+        navigate('/mobticket');
       } else {
         setShowAlert(true);
         setAlertVarient('danger');
@@ -229,13 +239,24 @@ export default function AddTicket() {
   };
   return (
     <>
-      <Navigation />
       {isLoading && <Loading />}
       <div className="container">
         <Form noValidate validated={validated} className="fromWrap">
           <Form.Group>
             <Form.Label>Description {!id && <span className="requiredTxt">*</span>}</Form.Label>
-            <Form.Control as="textarea" required placeholder="Enter description" name="description" disabled={id} />
+            <Form.Control as="textarea" 
+            required 
+            onChange={(e) => {
+              setPostObject((prev) => {
+                const Current = { ...prev };
+                Current.description = e.target.value;
+                return Current;
+              });
+            }} 
+            placeholder="Enter description" 
+            name="description" 
+            disabled={id}
+            value={PostObject.description} />
           </Form.Group>
           {id && (
             <Form.Group>
@@ -310,10 +331,13 @@ export default function AddTicket() {
           )}
         </Form>
         <div className=" d-flex align-items-center justify-content-center">
-          <Button type="submit" className="buttonPrimary mb-5 mt-4 mr-1" onClick={() => navigate('/mobticket')}>
+          <Button type="submit" className="buttonPrimary mb-5 mt-4 mr-1" onClick={() => {
+            dispatch(profileIcon('Ticket'))
+            navigate('/mobticket')
+          }}>
             Cancel
           </Button>
-          <Button className="buttonPrimary mb-5 mt-4 mr-1" onClick={createEditTicket}>
+          <Button className="buttonPrimary mb-5 mt-4 mr-1" onClick={() => createEditTicket()}>
             {id ? 'Edit' : 'Create'}
           </Button>
         </div>

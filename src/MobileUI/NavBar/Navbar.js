@@ -4,11 +4,12 @@ import MoblieSidebar from './Sidebar/Sidebar';
 import { ThemeProvider } from '../../Context/MenuContext';
 import './Navbar.css';
 
-function Navigation() {
+function Navigation(component) {
   return (
     <ThemeProvider>
       <Mobileheader />
       <MoblieSidebar />
+      {component}
     </ThemeProvider>
   );
 }

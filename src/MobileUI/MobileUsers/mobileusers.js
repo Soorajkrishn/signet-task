@@ -3,9 +3,10 @@ import APIUrlConstants from '../../Config/APIUrlConstants';
 import { httpStatusCode } from '../../Constants/TextConstants';
 import Loading from '../../Pages/Widgets/Loading';
 import { makeRequest } from '../../Services/APIService';
-import Navigation from '../NavBar/Navbar';
 import { useNavigate } from 'react-router-dom';
 import './mobileUsers.css';
+import { profileIcon } from '../../Redux/Actions/Actions';
+import { useDispatch } from 'react-redux';
 
 export default function MobileUsers() {
   const [user, setUser] = useState([]);
@@ -16,6 +17,7 @@ export default function MobileUsers() {
   const [end, setEnd] = useState(10);
   const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
+  const dispatch=useDispatch()
 
   const fetchAllUserDetails = async () => {
     setIsLoading(true);
@@ -30,7 +32,6 @@ export default function MobileUsers() {
   }, []);
 
   const pageNo = Math.ceil(user.length / 10);
-  console.log(pageNo);
 
   const view = () => {
     setTimeout(() => {
@@ -42,7 +43,6 @@ export default function MobileUsers() {
       }
     }, 1500);
   };
-  console.log(sliceTicket);
   window.onscroll = () => {
     if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight - 2) {
       if (page < pageNo) {
@@ -63,6 +63,7 @@ export default function MobileUsers() {
   }, [user, start, end]);
 
   const handleClick = (id) => {
+    dispatch(profileIcon('Edit Users'))
     navigate(`/mobedit/${id}`);
   };
 
@@ -73,7 +74,6 @@ export default function MobileUsers() {
     <>
       {isLoading && <Loading />}
       {loader && <Loading />}
-      <Navigation />
       <div className="wrapperBase">
         <ul>
           {sliceTicket.map((v) => (
@@ -102,7 +102,7 @@ export default function MobileUsers() {
           ))}
         </ul>
         <div className="addUser">
-          <img src="/images/tasks/plus.svg" alt="" />
+          <img onClick={()=>navigate('/mobcreate')} src="/images/tasks/plus.svg" alt="" />
         </div>
       </div>
     </>

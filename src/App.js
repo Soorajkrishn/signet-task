@@ -10,13 +10,7 @@ import { userRoleId, roleId } from './Utilities/AppUtilities';
 import Layout from './Layout';
 import { components } from './Constants/TextConstants';
 import ReactGA from 'react-ga4';
-import Navigation from './MobileUI/NavBar/Navbar';
-import Profile from './MobileUI/Profile/profile';
-import Notification from './MobileUI/Notification/Notification';
-import AddTicket from './MobileUI/AddTicket/Addticket';
-import Viewticket from './MobileUI/ViewTicket/Viewticket';
-import MobileUsers from './MobileUI/MobileUsers/mobileusers';
-import EditUserDetails from './MobileUI/EditUser/Edituser';
+
 
 const oktaAuth = new OktaAuth({
   issuer: process.env.REACT_APP_OKTA_AUTH_URL,
@@ -72,6 +66,16 @@ function App() {
             <Route exact path="/notification" element={<Layout component={components.NOTIFICATION} />} />
             <Route exact path="/profile" element={<Layout component={components.PROFILE} />} />
             <Route exact path="/statistics" element={<Layout component={components.STATISTICS} />} />
+            <Route exact path="/mobticket" element={<Layout component={components.TICKETMOB} />} />
+            <Route exact path="/mobprofile" element={<Layout component={components.PROFILEMOB} />} />
+            <Route exact path="/mobnoti" element={<Layout component={components.NOTIFICATION_MOB} />} />
+            <Route exact path="/mobadd/:id" element={<Layout component={components.ADDTICKET_MOB} />} />
+            <Route exact path="/mobadd" element={<Layout component={components.ADDTICKET_MOB} />} />
+            <Route exact path="/mobusers" element={<Layout component={components.USERS_MOB} />} />
+            <Route exact path="/mobview/:id" element={<Layout component={components.VIEWTICKET_MOB} />} />
+            <Route exact path="/mobedit/:id" element={<Layout component={components.EDIT_USER_MOB} />} />
+            <Route exact path="/mobcreate" element={<Layout component={components.CREATE_USER_MOB} />} />
+            <Route exact path="/mobdashboard" element={<Layout component={components.DASHBOARD_MOB} />} />
           </Route>
           <Route path="*" element={<Navigate replace to={redirectTo} />} />
           <Route exact path="/" element={token ? <Navigate to={redirectTo} /> : <Layout component={components.LOGIN} />} />
@@ -103,14 +107,7 @@ function App() {
           <Route exact path="/otpverify" element={<Layout component={components.OTP_VERIFY} />} />
           <Route exact path="/twofactor" element={<Layout component={components.TWO_FACTOR} />} />
           <Route exact path="/testtickets" element={<Layout component={components.TEST_TICKET} />} />
-          <Route exact path="/mobticket" element={<Layout component={components.TICKETMOB} />} />
-          <Route exact path="/nav" element={<Navigation />} />
-          <Route exact path="/mobprofile" element={<Profile />} />
-          <Route exact path="/mobnoti" element={<Notification />} />
-          <Route exact path="/mobadd" element={<AddTicket />} />
-          <Route exact path="/mobusers" element={<MobileUsers />} />
-          <Route exact path="/mobview/:id" element={<Viewticket />} />
-          <Route exact path="/mobedit/:id" element={<EditUserDetails />} />
+
         </Routes>
       </Security>
     </Router>

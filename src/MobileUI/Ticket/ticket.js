@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from 'react';
-import { apiMethods, gaEvents, httpStatusCode } from '../../Constants/TextConstants';
+import { gaEvents, httpStatusCode } from '../../Constants/TextConstants';
 import APIUrlConstants from '../../Config/APIUrlConstants';
-import { fetchCall, makeRequest } from '../../Services/APIService';
+import { makeRequest } from '../../Services/APIService';
 import Loading from '../../Pages/Widgets/Loading';
-import Navbar from '../NavBar/Navbar';
 import './ticket.css';
 import { useNavigate } from 'react-router-dom';
-import useAnalyticsEventTracker from '../../Hooks/useAnalyticsEventTracker';
-import { Button, Modal, Form, Alert } from 'react-bootstrap';
+import { profileIcon, ticketView } from '../../Redux/Actions/Actions';
+import { Alert } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
 
-function TicketList() {
+function MobileTicket() {
   const [ticket, setTicket] = useState([]);
   const [isLoading, setLoading] = useState(false);
   const [sliceTicket, setSliceTicket] = useState([]);
@@ -18,11 +18,7 @@ function TicketList() {
   const [end, setEnd] = useState(10);
   const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
-  const { buttonTracker } = useAnalyticsEventTracker();
-  const [show, setShow] = useState(false);
-
-  const [ticketNo, setTicketNo] = useState(null);
-
+  const dispatch = useDispatch()
   const [showAlert, setShowAlert] = useState(false);
   const [error, setError] = useState(false);
   const closeAlert = () => setShowAlert(false);
@@ -50,7 +46,9 @@ function TicketList() {
     fetchAllUserDetails();
   }, []);
 
+  const ticketticket = useSelector((state) => state.MoblieuiReducer)
   const pageNo = Math.ceil(ticket.length / 10);
+
 
   const view = () => {
     setTimeout(() => {
@@ -58,9 +56,6 @@ function TicketList() {
         setPage(page + 1);
         setStart(start + 10);
         setEnd(end + 10);
-        const tempSlice = ticket?.slice(start, end);
-        const temp = sliceTicket.concat(tempSlice);
-        setSliceTicket(temp);
         setLoader(false);
       }
     }, 1500);
@@ -78,13 +73,16 @@ function TicketList() {
   useEffect(() => {
     if (ticket.length > 10) {
       const tempTicket = ticket?.slice(start, end);
-      setSliceTicket(tempTicket);
+      const temp = sliceTicket.concat(tempTicket);
+      setSliceTicket(temp);
+
     } else {
       setSliceTicket(ticket);
     }
-  }, [ticket]);
+  }, [ticket, start, end]);
 
-  const handleClick = (id) => {
+  const handleClick = (id, email) => {
+    dispatch(ticketView(email, id))
     navigate(`/mobview/${id}`);
   };
 
@@ -92,10 +90,10 @@ function TicketList() {
     <>
       <div className="container">
         {isLoading && <Loading />}
-        <Navbar />
+
         <ul>
           {sliceTicket.map((v) => (
-            <li onClick={() => handleClick(v.ticketNo)} className="ticketData">
+            <li onClick={() => handleClick(v.ticketNo, v.callerEmail)} key={v.ticketNo} className="ticketData">
               <p className="truncate">{v.description}</p>
               <p>{v.ticketNo}</p>
             </li>
@@ -105,6 +103,7 @@ function TicketList() {
         <div
           className="addTicket"
           onClick={() => {
+            dispatch(profileIcon('Add Ticket'))
             navigate('/mobadd');
           }}
         >
@@ -120,4 +119,4 @@ function TicketList() {
   );
 }
 
-export default TicketList;
+export default MobileTicket;

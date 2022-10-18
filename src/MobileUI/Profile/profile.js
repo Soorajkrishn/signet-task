@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './profile.css';
 import { randomColor } from '../../Utilities/AppUtilities';
-import Navigation from '../NavBar/Navbar';
 import { useDispatch, useSelector } from 'react-redux';
 import { Form, Button, Alert } from 'react-bootstrap';
 import { apiMethods, gaEvents, httpStatusCode } from '../../Constants/TextConstants';
@@ -10,10 +9,10 @@ import { authentication } from '../../Config/FirebaseConfig';
 import { RecaptchaVerifier, signInWithPhoneNumber } from 'firebase/auth';
 import useAnalyticsEventTracker from '../../Hooks/useAnalyticsEventTracker';
 import Alerts from '../../Pages/Widgets/Alerts';
-import { updateUser } from '../../Redux/Actions/Actions';
+import { removeEditProfile, updateUser } from '../../Redux/Actions/Actions';
 import APIUrlConstants from '../../Config/APIUrlConstants';
 
-export default function Profile() {
+export default function MobileProfile() {
   const [user, setUser] = useState([]);
   const [phoneui, setPhoneUi] = useState('');
   const [phone, setPhone] = useState('');
@@ -36,17 +35,18 @@ export default function Profile() {
   const closeAlert = () => setShowAlert(false);
   const [validated, setValidated] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const test = useSelector((state) => state.MoblieuiReducer);
+  const userProfile = useSelector((state) => state.MoblieuiReducer);
   const dispatch = useDispatch();
   const state = useSelector((stateR) => stateR.UserReducer);
   useEffect(() => {
     const temp = JSON.parse(localStorage.getItem('user'));
     setUser(temp);
   }, []);
+ 
 
   const avatar = `${user?.firstName?.trim().charAt(0)} ${user?.lastName?.trim().charAt(0)}`;
 
-  console.log(test);
+
   function formatPhoneNumber(x) {
     const formated = x.replace(/\D+/g, '').replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
     return formated;
@@ -186,7 +186,6 @@ export default function Profile() {
           window.confirmationResult = confirmationResult;
           setVarient('success');
           setOtpAlertshow(true);
-          console.log('otp');
           setTimeout(() => {
             setOtpAlertshow(false);
           }, 5000);
@@ -242,7 +241,7 @@ export default function Profile() {
     setOtpAlertshow(false);
   };
   const cancelButton = () => {
-    dispatch({ type: 'noEdit' });
+    dispatch(removeEditProfile('Profile'));
     setToogle(false);
   };
   return (
@@ -272,7 +271,6 @@ export default function Profile() {
       <Alert variant={variant} show={otpalertshow} dismissible className="alertWrapper" onClick={handleAlertClose}>
         <p>{variant === 'success' ? 'OTP sent to your mobile number' : 'something went worng '}</p>
       </Alert>
-      <Navigation />
       <div className=" mt-3 profileWrapper d-flex align-items-center justify-content-center">
         <div
           className="avatar profileAvatar text-capitalize d-flex align-items-center justify-content-center"
@@ -294,7 +292,7 @@ export default function Profile() {
           <label>
             <b>First Name</b>
           </label>
-          {test.profileEdit ? (
+          {userProfile.profileEdit ? (
             <Form.Control
               required
               pattern="^[a-zA-Z0-9]+$"
@@ -307,12 +305,14 @@ export default function Profile() {
               }}
             />
           ) : (
-            <p>{user?.firstName}</p>
+            <div className='textContainer'>
+               <p>{user?.firstName}</p>
+            </div>
           )}
           <label>
             <b>Last Name</b>
           </label>
-          {test.profileEdit ? (
+          {userProfile.profileEdit ? (
             <Form.Control
               required
               pattern="^[a-zA-Z0-9]+$"
@@ -325,12 +325,14 @@ export default function Profile() {
               }}
             />
           ) : (
-            <p>{user?.lastName}</p>
+            <div className='textContainer'>
+              <p>{user?.lastName}</p>
+            </div>
           )}
           <label>
             <b>Phone Number</b>
           </label>
-          {test.profileEdit ? (
+          {userProfile.profileEdit ? (
             <div className="d-flex  align-items-start w-100 customVerifyBox">
               <Form.Group controlId="formMobileNumber" className="inputHolder w-75">
                 <Form.Control
@@ -342,18 +344,18 @@ export default function Profile() {
                   value={phoneui}
                   onChange={phoneChange}
                 />
-                {test.profileEdit && validPhone === true ? (
-                  <Form.Control.Feedback type="invalid" data-testid="phonerr">
+                {userProfile.profileEdit && validPhone === true ? (
+                  <Form.Control.Feedback type="invalid" data-userProfileid="phonerr">
                     Enter a valid Phone Number
                   </Form.Control.Feedback>
                 ) : null}
-                {test.profileEdit && phoneVer === true ? (
+                {userProfile.profileEdit && phoneVer === true ? (
                   <Form.Control.Feedback type="invalid" className="errorColor">
                     Verify Phone Number
                   </Form.Control.Feedback>
                 ) : null}
               </Form.Group>
-              {!toogle && test.profileEdit && (
+              {!toogle && userProfile.profileEdit && (
                 <Button
                   className="verifyBtn w-15"
                   variant="primary"
@@ -362,13 +364,13 @@ export default function Profile() {
                     buttonTracker(gaEvents.SEND_OTP);
                   }}
                   style={{ height: '60px' }}
-                  data-testid="verifybtn"
+                  data-userprofileid="verifybtn"
                 >
                   <img src={process.env.REACT_APP_PUBLIC_URL + 'images/login/verify.svg'} alt="" /> Verify
                 </Button>
               )}
 
-              {toogle && test.profileEdit && (
+              {toogle && userProfile.profileEdit && (
                 <Form.Group controlId="formOtp" className="inputHolder">
                   <Form.Control
                     required
@@ -395,31 +397,38 @@ export default function Profile() {
               )}
             </div>
           ) : (
-            <p>{phoneui}</p>
+            <div className='textContainer'>
+               <p>{phoneui}</p>
+            </div> 
           )}
           <label>
             <b>Organization</b>
           </label>
-          {test.profileEdit ? (
+          {userProfile.profileEdit ? (
             <Form.Group controlId="formOrganization" className="inputHolder">
               <Form.Control placeholder="Organization Name" type="text" value={user?.orgName} readOnly />
             </Form.Group>
           ) : (
-            <p>{user?.orgName}</p>
+            <div className='textContainer'>
+              <p>{user?.orgName}</p>
+            </div>
+            
           )}
           <label>
             <b>Organization Emil</b>
           </label>
-          {test.profileEdit ? (
+          {userProfile.profileEdit ? (
             <Form.Group controlId="formSecondaryEmail" className="inputHolder">
               <Form.Control placeholder="Organization Email" type="text" value={user?.emailId} readOnly />
             </Form.Group>
           ) : (
-            <p>{user?.emailId}</p>
+            <div className='textContainer'>
+              <p>{user?.emailId}</p>
+            </div>
           )}
         </Form>
         <div id="mobile-number-button" />
-        {test.profileEdit && (
+        {userProfile.profileEdit && (
           <div className="d-flex align-items-center justify-content-center container w-75">
             <Button onClick={cancelButton} className="buttonPrimary mb-5 mt-4 mr-1">
               {' '}

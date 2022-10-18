@@ -4,7 +4,6 @@ import APIUrlConstants from '../../Config/APIUrlConstants';
 import { apiMethods, httpStatusCode } from '../../Constants/TextConstants';
 import { Button } from 'react-bootstrap';
 import Loading from '../../Pages/Widgets/Loading';
-import Navigation from '../NavBar/Navbar';
 import './Notification.css';
 
 export default function Notification() {
@@ -15,13 +14,7 @@ export default function Notification() {
   const [pageNumber, setPageNumber] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
   const [totalPage, setTotalPage] = useState(0);
-  const [newPage, setNewPage] = useState(0);
-  const [notificationData, setNotificationData] = useState([]);
 
-  // const t=()=>{
-  //   const temp=notificationData.concat(notifications)
-  //     setNotificationData(temp)
-  // }
 
   const fetchNotifications = async (pageNo) => {
     setIsLoading(true);
@@ -29,7 +22,7 @@ export default function Notification() {
       userId: localStorage.getItem('id'),
       orgName: organizationName,
       page: pageNo,
-      pageSize: 5,
+      pageSize: 10,
       status: 'All',
     });
     if (statusCode === httpStatusCode.SUCCESS) {
@@ -43,20 +36,12 @@ export default function Notification() {
       setIsLoading(false);
     }
   };
-  // useEffect(()=>{
-  //   const temp=notificationData.concat(notifications)
-  //   const a=[...new Set(temp)]
-  //     setNotificationData(a)
 
-  // },[notifications])
-
-  console.log(totalPage);
 
   useEffect(() => {
     fetchNotifications(0);
   }, []);
 
-  console.log(notificationData);
 
   const next = () => {
     const nextPageNumber = pageNumber + 1;
@@ -68,20 +53,8 @@ export default function Notification() {
     fetchNotifications(previousPageNumber);
   };
 
-  const notificationPage = () => {
-    if (lastPage === false) {
-      next();
-    }
-  };
 
-  window.onscroll = () => {
-    if (window.innerHeight + window.pageYOffset >= document.body.offsetHeight - 2) {
-      notificationPage();
-    }
-  };
   return (
-    <>
-      <Navigation />
       <div className="wrapperBase">
         {isLoading ? (
           <Loading />
@@ -106,6 +79,5 @@ export default function Notification() {
           </div>
         )}
       </div>
-    </>
   );
 }

@@ -27,8 +27,16 @@ import { components } from './Constants/TextConstants';
 import { useLocation } from 'react-router-dom';
 import ReactGA from 'react-ga4';
 import Privacypolicy from './Pages/PrivacyPolicy/Privacypolicy';
-import TicketList from './MobileUI/Ticket/ticket';
-import Navbar from './MobileUI/NavBar/Navbar';
+import Navigation from './MobileUI/NavBar/Navbar';
+import MobileTicket from './MobileUI/Ticket/ticket';
+import MobileProfile from './MobileUI/Profile/profile';
+import MobileNotification from './MobileUI/Notification/Notification';
+import MobileAddTicket from './MobileUI/AddTicket/Addticket';
+import MobileViewticket from './MobileUI/ViewTicket/Viewticket';
+import MobileUsers from './MobileUI/MobileUsers/mobileusers';
+import MobileEditUserDetails from './MobileUI/EditUser/Edituser';
+import MobileCreateuser from './MobileUI/Createuser/createuser';
+import MobileDashboard from './MobileUI/Dashboard/Dashboard';
 
 function Layout(props) {
   const { component } = props;
@@ -89,7 +97,23 @@ function Layout(props) {
     case components.PRIVACYPOLICY:
       return <Privacypolicy />;
     case components.TICKETMOB:
-      return <TicketList />;
+      return Navigation(<MobileTicket />);
+    case components.ADDTICKET_MOB:
+      return Navigation(<MobileAddTicket />);
+    case components.VIEWTICKET_MOB:
+      return Navigation(<MobileViewticket />);
+    case components.PROFILEMOB:
+      return Navigation(<MobileProfile />);
+    case components.DASHBOARD_MOB:
+      return Navigation(<MobileDashboard />);
+    case components.NOTIFICATION_MOB:
+      return Navigation(<MobileNotification />);
+    case components.USERS_MOB:
+      return Navigation(<MobileUsers />);
+    case components.EDIT_USER_MOB:
+      return Navigation(<MobileEditUserDetails />);
+    case components.CREATE_USER_MOB:
+      return Navigation(<MobileCreateuser />);
 
     default:
       return <div>Component not found</div>;

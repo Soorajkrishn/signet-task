@@ -1,18 +1,22 @@
 import React, { useEffect, useState } from 'react';
-import Navigation from '../NavBar/Navbar';
 import { httpStatusCode } from '../../Constants/TextConstants';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { makeRequest } from '../../Services/APIService';
 import APIUrlConstants from '../../Config/APIUrlConstants';
 import Loading from '../../Pages/Widgets/Loading';
+import './Viewticket.css'
+import { Button } from 'react-bootstrap';
+import { useDispatch, useSelector } from 'react-redux';
+import { profileIcon } from '../../Redux/Actions/Actions';
 
-export default function Viewticket() {
+export default function MobileViewticket() {
   const { id } = useParams();
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState({});
+  const navigate = useNavigate()
+  const dispatch=useDispatch()
 
   const fetchTicketDetails = async () => {
-    setLoading(true);
     const { 0: statusCode, 1: resp } = await makeRequest(`${APIUrlConstants.VIEW_TICKET}/${id}`);
     if (statusCode === httpStatusCode.SUCCESS) {
       setLoading(false);
@@ -28,7 +32,7 @@ export default function Viewticket() {
       {isLoading && <Loading />}
       {!isLoading ? (
         <>
-          <Navigation />
+
           <div className="container">
             <p>
               <b>Ticket No :</b>
@@ -38,37 +42,63 @@ export default function Viewticket() {
               <label>
                 <b>Description </b>
               </label>
-              <p>{data.description}</p>
+              <div className='textContainer'>
+                <p>{data.description}</p>
+              </div>
+
               <label>
                 <b>Status </b>
               </label>
-              <p>{data.status}</p>
+              <div className='textContainer'>
+                <p>{data.status}</p>
+              </div>
+
               <label>
                 <b>Problem Code</b>
               </label>
-              <p>{data.problem}</p>
+              <div className='textContainer'>
+                <p>{data.problem}</p>
+              </div>
               <label>
                 <b>Created Date</b>
               </label>
-              <p>{data.createdDate}</p>
+              <div className='textContainer'>
+                <p>{data.createdDate}</p>
+              </div>
               <label>
                 <b>Priority</b>
               </label>
-              <p>{data.priority}</p>
+              <div className='textContainer'>
+                <p>{data.priority}</p>
+              </div>
               <label>
                 <b>Created By</b>
               </label>
-              <p>{data.createdBy}</p>
+              <div className='textContainer'>
+                <p>{data.createdBy}</p>
+              </div>
               <label>
                 <b>Caller Email</b>
               </label>
-              <p>{data.callerEmail}</p>
+              <div className='textContainer'>
+                <p>{data.callerEmail}</p>
+              </div>
               <label>
                 <b>Phone Number</b>
               </label>
-              <p>{data.phoneNumber}</p>
+              <div className='textContainer'>
+                <p>{data.phoneNumber}</p>
+              </div>
             </div>
           </div>
+
+          <Button className='buttonPrimary mt-2 ml-2' onClick={() => {
+            dispatch(profileIcon('Ticket'))
+            navigate('/mobticket')
+          }}>
+            Back
+          </Button>
+
         </>
       ) : null}
     </>

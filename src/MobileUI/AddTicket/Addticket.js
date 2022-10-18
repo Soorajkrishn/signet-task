@@ -48,7 +48,7 @@ export default function MobileAddTicket() {
   const [apiErrorMsg, setApiErrorMsg] = useState('');
   const [additiondes, setAdditionaldes] = useState('');
   const [date, setDate] = useState('');
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const format = 'yyyy-MM-DD HH:mm';
   const dateandtime = moment.utc(new Date()).subtract(4, 'hours').format(format);
 
@@ -192,7 +192,7 @@ export default function MobileAddTicket() {
 
       if (statusCode === httpStatusCode.SUCCESS) {
         setSaveLoading(false);
-        dispatch(profileIcon('Ticket'))
+        dispatch(profileIcon('Ticket'));
         navigate('/mobticket');
       } else {
         setShowAlert(true);
@@ -244,19 +244,21 @@ export default function MobileAddTicket() {
         <Form noValidate validated={validated} className="fromWrap">
           <Form.Group>
             <Form.Label>Description {!id && <span className="requiredTxt">*</span>}</Form.Label>
-            <Form.Control as="textarea" 
-            required 
-            onChange={(e) => {
-              setPostObject((prev) => {
-                const Current = { ...prev };
-                Current.description = e.target.value;
-                return Current;
-              });
-            }} 
-            placeholder="Enter description" 
-            name="description" 
-            disabled={id}
-            value={PostObject.description} />
+            <Form.Control
+              as="textarea"
+              required
+              onChange={(e) => {
+                setPostObject((prev) => {
+                  const Current = { ...prev };
+                  Current.description = e.target.value;
+                  return Current;
+                });
+              }}
+              placeholder="Enter description"
+              name="description"
+              disabled={id}
+              value={PostObject.description}
+            />
           </Form.Group>
           {id && (
             <Form.Group>
@@ -331,10 +333,14 @@ export default function MobileAddTicket() {
           )}
         </Form>
         <div className=" d-flex align-items-center justify-content-center">
-          <Button type="submit" className="buttonPrimary mb-5 mt-4 mr-1" onClick={() => {
-            dispatch(profileIcon('Ticket'))
-            navigate('/mobticket')
-          }}>
+          <Button
+            type="submit"
+            className="buttonPrimary mb-5 mt-4 mr-1"
+            onClick={() => {
+              dispatch(profileIcon('Ticket'));
+              navigate('/mobticket');
+            }}
+          >
             Cancel
           </Button>
           <Button className="buttonPrimary mb-5 mt-4 mr-1" onClick={() => createEditTicket()}>

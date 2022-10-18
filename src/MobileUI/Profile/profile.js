@@ -42,10 +42,8 @@ export default function MobileProfile() {
     const temp = JSON.parse(localStorage.getItem('user'));
     setUser(temp);
   }, []);
- 
 
   const avatar = `${user?.firstName?.trim().charAt(0)} ${user?.lastName?.trim().charAt(0)}`;
-
 
   function formatPhoneNumber(x) {
     const formated = x.replace(/\D+/g, '').replace(/(\d{3})(\d{3})(\d{4})/, '($1) $2-$3');
@@ -305,8 +303,8 @@ export default function MobileProfile() {
               }}
             />
           ) : (
-            <div className='textContainer'>
-               <p>{user?.firstName}</p>
+            <div className="textContainer">
+              <p>{user?.firstName}</p>
             </div>
           )}
           <label>
@@ -325,7 +323,7 @@ export default function MobileProfile() {
               }}
             />
           ) : (
-            <div className='textContainer'>
+            <div className="textContainer">
               <p>{user?.lastName}</p>
             </div>
           )}
@@ -397,9 +395,9 @@ export default function MobileProfile() {
               )}
             </div>
           ) : (
-            <div className='textContainer'>
-               <p>{phoneui}</p>
-            </div> 
+            <div className="textContainer">
+              <p>{phoneui}</p>
+            </div>
           )}
           <label>
             <b>Organization</b>
@@ -409,10 +407,9 @@ export default function MobileProfile() {
               <Form.Control placeholder="Organization Name" type="text" value={user?.orgName} readOnly />
             </Form.Group>
           ) : (
-            <div className='textContainer'>
+            <div className="textContainer">
               <p>{user?.orgName}</p>
             </div>
-            
           )}
           <label>
             <b>Organization Emil</b>
@@ -422,7 +419,7 @@ export default function MobileProfile() {
               <Form.Control placeholder="Organization Email" type="text" value={user?.emailId} readOnly />
             </Form.Group>
           ) : (
-            <div className='textContainer'>
+            <div className="textContainer">
               <p>{user?.emailId}</p>
             </div>
           )}

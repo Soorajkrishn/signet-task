@@ -15,7 +15,6 @@ export default function Notification() {
   const [isLoading, setIsLoading] = useState(false);
   const [totalPage, setTotalPage] = useState(0);
 
-
   const fetchNotifications = async (pageNo) => {
     setIsLoading(true);
     const [statusCode, response] = await fetchCall(APIUrlConstants.VIEW_ALL_NOTIFICATIONS, apiMethods.POST, {
@@ -37,11 +36,9 @@ export default function Notification() {
     }
   };
 
-
   useEffect(() => {
     fetchNotifications(0);
   }, []);
-
 
   const next = () => {
     const nextPageNumber = pageNumber + 1;
@@ -53,31 +50,30 @@ export default function Notification() {
     fetchNotifications(previousPageNumber);
   };
 
-
   return (
-      <div className="wrapperBase">
-        {isLoading ? (
-          <Loading />
-        ) : (
-          <div className="notifyBodyWrap">
-            {notifications.map((i) => (
-              <div className="notifyBodyBox" key={i.id}>
-                <span />
-                <div className="notifyBodyInfo">
-                  <div dangerouslySetInnerHTML={{ __html: i.notificationMessage }} />
-                </div>
+    <div className="wrapperBase">
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <div className="notifyBodyWrap">
+          {notifications.map((i) => (
+            <div className="notifyBodyBox" key={i.id}>
+              <span />
+              <div className="notifyBodyInfo">
+                <div dangerouslySetInnerHTML={{ __html: i.notificationMessage }} />
               </div>
-            ))}
-            <div className="pagination">
-              <Button className="saveBtn paginationButton" disabled={firstPage} onClick={() => previous()}>
-                {'<'}
-              </Button>
-              <Button className="saveBtn paginationButton" disabled={lastPage} onClick={() => next()}>
-                {'>'}
-              </Button>
             </div>
+          ))}
+          <div className="pagination">
+            <Button className="saveBtn paginationButton" disabled={firstPage} onClick={() => previous()}>
+              {'<'}
+            </Button>
+            <Button className="saveBtn paginationButton" disabled={lastPage} onClick={() => next()}>
+              {'>'}
+            </Button>
           </div>
-        )}
-      </div>
+        </div>
+      )}
+    </div>
   );
 }

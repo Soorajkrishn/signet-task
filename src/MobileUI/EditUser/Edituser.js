@@ -37,7 +37,7 @@ export default function MobileEditUserDetails() {
   const closeAlert = () => setShowAlert(false);
   const [roleValidated, setRoleValidated] = useState(false);
   const navigate = useNavigate();
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
   const {
     register,
     handleSubmit,
@@ -48,7 +48,6 @@ export default function MobileEditUserDetails() {
   });
   const timer = useRef(null);
   const { roleId } = user;
-
 
   const fetchRoles = async () => {
     const { 0: status, 1: result } = await makeRequest(APIUrlConstants.GET_USER_ROLES);
@@ -87,7 +86,6 @@ export default function MobileEditUserDetails() {
   const statusChange = (value) => {
     setUser((prevState) => ({ ...prevState, status: value?.value }));
   };
-
 
   const loadOptions = async (searchtext) => {
     if (searchtext.length >= 3) {
@@ -171,173 +169,171 @@ export default function MobileEditUserDetails() {
   useEffect(() => () => clearTimeout(timer.current), []);
 
   return (
-    
-      <div className="wrapperBase">
-        {showAlert && (
-          <Alerts
-            variant={alertVarient}
-            onClose={() => {
-              setShowAlert(true);
-            }}
-            alertshow={alertMessage}
-          />
-        )}
+    <div className="wrapperBase">
+      {showAlert && (
+        <Alerts
+          variant={alertVarient}
+          onClose={() => {
+            setShowAlert(true);
+          }}
+          alertshow={alertMessage}
+        />
+      )}
 
-        <div className="container">
-          {isLoading && <Loading />}
-          <div>
-            <div className="editWrap">
-              <Form onSubmit={handleSubmit(updateUser)} id="editUserForm">
-                <div className="mb-3">
-                  <Form.Label>
-                    First Name <span className="requiredTxt">*</span>
-                  </Form.Label>
-                  <Form.Group>
-                    <Form.Control
-                      type="text"
-                      id="fullname"
-                      data-testid="FName"
-                      name="fullname"
-                      value={user.firstName ?? ''}
-                      isValid={touchedFields.firstName && !errors.firstName}
-                      isInvalid={errors.firstName}
-                      {...register('firstName', {
-                        required: 'First Name is Required',
-                        minLength: {
-                          value: 3,
-                          message: 'Minimum 3 Characters Required for  first name',
-                        },
-                        maxLength: {
-                          value: 30,
-                          message: 'Name was Too High',
-                        },
-                        pattern: {
-                          message: 'Enter a valid First Name',
-                        },
-                      })}
-                      onChange={(e) => {
-                        setUser((prevState) => ({ ...prevState, firstName: e.target.value }));
-                      }}
-                    />
-                    {errors.firstName && <p className="text-danger">{errors.firstName.message}</p>}
-                  </Form.Group>
-                </div>
-                <div className="mb-3">
-                  <Form.Label>
-                    Last Name <span className="requiredTxt">*</span>
-                  </Form.Label>
-                  <Form.Group>
-                    <Form.Control
-                      type="text"
-                      id="lastName"
-                      name="lastName"
-                      data-testid="LName"
-                      value={user.lastName}
-                      isValid={touchedFields.lastName && !errors.lastName}
-                      isInvalid={errors.lastName}
-                      {...register('lastName', {
-                        required: 'Last Name is Required',
-                        maxLength: {
-                          value: 30,
-                          message: 'Last name was Too High',
-                        },
-                        pattern: {
-                          message: 'Enter a valid last Name',
-                        },
-                      })}
-                      onChange={(e) => {
-                        setUser((prevState) => ({ ...prevState, lastName: e.target.value }));
-                      }}
-                    />
-                    {errors.lastName && <p className="text-danger">{errors.lastName.message}</p>}
-                  </Form.Group>
-                </div>
-                <div className="mb-3">
-                  <Form.Label>
-                    Organization <span className="requiredTxt">*</span>
-                  </Form.Label>
-                  <Form.Group>
-                    <AsyncSelect
-                      value={selectedValue}
-                      getOptionLabel={(e) => e.companyName}
-                      getOptionValue={(e) => e.companyName}
-                      loadOptions={loadOptions}
-                      onChange={handleChange}
-                      placeholder="Search for Organization Name"
-                      styles={customStyles}
-                      components={{
-                        IndicatorSeparator: () => null,
-                      }}
-                    />
-                    {errors.Organization && <p className="text-danger">{errors.Organization.message}</p>}
-                  </Form.Group>
-                </div>
-                <div className="mb-3">
-                  <Form.Label>
-                    Organization Email <span className="requiredTxt">*</span>
-                  </Form.Label>
-                  <Form.Group>
-                    <Form.Control
-                      type="email"
-                      name="orgEmail"
-                      data-testid="orgEmail"
-                      id="orgEmail"
-                      required
-                      disabled
-                      value={user?.orgEmail}
-                      {...register('orgEmail', {
-                        pattern: '[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$',
-                      })}
-                    />
-                    {errors.orgEmail && <p className="text-danger">{errors.orgEmail.message}</p>}
-                  </Form.Group>
-                </div>
-
-                <div className="mb-3">
-                  <Form.Label>
-                    Role <span className="requiredTxt">*</span>
-                  </Form.Label>
-                  <Form.Group className="mb-3 userSelect">
-                    <Select options={roleName} onChange={roleChange} placeholder={rName} styles={{ customStyles }} />
-                    {roleValidated ? <Form.Control.Feedback type="invalid">Role is required </Form.Control.Feedback> : null}
-                  </Form.Group>
-                </div>
-                <div className="mb-3">
-                  <Form.Label>
-                    Status <span className="requiredTxt">*</span>
-                  </Form.Label>
-                  <Form.Group className="userSelect mb-2">
-                    <Select
-                      options={Option}
-                      onChange={statusChange}
-                      placeholder={user.status}
-                      styles={{ customStyles }}
-                      data-testid="siteName"
-                    />
-                  </Form.Group>
-                </div>
-                <div className="d-flex justify-content-md-start justify-content-sm-center justify-content-center editAction">
-                  <input
-                    className="buttonPrimary text-center"
-                    type="submit"
-                    onClick={() => {
-                      dispatch(profileIcon('Users'))
-                      navigate('/mobusers');
+      <div className="container">
+        {isLoading && <Loading />}
+        <div>
+          <div className="editWrap">
+            <Form onSubmit={handleSubmit(updateUser)} id="editUserForm">
+              <div className="mb-3">
+                <Form.Label>
+                  First Name <span className="requiredTxt">*</span>
+                </Form.Label>
+                <Form.Group>
+                  <Form.Control
+                    type="text"
+                    id="fullname"
+                    data-testid="FName"
+                    name="fullname"
+                    value={user.firstName ?? ''}
+                    isValid={touchedFields.firstName && !errors.firstName}
+                    isInvalid={errors.firstName}
+                    {...register('firstName', {
+                      required: 'First Name is Required',
+                      minLength: {
+                        value: 3,
+                        message: 'Minimum 3 Characters Required for  first name',
+                      },
+                      maxLength: {
+                        value: 30,
+                        message: 'Name was Too High',
+                      },
+                      pattern: {
+                        message: 'Enter a valid First Name',
+                      },
+                    })}
+                    onChange={(e) => {
+                      setUser((prevState) => ({ ...prevState, firstName: e.target.value }));
                     }}
-                    value="Cancel"
                   />
-                  <input
-                    className="buttonPrimary text-center"
-                    type="submit"
-                    value="Update"
-                    disabled={roleValidated ? 'disabled' : ''}
+                  {errors.firstName && <p className="text-danger">{errors.firstName.message}</p>}
+                </Form.Group>
+              </div>
+              <div className="mb-3">
+                <Form.Label>
+                  Last Name <span className="requiredTxt">*</span>
+                </Form.Label>
+                <Form.Group>
+                  <Form.Control
+                    type="text"
+                    id="lastName"
+                    name="lastName"
+                    data-testid="LName"
+                    value={user.lastName}
+                    isValid={touchedFields.lastName && !errors.lastName}
+                    isInvalid={errors.lastName}
+                    {...register('lastName', {
+                      required: 'Last Name is Required',
+                      maxLength: {
+                        value: 30,
+                        message: 'Last name was Too High',
+                      },
+                      pattern: {
+                        message: 'Enter a valid last Name',
+                      },
+                    })}
+                    onChange={(e) => {
+                      setUser((prevState) => ({ ...prevState, lastName: e.target.value }));
+                    }}
                   />
-                </div>
-              </Form>
-            </div>
+                  {errors.lastName && <p className="text-danger">{errors.lastName.message}</p>}
+                </Form.Group>
+              </div>
+              <div className="mb-3">
+                <Form.Label>
+                  Organization <span className="requiredTxt">*</span>
+                </Form.Label>
+                <Form.Group>
+                  <AsyncSelect
+                    value={selectedValue}
+                    getOptionLabel={(e) => e.companyName}
+                    getOptionValue={(e) => e.companyName}
+                    loadOptions={loadOptions}
+                    onChange={handleChange}
+                    placeholder="Search for Organization Name"
+                    styles={customStyles}
+                    components={{
+                      IndicatorSeparator: () => null,
+                    }}
+                  />
+                  {errors.Organization && <p className="text-danger">{errors.Organization.message}</p>}
+                </Form.Group>
+              </div>
+              <div className="mb-3">
+                <Form.Label>
+                  Organization Email <span className="requiredTxt">*</span>
+                </Form.Label>
+                <Form.Group>
+                  <Form.Control
+                    type="email"
+                    name="orgEmail"
+                    data-testid="orgEmail"
+                    id="orgEmail"
+                    required
+                    disabled
+                    value={user?.orgEmail}
+                    {...register('orgEmail', {
+                      pattern: '[a-z0-9._%+-]+@[a-z0-9.-]+.[a-z]{2,4}$',
+                    })}
+                  />
+                  {errors.orgEmail && <p className="text-danger">{errors.orgEmail.message}</p>}
+                </Form.Group>
+              </div>
+
+              <div className="mb-3">
+                <Form.Label>
+                  Role <span className="requiredTxt">*</span>
+                </Form.Label>
+                <Form.Group className="mb-3 userSelect">
+                  <Select options={roleName} onChange={roleChange} placeholder={rName} styles={{ customStyles }} />
+                  {roleValidated ? <Form.Control.Feedback type="invalid">Role is required </Form.Control.Feedback> : null}
+                </Form.Group>
+              </div>
+              <div className="mb-3">
+                <Form.Label>
+                  Status <span className="requiredTxt">*</span>
+                </Form.Label>
+                <Form.Group className="userSelect mb-2">
+                  <Select
+                    options={Option}
+                    onChange={statusChange}
+                    placeholder={user.status}
+                    styles={{ customStyles }}
+                    data-testid="siteName"
+                  />
+                </Form.Group>
+              </div>
+              <div className="d-flex justify-content-md-start justify-content-sm-center justify-content-center editAction">
+                <input
+                  className="buttonPrimary text-center"
+                  type="submit"
+                  onClick={() => {
+                    dispatch(profileIcon('Users'));
+                    navigate('/mobusers');
+                  }}
+                  value="Cancel"
+                />
+                <input
+                  className="buttonPrimary text-center"
+                  type="submit"
+                  value="Update"
+                  disabled={roleValidated ? 'disabled' : ''}
+                />
+              </div>
+            </Form>
           </div>
         </div>
       </div>
-  
+    </div>
   );
 }

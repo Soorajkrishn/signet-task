@@ -223,9 +223,7 @@ export default function MobileDashboard() {
   };
 
   return (
-   
     <div>
-        
       {roledId !== userRoleId.remoteSmartUser ? (
         <NetworkHealth />
       ) : (
@@ -292,7 +290,5 @@ export default function MobileDashboard() {
         </div>
       )}
     </div>
-    
-    
   );
 }

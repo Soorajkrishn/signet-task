@@ -17,7 +17,7 @@ export default function MobileUsers() {
   const [end, setEnd] = useState(10);
   const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
-  const dispatch=useDispatch()
+  const dispatch = useDispatch();
 
   const fetchAllUserDetails = async () => {
     setIsLoading(true);
@@ -63,7 +63,7 @@ export default function MobileUsers() {
   }, [user, start, end]);
 
   const handleClick = (id) => {
-    dispatch(profileIcon('Edit Users'))
+    dispatch(profileIcon('Edit Users'));
     navigate(`/mobedit/${id}`);
   };
 
@@ -102,7 +102,7 @@ export default function MobileUsers() {
           ))}
         </ul>
         <div className="addUser">
-          <img onClick={()=>navigate('/mobcreate')} src="/images/tasks/plus.svg" alt="" />
+          <img onClick={() => navigate('/mobcreate')} src="/images/tasks/plus.svg" alt="" />
         </div>
       </div>
     </>

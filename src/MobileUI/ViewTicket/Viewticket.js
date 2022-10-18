@@ -4,7 +4,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { makeRequest } from '../../Services/APIService';
 import APIUrlConstants from '../../Config/APIUrlConstants';
 import Loading from '../../Pages/Widgets/Loading';
-import './Viewticket.css'
+import './Viewticket.css';
 import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { profileIcon } from '../../Redux/Actions/Actions';
@@ -13,8 +13,8 @@ export default function MobileViewticket() {
   const { id } = useParams();
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState({});
-  const navigate = useNavigate()
-  const dispatch=useDispatch()
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
 
   const fetchTicketDetails = async () => {
     const { 0: statusCode, 1: resp } = await makeRequest(`${APIUrlConstants.VIEW_TICKET}/${id}`);
@@ -32,7 +32,6 @@ export default function MobileViewticket() {
       {isLoading && <Loading />}
       {!isLoading ? (
         <>
-
           <div className="container">
             <p>
               <b>Ticket No :</b>
@@ -42,63 +41,65 @@ export default function MobileViewticket() {
               <label>
                 <b>Description </b>
               </label>
-              <div className='textContainer'>
+              <div className="textContainer">
                 <p>{data.description}</p>
               </div>
 
               <label>
                 <b>Status </b>
               </label>
-              <div className='textContainer'>
+              <div className="textContainer">
                 <p>{data.status}</p>
               </div>
 
               <label>
                 <b>Problem Code</b>
               </label>
-              <div className='textContainer'>
+              <div className="textContainer">
                 <p>{data.problem}</p>
               </div>
               <label>
                 <b>Created Date</b>
               </label>
-              <div className='textContainer'>
+              <div className="textContainer">
                 <p>{data.createdDate}</p>
               </div>
               <label>
                 <b>Priority</b>
               </label>
-              <div className='textContainer'>
+              <div className="textContainer">
                 <p>{data.priority}</p>
               </div>
               <label>
                 <b>Created By</b>
               </label>
-              <div className='textContainer'>
+              <div className="textContainer">
                 <p>{data.createdBy}</p>
               </div>
               <label>
                 <b>Caller Email</b>
               </label>
-              <div className='textContainer'>
+              <div className="textContainer">
                 <p>{data.callerEmail}</p>
               </div>
               <label>
                 <b>Phone Number</b>
               </label>
-              <div className='textContainer'>
+              <div className="textContainer">
                 <p>{data.phoneNumber}</p>
               </div>
             </div>
           </div>
 
-          <Button className='buttonPrimary mt-2 ml-2' onClick={() => {
-            dispatch(profileIcon('Ticket'))
-            navigate('/mobticket')
-          }}>
+          <Button
+            className="buttonPrimary mt-2 ml-2"
+            onClick={() => {
+              dispatch(profileIcon('Ticket'));
+              navigate('/mobticket');
+            }}
+          >
             Back
           </Button>
-
         </>
       ) : null}
     </>

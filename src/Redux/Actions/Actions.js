@@ -37,7 +37,7 @@ export const profileIcon = (pageName) => ({
   payload: pageName,
 });
 
-export const ticketView = (email,id) => ({
+export const ticketView = (email, id) => ({
   type: 'TICKET_VIEW',
-  payload: {email,id},
+  payload: { email, id },
 });

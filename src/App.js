@@ -11,7 +11,6 @@ import Layout from './Layout';
 import { components } from './Constants/TextConstants';
 import ReactGA from 'react-ga4';
 
-
 const oktaAuth = new OktaAuth({
   issuer: process.env.REACT_APP_OKTA_AUTH_URL,
   clientId: process.env.REACT_APP_OKTA_AUTH_CLIENT_ID,
@@ -107,7 +106,6 @@ function App() {
           <Route exact path="/otpverify" element={<Layout component={components.OTP_VERIFY} />} />
           <Route exact path="/twofactor" element={<Layout component={components.TWO_FACTOR} />} />
           <Route exact path="/testtickets" element={<Layout component={components.TEST_TICKET} />} />
-
         </Routes>
       </Security>
     </Router>

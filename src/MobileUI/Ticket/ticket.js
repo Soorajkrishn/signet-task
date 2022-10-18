@@ -18,7 +18,7 @@ function MobileTicket() {
   const [end, setEnd] = useState(10);
   const [loader, setLoader] = useState(false);
   const navigate = useNavigate();
-  const dispatch = useDispatch()
+  const dispatch = useDispatch();
   const [showAlert, setShowAlert] = useState(false);
   const [error, setError] = useState(false);
   const closeAlert = () => setShowAlert(false);
@@ -46,9 +46,8 @@ function MobileTicket() {
     fetchAllUserDetails();
   }, []);
 
-  const ticketticket = useSelector((state) => state.MoblieuiReducer)
+  const ticketticket = useSelector((state) => state.MoblieuiReducer);
   const pageNo = Math.ceil(ticket.length / 10);
-
 
   const view = () => {
     setTimeout(() => {
@@ -75,14 +74,13 @@ function MobileTicket() {
       const tempTicket = ticket?.slice(start, end);
       const temp = sliceTicket.concat(tempTicket);
       setSliceTicket(temp);
-
     } else {
       setSliceTicket(ticket);
     }
   }, [ticket, start, end]);
 
   const handleClick = (id, email) => {
-    dispatch(ticketView(email, id))
+    dispatch(ticketView(email, id));
     navigate(`/mobview/${id}`);
   };
 
@@ -103,7 +101,7 @@ function MobileTicket() {
         <div
           className="addTicket"
           onClick={() => {
-            dispatch(profileIcon('Add Ticket'))
+            dispatch(profileIcon('Add Ticket'));
             navigate('/mobadd');
           }}
         >

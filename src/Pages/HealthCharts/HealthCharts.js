@@ -10,6 +10,7 @@ import { httpStatusCode } from '../../Constants/TextConstants';
 import moment from 'moment';
 import { userRoleId } from '../../Utilities/AppUtilities';
 import NetworkHealth from '../NetworkHealth/NetworkHealth';
+import TreeMapChart from '../../Charts/TreeMapChart';
 
 export default function HealthCharts() {
   const [reload, setReload] = useState(false);
@@ -59,6 +60,10 @@ export default function HealthCharts() {
     });
   };
 
+  const label=['OpenTickets','ClosedTickets','InprocessTickets']
+  const value=[16,8,8]
+  const chartData = {label,value}
+
   useEffect(() => {
     if (localStorage.getItem('roleId') === userRoleId.remoteSmartUser) {
       fetchCharts();
@@ -66,7 +71,7 @@ export default function HealthCharts() {
   }, [reload]);
 
   const renderTooltip = (props) => (
-    <Tooltip id="button-tooltip" {...props}>
+    <Tooltip id="button-tooltip" {...props}> 
       <div className="p-2">
         <p>
           <b>{systemAvailability.title}</b>
@@ -104,6 +109,14 @@ export default function HealthCharts() {
           <p className="chartXaxis">Priority</p>
         </div>
       );
+    }
+    if (type === 'ticketStatus') {
+      return (
+        <div className="cardBody mt-5">
+          <HorizontalBarChart data={data} />
+          <p className="chartXaxis">Tickets By Status</p>
+        </div>
+      )
     }
     if (type === 'ticketBySite' && data && data.ticket && data.ticket.ticketSites && data.ticket.ticketSites.length) {
       return (
@@ -271,6 +284,15 @@ export default function HealthCharts() {
                 </div>
               </Col>
               <Col lg={6} md={12} sm={12} xs={12} className="mb-4">
+                <div className="cardWrapper">
+                  <div className="cardHeader d-flex align-items-center justify-content-between">
+                    <h6>status</h6>
+                    <img src={process.env.REACT_APP_PUBLIC_URL + 'images/dashboard/expand.svg'} alt="" />
+                  </div>
+                  {isLoading ? renderSpinner() : renderChart('ticketStatus', chartData)}
+                </div>
+              </Col>
+              <Col lg={6} md={12} sm={12} xs={12} className="mb-4">
                 <Col lg={12} className="mb-4">
                   <div className="cardWrapper">
                     <div className="cardHeader d-flex align-items-center justify-content-between">
@@ -290,6 +312,7 @@ export default function HealthCharts() {
                   </div>
                 </Col>
               </Col>
+
             </Row>
           </div>
         </div>

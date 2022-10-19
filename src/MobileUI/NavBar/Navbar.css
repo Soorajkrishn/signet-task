@@ -1,5 +1,4 @@
-@media screen and (max-width: 550px) {
-  .wrapper {
-    color: blue;
+.wrapper {
+    padding: 0px !important;
+    margin: 0px !important;
   }
-}

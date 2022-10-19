@@ -2,8 +2,9 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useLocation, useNavigate } from 'react-router-dom';
 import { useTheme, useThemeUpdate } from '../../../Context/MenuContext';
-import { editprofile } from '../../../Redux/Actions/Actions';
+import { editprofile, profileIcon } from '../../../Redux/Actions/Actions';
 import './Header.css';
+import { userRoleId } from '../../../Utilities/AppUtilities';
 
 function Mobileheader() {
   const [ticketEdit, setTicketEdit] = useState(false);
@@ -26,6 +27,13 @@ function Mobileheader() {
     }
   };
 
+  useEffect(()=>{
+    if(localStorage.getItem('roleId')===userRoleId.signetAdmin){
+      dispatch(profileIcon('Users'))
+    }else{
+      dispatch(profileIcon('Tickets'))
+    }
+  },[])
   useEffect(() => {
     if (email === localStorage.getItem('email')) {
       setTicketEdit(true);

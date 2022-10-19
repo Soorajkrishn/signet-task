@@ -9,17 +9,14 @@ function Navigation(component) {
   return (
     <ThemeProvider>
       <Mobileheader />
-      <Row className='wrapper'>
-        <Col md={2} className='wrapper '>
-        <MoblieSidebar />
+      <Row className="wrapper">
+        <Col md={2} className="wrapper ">
+          <MoblieSidebar />
         </Col>
-        <Col md={10} className='wrapper'>
+        <Col md={10} className="wrapper">
           {component}
         </Col>
-        
       </Row>
-      
-      
     </ThemeProvider>
   );
 }

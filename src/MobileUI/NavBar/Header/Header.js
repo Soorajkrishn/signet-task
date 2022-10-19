@@ -27,13 +27,13 @@ function Mobileheader() {
     }
   };
 
-  useEffect(()=>{
-    if(localStorage.getItem('roleId')===userRoleId.signetAdmin){
-      dispatch(profileIcon('Users'))
-    }else{
-      dispatch(profileIcon('Tickets'))
+  useEffect(() => {
+    if (localStorage.getItem('roleId') === userRoleId.signetAdmin) {
+      dispatch(profileIcon('Users'));
+    } else {
+      dispatch(profileIcon('Tickets'));
     }
-  },[])
+  }, []);
   useEffect(() => {
     if (email === localStorage.getItem('email')) {
       setTicketEdit(true);

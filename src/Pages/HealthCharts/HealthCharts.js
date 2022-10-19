@@ -60,9 +60,9 @@ export default function HealthCharts() {
     });
   };
 
-  const label=['OpenTickets','ClosedTickets','InprocessTickets']
-  const value=[16,8,8]
-  const chartData = {label,value}
+  const label = ['OpenTickets', 'ClosedTickets', 'InprocessTickets'];
+  const value = [16, 8, 8];
+  const chartData = { label, value };
 
   useEffect(() => {
     if (localStorage.getItem('roleId') === userRoleId.remoteSmartUser) {
@@ -71,7 +71,7 @@ export default function HealthCharts() {
   }, [reload]);
 
   const renderTooltip = (props) => (
-    <Tooltip id="button-tooltip" {...props}> 
+    <Tooltip id="button-tooltip" {...props}>
       <div className="p-2">
         <p>
           <b>{systemAvailability.title}</b>
@@ -116,7 +116,7 @@ export default function HealthCharts() {
           <HorizontalBarChart data={data} />
           <p className="chartXaxis">Tickets By Status</p>
         </div>
-      )
+      );
     }
     if (type === 'ticketBySite' && data && data.ticket && data.ticket.ticketSites && data.ticket.ticketSites.length) {
       return (
@@ -312,7 +312,6 @@ export default function HealthCharts() {
                   </div>
                 </Col>
               </Col>
-
             </Row>
           </div>
         </div>

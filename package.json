@@ -5,6 +5,7 @@
   "dependencies": {
     "@okta/okta-auth-js": "6.0",
     "@okta/okta-react": "6.4",
+    "@syncfusion/ej2-react-treemap": "^20.3.47",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
@@ -36,6 +37,7 @@
     "react-dom": "^17.0.2",
     "react-draft-wysiwyg": "^1.14.7",
     "react-ga4": "^1.4.1",
+    "react-google-charts": "^4.0.0",
     "react-hook-form": "^7.12.2",
     "react-linkify": "^1.0.0-alpha",
     "react-moment": "^1.1.2",

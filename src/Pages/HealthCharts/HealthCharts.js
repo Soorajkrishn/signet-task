@@ -11,6 +11,7 @@ import moment from 'moment';
 import { userRoleId } from '../../Utilities/AppUtilities';
 import NetworkHealth from '../NetworkHealth/NetworkHealth';
 import TreeMapChart from '../../Charts/TreeMapChart';
+import TestChart from '../../Charts/temp';
 
 export default function HealthCharts() {
   const [reload, setReload] = useState(false);
@@ -312,6 +313,16 @@ export default function HealthCharts() {
                   </div>
                 </Col>
               </Col>
+              <Col lg={12}>
+                  <div className="cardWrapper heightAuto">
+                    <div className="cardHeader d-flex align-items-center justify-content-between">
+                      <h6>System Capacity (Copy)</h6>
+                      <img src={process.env.REACT_APP_PUBLIC_URL + 'images/dashboard/expand.svg'} alt="" />
+                    </div>
+                      <TreeMapChart/>
+                  </div>
+                </Col>
+                
             </Row>
           </div>
         </div>

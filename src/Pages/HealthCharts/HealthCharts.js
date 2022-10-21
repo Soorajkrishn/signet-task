@@ -11,7 +11,8 @@ import moment from 'moment';
 import { userRoleId } from '../../Utilities/AppUtilities';
 import NetworkHealth from '../NetworkHealth/NetworkHealth';
 import TreeMapChart from '../../Charts/TreeMapChart';
-import TestChart from '../../Charts/temp';
+import { dataSet } from '../../Charts/temp';
+
 
 export default function HealthCharts() {
   const [reload, setReload] = useState(false);
@@ -20,6 +21,8 @@ export default function HealthCharts() {
   const [systemCapacity, setSystemCapacity] = useState({});
   const [systemAvailability, setSystemAvailability] = useState({});
   const roledId = localStorage.getItem('roleId');
+  const {ticket}=dataSet
+  const {ticketProblems}=ticket
 
   const fetchCharts = async () => {
     const keywords = ['q360_data', 'system_capacity', 'system_availability'];
@@ -61,8 +64,10 @@ export default function HealthCharts() {
     });
   };
 
+  
+
   const label = ['OpenTickets', 'ClosedTickets', 'InprocessTickets'];
-  const value = [16, 8, 8];
+  const value = [ticket.totalOpenTickets, ticket.totalClosedTickets, ticket.totalInprocessTickets];
   const chartData = { label, value };
 
   useEffect(() => {
@@ -117,6 +122,11 @@ export default function HealthCharts() {
           <HorizontalBarChart data={data} />
           <p className="chartXaxis">Tickets By Status</p>
         </div>
+      );
+    }
+    if (type === 'ticketProblem') {
+      return (
+          <TreeMapChart data={data} />
       );
     }
     if (type === 'ticketBySite' && data && data.ticket && data.ticket.ticketSites && data.ticket.ticketSites.length) {
@@ -294,7 +304,6 @@ export default function HealthCharts() {
                 </div>
               </Col>
               <Col lg={6} md={12} sm={12} xs={12} className="mb-4">
-                <Col lg={12} className="mb-4">
                   <div className="cardWrapper">
                     <div className="cardHeader d-flex align-items-center justify-content-between">
                       <h6>System Availability</h6>
@@ -303,7 +312,7 @@ export default function HealthCharts() {
                     {isLoading ? renderSpinner() : renderChart('systemAvailability', systemAvailability)}
                   </div>
                 </Col>
-                <Col lg={12}>
+                <Col lg={6} md={12} sm={12} xs={12} className="mb-4">
                   <div className="cardWrapper heightAuto">
                     <div className="cardHeader d-flex align-items-center justify-content-between">
                       <h6>System Capacity (Copy)</h6>
@@ -312,14 +321,13 @@ export default function HealthCharts() {
                     {isLoading ? renderSpinner() : renderChart('systemCapacityCopy', systemCapacity)}
                   </div>
                 </Col>
-              </Col>
               <Col lg={12}>
                 <div className="cardWrapper heightAuto">
                   <div className="cardHeader d-flex align-items-center justify-content-between">
                     <h6>System Capacity (Copy)</h6>
                     <img src={process.env.REACT_APP_PUBLIC_URL + 'images/dashboard/expand.svg'} alt="" />
                   </div>
-                  <TreeMapChart />
+                  <TreeMapChart data={ticketProblems} /> 
                 </div>
               </Col>
             </Row>

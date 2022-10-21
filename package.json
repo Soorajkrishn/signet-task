@@ -5,7 +5,6 @@
   "dependencies": {
     "@okta/okta-auth-js": "6.0",
     "@okta/okta-react": "6.4",
-    "@syncfusion/ej2-react-treemap": "^20.3.47",
     "@testing-library/jest-dom": "^5.16.2",
     "@testing-library/react": "^12.1.4",
     "@testing-library/user-event": "^13.5.0",
@@ -52,6 +51,7 @@
     "rxjs": "^7.5.5",
     "sockjs-client": "^1.6.1",
     "stompjs": "^2.3.3",
+    "values.js": "^2.1.1",
     "web-vitals": "^2.1.4",
     "whatwg-fetch": "^3.6.2"
   },

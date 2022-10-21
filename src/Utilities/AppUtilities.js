@@ -2,7 +2,7 @@ import { SIGNET_ADMIN, REMOTE_SMARTUSER, NON_REMOTE_SMARTUSER } from '../Config/
 import Values from 'values.js';
 
 export const randomRgbBlueColor = (count) => {
-  const list = new Values('#16216C').all((200/count)).reverse();
+  const list = new Values('#16216C').all(200 / count).reverse();
   const colors = [];
   for (let i = 0; i < count; i += 1) {
     colors.push(`rgb(${list[i].rgb.join(',')})`);
